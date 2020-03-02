@@ -37,6 +37,7 @@
 #include "interlocking.h"
 
 #include "interlocking_algorithm.h"
+#include "interlocking/request_route.h"
 
 pthread_mutex_t interlocker_mutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -205,6 +206,31 @@ int grant_route(const char *train_id, const char *source_id, const char *destina
 }
 
 int grant_route_with_algorithm(const char *train_id, const char *source_id, const char *destination_id) {
+    // request route
+    TickData tick_data;
+    reset(&tick_data);
+
+    // Set the inputs
+    tick_data.iface.src_signal_id = source_id;
+    tick_data.iface.dst_signal_id = destination_id;
+    tick_data.iface.train_id = train_id;
+
+    // Execute the algorithm
+    int cticks = 0;
+    while (tick_data.threadStatus != TERMINATED) {
+        tick(&tick_data);
+        cticks++;
+    }
+
+    printf("count ticks: %d\n", cticks);
+
+    // result
+    char *route_id = tick_data.iface.out;
+    printf("result route: %s\n", route_id);
+    return (int)strtol(route_id, NULL, 10);
+}
+
+int grant_route_with_algorithm_bak(const char *train_id, const char *source_id, const char *destination_id) {
 	t_interlocking_algorithm_tick_data interlocking_data;
 	interlocking_algorithm_reset(&interlocking_data);
 

@@ -62,7 +62,6 @@ typedef struct {
  * id of the route
  * source signal of the route
  * destination signal of the route
- * direction of the train movement on the route
  * path of the route, consisting of track segments
  * points within the route and their required position
  * signals within the route
@@ -70,14 +69,15 @@ typedef struct {
  * id of train when granted the route
  */
 typedef struct {
-	size_t id;
+	char *id;
 	t_interlocking_signal source;
 	t_interlocking_signal destination;
 	size_t direction;
+	float length;
 	GArray *path;		// g_array_index(route->path, t_interlocking_path_segment, segment_index)
 	GArray *points;		// g_array_index(route->points, t_interlocking_point, point_index)
 	GArray *signals;	// g_array_index(route->signals, t_interlocking_signal, signal_index)
-	GArray *conflicts;	// g_array_index(route->conflicts, size_t, conflict_index)
+	GArray *conflicts;	// g_array_index(route->conflicts, char *, conflict_index)
 	GString *train_id;
 } t_interlocking_route;
 
@@ -107,9 +107,15 @@ int interlocking_table_initialise(const char *config_dir);
 void free_interlocking_hashtable(void);
 
 /**
- * Frees the array that stores the interlocking table.
+ * Free the array that stores interlocking table
  */
 void free_interlocking_table(void);
+
+/**
+ * Return the array of route ID for a given source and destination signal
+ * @return array if it exists, otherwise NULL
+ */
+GArray *interlocking_table_get_route_ids(const char *source_id, const char *destination_id);
 
 /**
  * Returns the route ID for a given source and destination signal. 

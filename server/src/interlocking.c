@@ -95,7 +95,7 @@ static int interlocking_table_resolve_indices(void) {
 		// points, and signals.
 	
 		GString *log = g_string_new("Interlocking resolve indicies: ");
-		g_string_append_printf(log, "Route id: %zu ", route->id);
+		g_string_append_printf(log, "Route id: %s ", route->id);
 		
 		char *id = route->source.id;
 		route->source.bidib_state_index = bidib_get_signal_state_index(id);
@@ -197,22 +197,26 @@ int interlocking_table_initialise(const char *config_dir) {
 	return (err_indices || err_hashtable);
 }
 
+GArray *interlocking_table_get_route_ids(const char *source_id, const char *destination_id) {
+    size_t len = strlen(source_id) + strlen(destination_id) + 1;
+    char route_string[len];
+    snprintf(route_string, len, "%s%s", source_id, destination_id);
+
+    if (g_hash_table_contains(route_string_to_ids_hashtable, route_string)) {
+        return (GArray *)g_hash_table_lookup(route_string_to_ids_hashtable, route_string);
+    }
+
+    return NULL;
+}
+
 int interlocking_table_get_route_id(const char *source_id, const char *destination_id) {
-	size_t len = strlen(source_id) + strlen(destination_id) + 1;
-	char route_string[len];
-	snprintf(route_string, len, "%s%s", source_id, destination_id);
+    GArray *route_ids = interlocking_table_get_route_ids(source_id, destination_id);
+    // Return first route
+    if (route_ids != NULL && route_ids->len > 0) {
+        return g_array_index(route_ids, size_t, 0);
+    }
 
-	if (g_hash_table_contains(route_string_to_ids_hashtable, route_string)) {
-		void *route_ids_ptr = g_hash_table_lookup(route_string_to_ids_hashtable, route_string);
-		GArray *route_ids = (GArray *) route_ids_ptr;
-
-		// Return first route
-		if (route_ids != NULL && route_ids->len > 0) {
-			return g_array_index(route_ids, size_t, 0);
-		}
-	}
-
-	return -1;
+    return -1;
 }
 
 t_interlocking_route *get_route(int route_id) {

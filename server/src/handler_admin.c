@@ -35,6 +35,7 @@
 #include "handler_driver.h"
 #include "interlocking.h"
 #include "dyn_containers_interface.h"
+#include "interlocking/bahn_data_util.h"
 
 
 static pthread_mutex_t start_stop_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -65,6 +66,13 @@ static void *start_bidib(void *_) {
 		starting = false;
 		pthread_mutex_unlock(&start_stop_mutex);
 		pthread_exit(NULL);
+	}
+
+	if (!initialise_config(config_directory)) {
+        pthread_mutex_lock(&start_stop_mutex);
+        starting = false;
+        pthread_mutex_unlock(&start_stop_mutex);
+        pthread_exit(NULL);
 	}
 	
 	int err_dyn_containers = dyn_containers_start();
@@ -124,6 +132,7 @@ static void *stop_bidib(void *_) {
 	free_all_grabbed_trains();
 	free_interlocking_hashtable();
 	free_interlocking_table();
+	free_config();
 	pthread_mutex_lock(&start_stop_mutex);
 	stopping = false;
 	pthread_mutex_unlock(&start_stop_mutex);
