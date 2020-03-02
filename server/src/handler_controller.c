@@ -38,6 +38,7 @@
 
 #include "interlocking_algorithm.h"
 #include "interlocking/request_route.h"
+#include "interlocking/bahn_data_util.h"
 
 pthread_mutex_t interlocker_mutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -206,6 +207,9 @@ int grant_route(const char *train_id, const char *source_id, const char *destina
 }
 
 int grant_route_with_algorithm(const char *train_id, const char *source_id, const char *destination_id) {
+    // init cache
+    init_cached_track_state();
+
     // request route
     TickData tick_data;
     reset(&tick_data);
@@ -221,13 +225,21 @@ int grant_route_with_algorithm(const char *train_id, const char *source_id, cons
         tick(&tick_data);
         cticks++;
     }
+    syslog_server(LOG_DEBUG, "Number of ticks: %d", cticks);
 
-    printf("count ticks: %d\n", cticks);
+    // Free
+    free_cached_track_state();
 
     // result
     char *route_id = tick_data.iface.out;
-    printf("result route: %s\n", route_id);
-    return (int)strtol(route_id, NULL, 10);
+    int route_id_int = route_id != NULL && strcmp(route_id, "") ? (int)strtol(route_id, NULL, 10) : -1;
+    if (route_id_int >= 0) {
+        syslog_server(LOG_ERR, "Grant route with algorithm: Route could not be granted");
+    } else {
+        syslog_server(LOG_NOTICE, "Grant route with algorithm: Route %d has been granted", route_id_int);
+    }
+
+    return route_id_int;
 }
 
 int grant_route_with_algorithm_bak(const char *train_id, const char *source_id, const char *destination_id) {

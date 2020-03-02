@@ -40,6 +40,30 @@ bool equal(const char *str1, const char *str2) {
     return strcmp(str1, str2) == 0;
 }
 
+void free_cached_state(void *pointer) {
+    free(pointer);
+}
+
+GArray *cached_states;
+
+void init_cached_track_state() {
+    cached_states = g_array_sized_new(FALSE, TRUE, sizeof(char *), 16);
+    g_array_set_clear_func(cached_states, free_cached_state);
+}
+
+void free_cached_track_state() {
+    if (cached_states != NULL) {
+        g_array_free(cached_states, true);
+        cached_states = NULL;
+    }
+}
+
+void add_cache_state(char *state) {
+    if (cached_states != NULL) {
+        g_array_append_val(cached_states, state);
+    }
+}
+
 e_config_type get_config_type(const char *type) {
     if (equal(type, "route")) {
         return TYPE_ROUTE;
@@ -450,23 +474,29 @@ char *track_state_get_value(const char *type, const char *id) {
             case TYPE_POINT:
                 index = bidib_get_point_state_index(id);
                 if (index >= 0 && index < track_state.points_board_count) {
-                    state = track_state.points_board[index].data.state_id;
+                    state = strdup(track_state.points_board[index].data.state_id);
                 }
                 break;
             case TYPE_SIGNAL:
                 index = bidib_get_signal_state_index(id);
                 if (index >= 0 && index < track_state.signals_board_count) {
-                    state = track_state.signals_board[index].data.state_id;
+                    state = strdup(track_state.signals_board[index].data.state_id);
                 }
                 break;
             default:
                 break;
         }
 
+        // free
         bidib_free_track_state(track_state);
     }
 
-    state = state != NULL ? state : "";
+    if (state != NULL) {
+        add_cache_state(state);
+    } else {
+        state = "";
+    }
+
     syslog_server(LOG_DEBUG, "Get track state: %s %s => %s", type, id, state);
     return state;
 }
@@ -502,7 +532,7 @@ bool is_segment_occupied(const char *id) {
 }
 
 char *config_get_point_position(const char *route_id, const char *point_id) {
-    void * obj = get_object(TYPE_ROUTE, route_id);
+    void *obj = get_object(TYPE_ROUTE, route_id);
     char *result = NULL;
 
     if (obj != NULL) {

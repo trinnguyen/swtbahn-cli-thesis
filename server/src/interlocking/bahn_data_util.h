@@ -40,4 +40,8 @@ bool is_segment_occupied(const char *id);
 
 char *config_get_point_position(const char *route_id, const char *point_id);
 
+void init_cached_track_state();
+
+void free_cached_track_state();
+
 #endif //BAHN_DATA_UTIL_H
