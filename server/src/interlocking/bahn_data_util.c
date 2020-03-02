@@ -7,6 +7,7 @@
 #include "../parsers/config_data_parser.h"
 #include "../interlocking.h"
 #include <bidib.h>
+#include "../server.h"
 
 t_config_data config_data = {};
 
@@ -231,7 +232,9 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
         }
     }
 
-    return result != NULL ? result : "";
+    result = result != NULL ? result : "";
+    syslog_server(LOG_DEBUG, "Get scalar string: %s %s.%s => %s", type, id, prop_name, result);
+    return result;
 }
 
 int config_get_scalar_int_value(const char *type, const char *id, const char *prop_name) {
@@ -242,33 +245,41 @@ int config_get_scalar_int_value(const char *type, const char *id, const char *pr
 float config_get_scalar_float_value(const char *type, const char *id, const char *prop_name) {
     e_config_type config_type = get_config_type(type);
     void *obj = get_object(config_type, id);
+    float result = 0;
     if (obj != NULL) {
         switch (config_type) {
             case TYPE_ROUTE:
                 if (equal(prop_name, "length")) {
-                    return ((t_interlocking_route *) obj)->length;
+                    result = ((t_interlocking_route *) obj)->length;
                 }
+                break;
             case TYPE_BLOCK:
                 if (equal(prop_name, "length")) {
-                    return ((t_config_block *) obj)->length;
+                    result = ((t_config_block *) obj)->length;
                 }
+                break;
             case TYPE_SEGMENT:
                 if (equal(prop_name, "length")) {
-                    return ((t_config_segment *) obj)->length;
+                    result = ((t_config_segment *) obj)->length;
                 }
+                break;
             case TYPE_TRAIN:
                 if (equal(prop_name, "length")) {
-                    return ((t_config_train *) obj)->length;
+                    result = ((t_config_train *) obj)->length;
+                    break;
                 }
 
                 if (equal(prop_name, "weight")) {
-                    return ((t_config_train *) obj)->weight;
+                    result = ((t_config_train *) obj)->weight;
                 }
+                break;
             default:
                 break;
         }
     }
-    return 0;
+
+    syslog_server(LOG_DEBUG, "Get scalar float: %s %s.%s => %.2f", type, id, prop_name, result);
+    return result;
 }
 
 bool config_get_scalar_bool_value(const char *type, const char *id, const char *prop_name) {
@@ -279,11 +290,13 @@ bool config_get_scalar_bool_value(const char *type, const char *id, const char *
 int config_get_array_string_value(const char *type, const char *id, const char *prop_name, char* data[]) {
     e_config_type config_type = get_config_type(type);
     void *obj = get_object(config_type, id);
+    int result = 0;
     if (obj != NULL) {
         GArray *arr = NULL;
         switch (config_type) {
             case TYPE_ROUTE:
-                return get_route_array_string_value((t_interlocking_route *)obj, prop_name, data);
+                result = get_route_array_string_value((t_interlocking_route *)obj, prop_name, data);
+                break;
             case TYPE_SIGNAL:
                 if (equal(prop_name, "aspects")) {
                     arr = ((t_config_signal *) obj)->aspects;
@@ -323,10 +336,12 @@ int config_get_array_string_value(const char *type, const char *id, const char *
             for (int i = 0; i < arr->len; ++i) {
                 data[i] = g_array_index(arr, char *, i);
             }
-            return arr->len;
+            result = arr->len;
         }
     }
-    return 0;
+
+    syslog_server(LOG_DEBUG, "Get array string: %s %s.%s => %d", type, id, prop_name, result);
+    return result;
 }
 
 int get_route_array_string_value(t_interlocking_route *route, const char *prop_name, char* data[]) {
@@ -372,6 +387,7 @@ int get_route_array_string_value(t_interlocking_route *route, const char *prop_n
 int config_get_array_int_value(const char *type, const char *id, const char *prop_name, int data[]) {
     e_config_type config_type = get_config_type(type);
     void *obj = get_object(config_type, id);
+    int result = 0;
     if (obj != NULL) {
         GArray *arr = NULL;
         switch (config_type) {
@@ -388,11 +404,12 @@ int config_get_array_int_value(const char *type, const char *id, const char *pro
             for (int i = 0; i < arr->len; ++i) {
                 data[i] = g_array_index(arr, int, i);
             }
-            return arr->len;
+            result = arr->len;
         }
     }
 
-    return 0;
+    syslog_server(LOG_DEBUG, "Get array int: %s %s.%s => %d", type, id, prop_name, result);
+    return result;
 }
 
 int config_get_array_float_value(const char *type, const char *id, const char *prop_name, float data[]) {
@@ -408,23 +425,24 @@ int config_get_array_bool_value(const char *type, const char *id, const char *pr
 bool config_set_scalar_string_value(const char *type, const char *id, const char *prop_name, char *value) {
     e_config_type config_type = get_config_type(type);
     void *obj = get_object(config_type, id);
+    bool result = false;
     if (obj != NULL && config_type == TYPE_ROUTE) {
         if (equal(prop_name, "train")) {
             // Set train
             t_interlocking_route *route = (t_interlocking_route *) obj;
             route->train_id = g_string_new(value);
-            return true;
+            result = true;
         }
     }
 
-    return false;
+    syslog_server(LOG_DEBUG, "Set scalar string: %s %s.%s = %s => %s", type, id, prop_name, value, result ? "true" : "false");
+    return result;
 }
 
 char *track_state_get_value(const char *type, const char *id) {
     e_config_type config_type = get_config_type(type);
     void *obj = get_object(config_type, id);
     char *state = NULL;
-
     if (obj != NULL) {
         t_bidib_track_state track_state = bidib_get_state();
         int index = -1;
@@ -448,32 +466,39 @@ char *track_state_get_value(const char *type, const char *id) {
         bidib_free_track_state(track_state);
     }
 
-    return state != NULL ? state : "";
+    state = state != NULL ? state : "";
+    syslog_server(LOG_DEBUG, "Get track state: %s %s => %s", type, id, state);
+    return state;
 }
 
 bool track_state_set_value(const char *type, const char *id, const char *value) {
+    bool result = false;
     switch (get_config_type(type)) {
         case TYPE_POINT:
-            return bidib_switch_point(id, value) == 0;
+            result = bidib_switch_point(id, value) == 0;
+            break;
         case TYPE_SIGNAL:
-            return bidib_set_signal(id, value) == 0;
+            result = bidib_set_signal(id, value) == 0;
+            break;
         default:
             break;
     }
 
-    return false;
+    syslog_server(LOG_DEBUG, "Set track state: %s %s => %s", type, id, result ? "true" : "false");
+    return result;
 }
 
 bool is_segment_occupied(const char *id) {
     int index = bidib_get_segment_state_index(id);
+    bool result = false;
     if (index >= 0) {
         t_bidib_track_state track_state = bidib_get_state();
-        bool res = track_state.segments[index].data.occupied;
+        result = track_state.segments[index].data.occupied;
         bidib_free_track_state(track_state);
-        return res;
     }
 
-    return false;
+    syslog_server(LOG_DEBUG, "Is segment occupied: %s => %s", id, result ? "true" : "false");
+    return result;
 }
 
 char *config_get_point_position(const char *route_id, const char *point_id) {
@@ -491,5 +516,7 @@ char *config_get_point_position(const char *route_id, const char *point_id) {
         }
     }
 
-    return result != NULL ? result : "";
+    result = result != NULL ? result : "";
+    syslog_server(LOG_DEBUG, "Get route point position: %s.%s => %s", route_id, point_id, result);
+    return result;
 }
