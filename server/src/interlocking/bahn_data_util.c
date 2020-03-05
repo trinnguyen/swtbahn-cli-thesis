@@ -501,15 +501,17 @@ bool track_state_set_value(const char *type, const char *id, const char *value) 
     switch (get_config_type(type)) {
         case TYPE_POINT:
             result = bidib_switch_point(id, value) == 0;
+            syslog_server(LOG_DEBUG, "Set point state: %s %s to %s => %s", type, id, value, result ? "true" : "false");
             break;
         case TYPE_SIGNAL:
             result = bidib_set_signal(id, value) == 0;
+            syslog_server(LOG_DEBUG, "Set signal state: %s %s to %s => %s", type, id, value, result ? "true" : "false");
             break;
         default:
             break;
     }
 
-    syslog_server(LOG_DEBUG, "Set track state: %s %s => %s", type, id, result ? "true" : "false");
+
     return result;
 }
 
