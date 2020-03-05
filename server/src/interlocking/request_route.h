@@ -22,14 +22,14 @@ typedef struct {
     char* dst_signal_id;                                 // Input
     char* train_id;                                      // Input
     char* out;                                           // Output
-    char* route_ids[100];
+    char* route_ids[1024];
     int count_routes;
     char* id;
     char is_grantable;
     int _taken_transitions[20];
     char _request_route_local_is_clear;
     char _request_route_local_success;
-    char* _request_route_local_point_ids[100];
+    char* _request_route_local_point_ids[1024];
     int _request_route_local_points_count;
     int _request_route_local_i;
     char* _request_route_local__src_signal_id_;
@@ -45,7 +45,7 @@ typedef struct {
     char _request_route_local__Tterm7;
     char _request_route_local__Tterm2;
     char _request_route_local__Tterm3;
-    char* _request_route_local_flank_signals[100];
+    char* _request_route_local_flank_signals[1024];
     int _request_route_local_flank_signals_count;
     int _request_route_local_i1;
     char _request_route_local__Tterm4;
@@ -54,7 +54,7 @@ typedef struct {
     char _request_route_local__Tterm5;
     char _request_route_local__Tterm6;
     char _request_route_local__Tterm8;
-    char* _request_route_local_segment_ids[100];
+    char* _request_route_local_segment_ids[1024];
     int _request_route_local_segment_ids_count;
     int _request_route_local_i2;
     char _request_route_local__Tterm9;
@@ -71,7 +71,7 @@ typedef struct {
     char _request_route_local__Tterm13;
     char _request_route_local__Tterm14;
     char* _request_route_local__train_id_;
-    char* _request_route_local_conflict_routes[100];
+    char* _request_route_local_conflict_routes[1024];
     int _request_route_local_count_conflict_routes;
     int _request_route_local_i4;
     char _request_route_local_result2;
