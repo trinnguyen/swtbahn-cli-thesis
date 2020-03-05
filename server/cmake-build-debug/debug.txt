@@ -1,0 +1,1639 @@
+ForeC Compiler (multicore distribution)
+Version: 0.991 (2 February 2020)
+Debug output
+---------------------------------------
+
+Debug level: 0
+Check instantaneous loops: no
+Minimum reaction time: 0 clock cycles
+Source file name: /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/dyn_containers.forec
+Header file name: /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/dyn_containers.foreh
+Embed main function: yes (forec_dyn_containers)
+
+============================
+tools::Multicore::toString()
+============================
+Multicore architecture:
+-----------------------
+	x86
+
+Multicore allocations:
+----------------------
+	Core	Thread
+	----	------
+	1		engineInstance0__thread
+	2		engineInstance1__thread
+	1		engineInstance2__thread
+	2		engineInstance3__thread
+	1		engineInstance4__thread
+	2		interlockerInstance0__thread
+	1		interlockerInstance1__thread
+	2		interlockerInstance2__thread
+	1		interlockerInstance3__thread
+	0		letInterface__thread
+	1		loadEngines__thread
+	2		loadInterlockers__thread
+	0		main__thread
+
+
+==============================
+tools::SymbolTable::toString()
+==============================
+Symbol tables:
+--------------
+	Scope name: copyEngineInputs
+		Scope level: 0
+			Instance: 0
+				(variable) internal__copyEngineInputs_0_0
+				(variable) external__copyEngineInputs_0_0
+
+	Scope name: copyEngineInstanceInputs
+		Scope level: 0
+			Instance: 0
+				(variable) internal__copyEngineInstanceInputs_0_0
+				(variable) external__copyEngineInstanceInputs_0_0
+
+	Scope name: copyEngineInstanceOutputs
+		Scope level: 0
+			Instance: 0
+				(variable) external__copyEngineInstanceOutputs_0_0
+				(variable) internal__copyEngineInstanceOutputs_0_0
+
+	Scope name: copyEngineOutputs
+		Scope level: 0
+			Instance: 0
+				(variable) external__copyEngineOutputs_0_0
+				(variable) internal__copyEngineOutputs_0_0
+
+	Scope name: copyFilename
+		Scope level: 0
+			Instance: 0
+				(variable) destination__copyFilename_0_0
+				(variable) source__copyFilename_0_0
+				(variable) name_len__copyFilename_0_0
+				(variable) path_len__copyFilename_0_0
+				(variable) source_copy__copyFilename_0_0
+				(variable) filename__copyFilename_0_0
+
+	Scope name: engineInstance0
+		Scope level: 0
+			Instance: 0
+				(variable) instance__engineInstance0_0_0
+				(variable) threadName__engineInstance0_0_0
+				(variable) trainEngineType__engineInstance0_0_0
+
+	Scope name: engineInstance1
+		Scope level: 0
+			Instance: 0
+				(variable) instance__engineInstance1_0_0
+				(variable) threadName__engineInstance1_0_0
+				(variable) trainEngineType__engineInstance1_0_0
+
+	Scope name: engineInstance2
+		Scope level: 0
+			Instance: 0
+				(variable) instance__engineInstance2_0_0
+				(variable) threadName__engineInstance2_0_0
+				(variable) trainEngineType__engineInstance2_0_0
+
+	Scope name: engineInstance3
+		Scope level: 0
+			Instance: 0
+				(variable) instance__engineInstance3_0_0
+				(variable) threadName__engineInstance3_0_0
+				(variable) trainEngineType__engineInstance3_0_0
+
+	Scope name: engineInstance4
+		Scope level: 0
+			Instance: 0
+				(variable) instance__engineInstance4_0_0
+				(variable) threadName__engineInstance4_0_0
+				(variable) trainEngineType__engineInstance4_0_0
+
+	Scope name: global
+		Scope level: 0
+			Instance: 0
+				(typedef) t_dyn_containers_interface__global_0_0
+				(typedef) t_dyn_shm_config__global_0_0
+				(typedef) pthread_mutex_t__global_0_0
+				(typedef) key_t__global_0_0
+				(variable) NULL__global_0_0
+				(typedef) bool__global_0_0
+				(shared) forec_intern_input_train_engine_instance_0__global_0_0
+				(shared) forec_intern_input_train_engine_instance_1__global_0_0
+				(shared) forec_intern_input_train_engine_instance_2__global_0_0
+				(shared) forec_intern_input_train_engine_instance_3__global_0_0
+				(shared) forec_intern_input_train_engine_instance_4__global_0_0
+				(typedef) t_forec_intern_output_train_engine_instance__global_0_0
+				(shared) forec_intern_output_train_engine_instance_0__global_0_0
+				(shared) forec_intern_output_train_engine_instance_1__global_0_0
+				(shared) forec_intern_output_train_engine_instance_2__global_0_0
+				(shared) forec_intern_output_train_engine_instance_3__global_0_0
+				(shared) forec_intern_output_train_engine_instance_4__global_0_0
+				(typedef) t_forec_intern_input_interlocker__global_0_0
+				(shared) forec_intern_input_interlocker_0__global_0_0
+				(shared) forec_intern_input_interlocker_1__global_0_0
+				(shared) forec_intern_input_interlocker_2__global_0_0
+				(shared) forec_intern_input_interlocker_3__global_0_0
+				(typedef) t_forec_intern_output_interlocker__global_0_0
+				(shared) forec_intern_output_interlocker_0__global_0_0
+				(shared) forec_intern_output_interlocker_1__global_0_0
+				(shared) forec_intern_output_interlocker_2__global_0_0
+				(shared) forec_intern_output_interlocker_3__global_0_0
+				(typedef) t_forec_intern_input_interlocker_instance__global_0_0
+				(shared) forec_intern_input_interlocker_instance_0__global_0_0
+				(shared) forec_intern_input_interlocker_instance_1__global_0_0
+				(shared) forec_intern_input_interlocker_instance_2__global_0_0
+				(shared) forec_intern_input_interlocker_instance_3__global_0_0
+				(typedef) t_forec_intern_output_interlocker_instance__global_0_0
+				(shared) forec_intern_output_interlocker_instance_0__global_0_0
+				(shared) forec_intern_output_interlocker_instance_1__global_0_0
+				(shared) forec_intern_output_interlocker_instance_2__global_0_0
+				(shared) forec_intern_output_interlocker_instance_3__global_0_0
+				(shared) dyn_containers_interface__global_0_0
+				(variable) shm_config__global_0_0
+				(variable) shm_permissions__global_0_0
+				(variable) shm_key__global_0_0
+				(variable) dyn_containers_mutex__global_0_0
+				(function) copyFilename
+				(function) copyEngineInputs
+				(function) copyEngineOutputs
+				(function) copyEngineInstanceInputs
+				(function) copyEngineInstanceOutputs
+				(function) unloadEngines
+				(function) unloadInterlockers
+				(function) printout
+				(function) keepOneCombine
+				(thread) letInterface__thread
+				(thread) loadEngines__thread
+				(thread) loadInterlockers__thread
+				(thread) engineInstance0__thread
+				(thread) engineInstance1__thread
+				(thread) engineInstance2__thread
+				(thread) engineInstance3__thread
+				(thread) engineInstance4__thread
+				(thread) interlockerInstance0__thread
+				(thread) interlockerInstance1__thread
+				(thread) interlockerInstance2__thread
+				(thread) interlockerInstance3__thread
+				(shared) LOG_NOTICE__global_0_0
+				(variable) LOG_ERR__global_0_0
+				(variable) PATH_MAX__global_0_0
+				(variable) NAME_MAX__global_0_0
+				(typedef) dynlib_status__global_0_0
+				(typedef) dynlib_data__global_0_0
+				(variable) DYNLIB_COMPILE_SUCCESS__global_0_0
+				(variable) DYNLIB_LOAD_SUCCESS__global_0_0
+				(variable) DYNLIB_COMPILE_OBJ_ERR__global_0_0
+				(variable) DYNLIB_COMPILE_SHARED_ERR__global_0_0
+				(variable) DYNLIB_LOAD_ERR__global_0_0
+				(variable) DYNLIB_LOAD_RESET_ERR__global_0_0
+				(variable) DYNLIB_LOAD_TICK_ERR__global_0_0
+				(typedef) TickData__global_0_0
+				(sharedConst) TRAIN_ENGINE_COUNT_MAX__global_0_0
+				(variable) INTERLOCKER_COUNT_MAX__global_0_0
+				(shared) trainEngines__global_0_0
+				(variable) interlockers__global_0_0
+				(variable) TRAIN_ENGINE_DEFINED_COUNT__global_0_0
+				(variable) trainEngineFilepaths__global_0_0
+				(variable) TRAIN_ENGINE_INSTANCE_COUNT_MAX__global_0_0
+				(variable) INTERLOCKER_INSTANCE_COUNT_MAX__global_0_0
+				(variable) trainEngineInstanceDataIntern__global_0_0
+				(variable) interlockerInstanceDataIntern__global_0_0
+				(shared) trainEngineInstanceData__global_0_0
+				(shared) interlockerInstanceData__global_0_0
+				(typedef) t_forec_intern_input__global_0_0
+				(shared) forec_intern_input__global_0_0
+				(typedef) t_forec_intern_input_train_engine__global_0_0
+				(shared) forec_intern_input_train_engine_0__global_0_0
+				(shared) forec_intern_input_train_engine_1__global_0_0
+				(shared) forec_intern_input_train_engine_2__global_0_0
+				(shared) forec_intern_input_train_engine_3__global_0_0
+				(typedef) t_forec_intern_output_train_engine__global_0_0
+				(shared) forec_intern_output_train_engine_0__global_0_0
+				(shared) forec_intern_output_train_engine_1__global_0_0
+				(shared) forec_intern_output_train_engine_2__global_0_0
+				(shared) forec_intern_output_train_engine_3__global_0_0
+				(typedef) t_forec_intern_input_train_engine_instance__global_0_0
+
+	Scope name: keepOneCombine
+		Scope level: 0
+			Instance: 0
+				(variable) left__keepOneCombine_0_0
+				(variable) right__keepOneCombine_0_0
+
+	Scope name: letInterface
+		Scope level: 0
+			Instance: 0
+				(variable) threadName__letInterface_0_0
+
+	Scope name: loadEngines
+		Scope level: 0
+			Instance: 0
+				(variable) threadName__loadEngines_0_0
+				(variable) load_status__loadEngines_0_0
+		Scope level: 1
+			Instance: 0
+			Instance: 1
+			Instance: 2
+				(variable) container__loadEngines_1_2
+		Scope level: 2
+			Instance: 0
+				(variable) load_status__loadEngines_2_0
+			Instance: 1
+				(variable) load_status__loadEngines_2_1
+			Instance: 2
+				(variable) load_status__loadEngines_2_2
+			Instance: 3
+				(variable) load_status__loadEngines_2_3
+
+	Scope name: main
+		Scope level: 0
+			Instance: 0
+				(variable) argc__main_0_0
+				(variable) argv__main_0_0
+
+	Scope name: printout
+		Scope level: 0
+			Instance: 0
+				(variable) threadName__printout_0_0
+				(variable) status__printout_0_0
+				(variable) library__printout_0_0
+
+	Scope name: unloadEngines
+		Scope level: 0
+
+		Scope level: 1
+			Instance: 0
+				(variable) i__unloadEngines_1_0
+
+	Scope name: unloadInterlockers
+		Scope level: 0
+
+		Scope level: 1
+			Instance: 0
+				(variable) i__unloadInterlockers_1_0
+
+
+Declared shared symbols:
+------------------------
+	Scope name: global
+		(Shared_forec_intern_input_train_engine_instance_0__global_0_0) forec_intern_input_train_engine_instance_0__global_0_0
+		(Shared_forec_intern_input_train_engine_instance_1__global_0_0) forec_intern_input_train_engine_instance_1__global_0_0
+		(Shared_forec_intern_input_train_engine_instance_2__global_0_0) forec_intern_input_train_engine_instance_2__global_0_0
+		(Shared_forec_intern_input_train_engine_instance_3__global_0_0) forec_intern_input_train_engine_instance_3__global_0_0
+		(Shared_forec_intern_input_train_engine_instance_4__global_0_0) forec_intern_input_train_engine_instance_4__global_0_0
+		(Shared_forec_intern_output_train_engine_instance_0__global_0_0) forec_intern_output_train_engine_instance_0__global_0_0
+		(Shared_forec_intern_output_train_engine_instance_1__global_0_0) forec_intern_output_train_engine_instance_1__global_0_0
+		(Shared_forec_intern_output_train_engine_instance_2__global_0_0) forec_intern_output_train_engine_instance_2__global_0_0
+		(Shared_forec_intern_output_train_engine_instance_3__global_0_0) forec_intern_output_train_engine_instance_3__global_0_0
+		(Shared_forec_intern_output_train_engine_instance_4__global_0_0) forec_intern_output_train_engine_instance_4__global_0_0
+		(Shared_forec_intern_input_interlocker_0__global_0_0) forec_intern_input_interlocker_0__global_0_0
+		(Shared_forec_intern_input_interlocker_1__global_0_0) forec_intern_input_interlocker_1__global_0_0
+		(Shared_forec_intern_input_interlocker_2__global_0_0) forec_intern_input_interlocker_2__global_0_0
+		(Shared_forec_intern_input_interlocker_3__global_0_0) forec_intern_input_interlocker_3__global_0_0
+		(Shared_forec_intern_output_interlocker_0__global_0_0) forec_intern_output_interlocker_0__global_0_0
+		(Shared_forec_intern_output_interlocker_1__global_0_0) forec_intern_output_interlocker_1__global_0_0
+		(Shared_forec_intern_output_interlocker_2__global_0_0) forec_intern_output_interlocker_2__global_0_0
+		(Shared_forec_intern_output_interlocker_3__global_0_0) forec_intern_output_interlocker_3__global_0_0
+		(Shared_forec_intern_input_interlocker_instance_0__global_0_0) forec_intern_input_interlocker_instance_0__global_0_0
+		(Shared_forec_intern_input_interlocker_instance_1__global_0_0) forec_intern_input_interlocker_instance_1__global_0_0
+		(Shared_forec_intern_input_interlocker_instance_2__global_0_0) forec_intern_input_interlocker_instance_2__global_0_0
+		(Shared_forec_intern_input_interlocker_instance_3__global_0_0) forec_intern_input_interlocker_instance_3__global_0_0
+		(Shared_forec_intern_output_interlocker_instance_0__global_0_0) forec_intern_output_interlocker_instance_0__global_0_0
+		(Shared_forec_intern_output_interlocker_instance_1__global_0_0) forec_intern_output_interlocker_instance_1__global_0_0
+		(Shared_forec_intern_output_interlocker_instance_2__global_0_0) forec_intern_output_interlocker_instance_2__global_0_0
+		(Shared_forec_intern_output_interlocker_instance_3__global_0_0) forec_intern_output_interlocker_instance_3__global_0_0
+		(Shared_dyn_containers_interface__global_0_0) dyn_containers_interface__global_0_0
+		(Shared_LOG_NOTICE__global_0_0) LOG_NOTICE__global_0_0
+		(Shared_trainEngines__global_0_0) trainEngines__global_0_0
+		(Shared_trainEngineInstanceData__global_0_0) trainEngineInstanceData__global_0_0
+		(Shared_interlockerInstanceData__global_0_0) interlockerInstanceData__global_0_0
+		(Shared_forec_intern_input__global_0_0) forec_intern_input__global_0_0
+		(Shared_forec_intern_input_train_engine_0__global_0_0) forec_intern_input_train_engine_0__global_0_0
+		(Shared_forec_intern_input_train_engine_1__global_0_0) forec_intern_input_train_engine_1__global_0_0
+		(Shared_forec_intern_input_train_engine_2__global_0_0) forec_intern_input_train_engine_2__global_0_0
+		(Shared_forec_intern_input_train_engine_3__global_0_0) forec_intern_input_train_engine_3__global_0_0
+		(Shared_forec_intern_output_train_engine_0__global_0_0) forec_intern_output_train_engine_0__global_0_0
+		(Shared_forec_intern_output_train_engine_1__global_0_0) forec_intern_output_train_engine_1__global_0_0
+		(Shared_forec_intern_output_train_engine_2__global_0_0) forec_intern_output_train_engine_2__global_0_0
+		(Shared_forec_intern_output_train_engine_3__global_0_0) forec_intern_output_train_engine_3__global_0_0
+
+	Scope name: global
+		(/* shared */ static const unsigned int) TRAIN_ENGINE_COUNT_MAX__global_0_0
+
+
+Use/Def of symbols:
+-------------------
+	Scope name: copyEngineInputs
+		def:
+			(typedef) t_forec_intern_input_train_engine__global_0_0
+			(variable) internal__copyEngineInputs_0_0
+
+		use:
+			(variable) PATH_MAX__global_0_0
+			(variable) NAME_MAX__global_0_0
+			(variable) internal__copyEngineInputs_0_0
+			(variable) external__copyEngineInputs_0_0
+
+	Scope name: copyEngineInstanceInputs
+		def:
+			(typedef) t_forec_intern_input_train_engine_instance__global_0_0
+			(variable) internal__copyEngineInstanceInputs_0_0
+
+		use:
+			(variable) external__copyEngineInstanceInputs_0_0
+
+	Scope name: copyEngineInstanceOutputs
+		def:
+			(typedef) t_forec_intern_output_train_engine_instance__global_0_0
+			(variable) external__copyEngineInstanceOutputs_0_0
+
+		use:
+			(variable) internal__copyEngineInstanceOutputs_0_0
+
+	Scope name: copyEngineOutputs
+		def:
+			(typedef) t_forec_intern_output_train_engine__global_0_0
+			(variable) external__copyEngineOutputs_0_0
+
+		use:
+			(variable) NAME_MAX__global_0_0
+			(variable) external__copyEngineOutputs_0_0
+			(variable) internal__copyEngineOutputs_0_0
+
+	Scope name: copyFilename
+		use:
+			(variable) destination__copyFilename_0_0
+			(variable) source__copyFilename_0_0
+			(variable) name_len__copyFilename_0_0
+			(variable) path_len__copyFilename_0_0
+			(variable) source_copy__copyFilename_0_0
+			(variable) filename__copyFilename_0_0
+
+	Scope name: engineInstance0
+		def:
+			(shared) forec_intern_output_train_engine_instance_0__global_0_0
+			(shared) trainEngineInstanceData__global_0_0
+			(variable) threadName__engineInstance0_0_0
+			(variable) trainEngineType__engineInstance0_0_0
+
+		use:
+			(shared) forec_intern_input_train_engine_instance_0__global_0_0
+			(shared) forec_intern_output_train_engine_instance_0__global_0_0
+			(shared) LOG_NOTICE__global_0_0
+			(shared) trainEngines__global_0_0
+			(shared) trainEngineInstanceData__global_0_0
+			(variable) instance__engineInstance0_0_0
+			(variable) threadName__engineInstance0_0_0
+			(variable) trainEngineType__engineInstance0_0_0
+
+	Scope name: engineInstance1
+		def:
+			(shared) forec_intern_output_train_engine_instance_1__global_0_0
+			(shared) trainEngineInstanceData__global_0_0
+			(variable) threadName__engineInstance1_0_0
+			(variable) trainEngineType__engineInstance1_0_0
+
+		use:
+			(shared) forec_intern_input_train_engine_instance_1__global_0_0
+			(shared) forec_intern_output_train_engine_instance_1__global_0_0
+			(shared) LOG_NOTICE__global_0_0
+			(shared) trainEngines__global_0_0
+			(shared) trainEngineInstanceData__global_0_0
+			(variable) instance__engineInstance1_0_0
+			(variable) threadName__engineInstance1_0_0
+			(variable) trainEngineType__engineInstance1_0_0
+
+	Scope name: engineInstance2
+		def:
+			(shared) forec_intern_output_train_engine_instance_2__global_0_0
+			(shared) trainEngineInstanceData__global_0_0
+			(variable) threadName__engineInstance2_0_0
+			(variable) trainEngineType__engineInstance2_0_0
+
+		use:
+			(shared) forec_intern_input_train_engine_instance_2__global_0_0
+			(shared) forec_intern_output_train_engine_instance_2__global_0_0
+			(shared) LOG_NOTICE__global_0_0
+			(shared) trainEngines__global_0_0
+			(shared) trainEngineInstanceData__global_0_0
+			(variable) instance__engineInstance2_0_0
+			(variable) threadName__engineInstance2_0_0
+			(variable) trainEngineType__engineInstance2_0_0
+
+	Scope name: engineInstance3
+		def:
+			(shared) forec_intern_output_train_engine_instance_3__global_0_0
+			(shared) trainEngineInstanceData__global_0_0
+			(variable) threadName__engineInstance3_0_0
+			(variable) trainEngineType__engineInstance3_0_0
+
+		use:
+			(shared) forec_intern_input_train_engine_instance_3__global_0_0
+			(shared) forec_intern_output_train_engine_instance_3__global_0_0
+			(shared) LOG_NOTICE__global_0_0
+			(shared) trainEngines__global_0_0
+			(shared) trainEngineInstanceData__global_0_0
+			(variable) instance__engineInstance3_0_0
+			(variable) threadName__engineInstance3_0_0
+			(variable) trainEngineType__engineInstance3_0_0
+
+	Scope name: engineInstance4
+		def:
+			(shared) forec_intern_output_train_engine_instance_4__global_0_0
+			(shared) trainEngineInstanceData__global_0_0
+			(variable) threadName__engineInstance4_0_0
+			(variable) trainEngineType__engineInstance4_0_0
+
+		use:
+			(shared) forec_intern_input_train_engine_instance_4__global_0_0
+			(shared) forec_intern_output_train_engine_instance_4__global_0_0
+			(shared) LOG_NOTICE__global_0_0
+			(shared) trainEngines__global_0_0
+			(shared) trainEngineInstanceData__global_0_0
+			(variable) instance__engineInstance4_0_0
+			(variable) threadName__engineInstance4_0_0
+			(variable) trainEngineType__engineInstance4_0_0
+
+	Scope name: keepOneCombine
+		def:
+			(typedef) TickData__global_0_0
+
+		use:
+			(variable) left__keepOneCombine_0_0
+
+	Scope name: letInterface
+		def:
+			(variable) threadName__letInterface_0_0
+			(shared) forec_intern_input__global_0_0
+
+		use:
+			(shared) forec_intern_input_train_engine_instance_0__global_0_0
+			(shared) forec_intern_input_train_engine_instance_1__global_0_0
+			(shared) forec_intern_input_train_engine_instance_2__global_0_0
+			(shared) forec_intern_input_train_engine_instance_3__global_0_0
+			(shared) forec_intern_input_train_engine_instance_4__global_0_0
+			(shared) forec_intern_output_train_engine_instance_0__global_0_0
+			(shared) forec_intern_output_train_engine_instance_1__global_0_0
+			(shared) forec_intern_output_train_engine_instance_2__global_0_0
+			(shared) forec_intern_output_train_engine_instance_3__global_0_0
+			(shared) forec_intern_output_train_engine_instance_4__global_0_0
+			(shared) dyn_containers_interface__global_0_0
+			(variable) dyn_containers_mutex__global_0_0
+			(function) copyEngineInputs
+			(function) copyEngineOutputs
+			(function) copyEngineInstanceInputs
+			(function) copyEngineInstanceOutputs
+			(shared) forec_intern_input__global_0_0
+			(shared) forec_intern_input_train_engine_0__global_0_0
+			(shared) forec_intern_input_train_engine_1__global_0_0
+			(shared) forec_intern_input_train_engine_2__global_0_0
+			(shared) forec_intern_input_train_engine_3__global_0_0
+			(shared) forec_intern_output_train_engine_0__global_0_0
+			(shared) forec_intern_output_train_engine_1__global_0_0
+			(shared) forec_intern_output_train_engine_2__global_0_0
+			(shared) forec_intern_output_train_engine_3__global_0_0
+
+	Scope name: loadEngines
+		def:
+			(variable) threadName__loadEngines_0_0
+			(variable) load_status__loadEngines_0_0
+			(typedef) dynlib_status__global_0_0
+			(shared) forec_intern_output_train_engine_0__global_0_0
+			(shared) forec_intern_output_train_engine_1__global_0_0
+			(shared) forec_intern_output_train_engine_2__global_0_0
+			(shared) forec_intern_output_train_engine_3__global_0_0
+			(variable) container__loadEngines_1_2
+
+		use:
+			(function) copyFilename
+			(function) printout
+			(variable) threadName__loadEngines_0_0
+			(variable) load_status__loadEngines_0_0
+			(variable) PATH_MAX__global_0_0
+			(variable) NAME_MAX__global_0_0
+			(variable) DYNLIB_LOAD_SUCCESS__global_0_0
+			(shared) trainEngines__global_0_0
+			(variable) trainEngineFilepaths__global_0_0
+			(shared) forec_intern_input_train_engine_0__global_0_0
+			(shared) forec_intern_input_train_engine_1__global_0_0
+			(shared) forec_intern_input_train_engine_2__global_0_0
+			(shared) forec_intern_input_train_engine_3__global_0_0
+			(shared) forec_intern_output_train_engine_0__global_0_0
+			(shared) forec_intern_output_train_engine_1__global_0_0
+			(shared) forec_intern_output_train_engine_2__global_0_0
+			(shared) forec_intern_output_train_engine_3__global_0_0
+			(variable) load_status__loadEngines_2_3
+			(variable) container__loadEngines_1_2
+			(variable) load_status__loadEngines_2_0
+			(variable) load_status__loadEngines_2_1
+			(variable) load_status__loadEngines_2_2
+
+	Scope name: main
+		use:
+			(shared) dyn_containers_interface__global_0_0
+			(variable) shm_config__global_0_0
+			(variable) shm_permissions__global_0_0
+			(variable) shm_key__global_0_0
+			(function) unloadEngines
+			(function) unloadInterlockers
+			(thread) letInterface__thread
+			(thread) loadEngines__thread
+			(thread) loadInterlockers__thread
+			(thread) engineInstance0__thread
+			(thread) engineInstance1__thread
+			(thread) engineInstance2__thread
+			(thread) engineInstance3__thread
+			(thread) engineInstance4__thread
+			(thread) interlockerInstance0__thread
+			(thread) interlockerInstance1__thread
+			(thread) interlockerInstance2__thread
+			(thread) interlockerInstance3__thread
+			(shared) LOG_NOTICE__global_0_0
+			(shared) forec_intern_input__global_0_0
+
+	Scope name: printout
+		def:
+			(typedef) dynlib_status__global_0_0
+			(typedef) dynlib_data__global_0_0
+
+		use:
+			(shared) LOG_NOTICE__global_0_0
+			(variable) LOG_ERR__global_0_0
+			(variable) threadName__printout_0_0
+			(variable) status__printout_0_0
+			(variable) library__printout_0_0
+
+	Scope name: unloadEngines
+		def:
+			(shared) forec_intern_output_train_engine_instance_0__global_0_0
+			(shared) forec_intern_output_train_engine_instance_1__global_0_0
+			(shared) forec_intern_output_train_engine_instance_2__global_0_0
+			(shared) forec_intern_output_train_engine_instance_3__global_0_0
+			(shared) forec_intern_output_train_engine_instance_4__global_0_0
+			(shared) forec_intern_output_train_engine_0__global_0_0
+			(shared) forec_intern_output_train_engine_1__global_0_0
+			(shared) forec_intern_output_train_engine_2__global_0_0
+			(shared) forec_intern_output_train_engine_3__global_0_0
+
+		use:
+			(sharedConst) TRAIN_ENGINE_COUNT_MAX__global_0_0
+			(shared) trainEngines__global_0_0
+			(variable) i__unloadEngines_1_0
+
+	Scope name: unloadInterlockers
+		def:
+			(shared) forec_intern_output_interlocker_0__global_0_0
+			(shared) forec_intern_output_interlocker_1__global_0_0
+			(shared) forec_intern_output_interlocker_2__global_0_0
+			(shared) forec_intern_output_interlocker_3__global_0_0
+			(shared) forec_intern_output_interlocker_instance_0__global_0_0
+			(shared) forec_intern_output_interlocker_instance_1__global_0_0
+			(shared) forec_intern_output_interlocker_instance_2__global_0_0
+			(shared) forec_intern_output_interlocker_instance_3__global_0_0
+
+		use:
+			(variable) INTERLOCKER_COUNT_MAX__global_0_0
+			(variable) interlockers__global_0_0
+			(variable) i__unloadInterlockers_1_0
+
+
+Indirect use/def of symbols by parId:
+-------------------------------------
+	par0:
+		forec_intern_input_train_engine_instance_0__global_0_0
+			use (skip): engineInstance0 letInterface 
+
+		forec_intern_input_train_engine_instance_1__global_0_0
+			use (skip): engineInstance1 letInterface 
+
+		forec_intern_input_train_engine_instance_2__global_0_0
+			use (skip): engineInstance2 letInterface 
+
+		forec_intern_input_train_engine_instance_3__global_0_0
+			use (skip): engineInstance3 letInterface 
+
+		forec_intern_input_train_engine_instance_4__global_0_0
+			use (skip): engineInstance4 letInterface 
+
+		forec_intern_output_train_engine_instance_0__global_0_0
+			def (root): engineInstance0 
+			use (root): engineInstance0 letInterface 
+
+		forec_intern_output_train_engine_instance_1__global_0_0
+			def (root): engineInstance1 
+			use (root): engineInstance1 letInterface 
+
+		forec_intern_output_train_engine_instance_2__global_0_0
+			def (root): engineInstance2 
+			use (root): engineInstance2 letInterface 
+
+		forec_intern_output_train_engine_instance_3__global_0_0
+			def (root): engineInstance3 
+			use (root): engineInstance3 letInterface 
+
+		forec_intern_output_train_engine_instance_4__global_0_0
+			def (root): engineInstance4 
+			use (root): engineInstance4 letInterface 
+
+		dyn_containers_interface__global_0_0
+			use (root): letInterface 
+
+		dyn_containers_mutex__global_0_0
+			use (skip): letInterface 
+
+		threadName__letInterface_0_0
+			def (skip): letInterface 
+
+		threadName__loadEngines_0_0
+			def (skip): loadEngines 
+			use (skip): loadEngines 
+
+		load_status__loadEngines_0_0
+			def (skip): loadEngines 
+			use (skip): loadEngines 
+
+		LOG_NOTICE__global_0_0
+			use (root): engineInstance0 engineInstance1 engineInstance2 engineInstance3 engineInstance4 
+
+		PATH_MAX__global_0_0
+			use (skip): loadEngines 
+
+		NAME_MAX__global_0_0
+			use (skip): loadEngines 
+
+		DYNLIB_LOAD_SUCCESS__global_0_0
+			use (skip): loadEngines 
+
+		trainEngines__global_0_0
+			use (skip): engineInstance0 engineInstance1 engineInstance2 engineInstance3 engineInstance4 loadEngines 
+
+		trainEngineFilepaths__global_0_0
+			use (skip): loadEngines 
+
+		trainEngineInstanceData__global_0_0
+			def (root): engineInstance0 engineInstance1 engineInstance2 engineInstance3 engineInstance4 
+			use (root): engineInstance0 engineInstance1 engineInstance2 engineInstance3 engineInstance4 
+
+		forec_intern_input__global_0_0
+			def (root): letInterface 
+			use (root): letInterface 
+
+		forec_intern_input_train_engine_0__global_0_0
+			use (skip): letInterface loadEngines 
+
+		forec_intern_input_train_engine_1__global_0_0
+			use (skip): letInterface loadEngines 
+
+		forec_intern_input_train_engine_2__global_0_0
+			use (skip): letInterface loadEngines 
+
+		forec_intern_input_train_engine_3__global_0_0
+			use (skip): letInterface loadEngines 
+
+		forec_intern_output_train_engine_0__global_0_0
+			def (root): loadEngines 
+			use (root): letInterface loadEngines 
+
+		forec_intern_output_train_engine_1__global_0_0
+			def (root): loadEngines 
+			use (root): letInterface loadEngines 
+
+		forec_intern_output_train_engine_2__global_0_0
+			def (root): loadEngines 
+			use (root): letInterface loadEngines 
+
+		forec_intern_output_train_engine_3__global_0_0
+			def (root): loadEngines 
+			use (root): letInterface loadEngines 
+
+		load_status__loadEngines_2_3
+			use (skip): loadEngines 
+
+		instance__engineInstance0_0_0
+			use (skip): engineInstance0 
+
+		threadName__engineInstance0_0_0
+			def (skip): engineInstance0 
+			use (skip): engineInstance0 
+
+		trainEngineType__engineInstance0_0_0
+			def (skip): engineInstance0 
+			use (skip): engineInstance0 
+
+		instance__engineInstance1_0_0
+			use (skip): engineInstance1 
+
+		threadName__engineInstance1_0_0
+			def (skip): engineInstance1 
+			use (skip): engineInstance1 
+
+		trainEngineType__engineInstance1_0_0
+			def (skip): engineInstance1 
+			use (skip): engineInstance1 
+
+		container__loadEngines_1_2
+			def (skip): loadEngines 
+			use (skip): loadEngines 
+
+		load_status__loadEngines_2_0
+			use (skip): loadEngines 
+
+		load_status__loadEngines_2_1
+			use (skip): loadEngines 
+
+		load_status__loadEngines_2_2
+			use (skip): loadEngines 
+
+		instance__engineInstance2_0_0
+			use (skip): engineInstance2 
+
+		threadName__engineInstance2_0_0
+			def (skip): engineInstance2 
+			use (skip): engineInstance2 
+
+		trainEngineType__engineInstance2_0_0
+			def (skip): engineInstance2 
+			use (skip): engineInstance2 
+
+		instance__engineInstance3_0_0
+			use (skip): engineInstance3 
+
+		threadName__engineInstance3_0_0
+			def (skip): engineInstance3 
+			use (skip): engineInstance3 
+
+		trainEngineType__engineInstance3_0_0
+			def (skip): engineInstance3 
+			use (skip): engineInstance3 
+
+		instance__engineInstance4_0_0
+			use (skip): engineInstance4 
+
+		threadName__engineInstance4_0_0
+			def (skip): engineInstance4 
+			use (skip): engineInstance4 
+
+		trainEngineType__engineInstance4_0_0
+			def (skip): engineInstance4 
+			use (skip): engineInstance4 
+
+
+Indirect use/def of symbols by threadId:
+----------------------------------------
+	engineInstance0:
+		forec_intern_input_train_engine_instance_0__global_0_0
+			use (root): engineInstance0 
+
+		forec_intern_output_train_engine_instance_0__global_0_0
+			def (intermediate): engineInstance0 
+			use (intermediate): engineInstance0 
+
+		LOG_NOTICE__global_0_0
+			use (intermediate): engineInstance0 
+
+		trainEngines__global_0_0
+			use (root): engineInstance0 
+
+		trainEngineInstanceData__global_0_0
+			def (intermediate): engineInstance0 
+			use (intermediate): engineInstance0 
+
+		instance__engineInstance0_0_0
+			use (skip): engineInstance0 
+
+		threadName__engineInstance0_0_0
+			def (skip): engineInstance0 
+			use (skip): engineInstance0 
+
+		trainEngineType__engineInstance0_0_0
+			def (skip): engineInstance0 
+			use (skip): engineInstance0 
+
+	engineInstance1:
+		forec_intern_input_train_engine_instance_1__global_0_0
+			use (root): engineInstance1 
+
+		forec_intern_output_train_engine_instance_1__global_0_0
+			def (intermediate): engineInstance1 
+			use (intermediate): engineInstance1 
+
+		LOG_NOTICE__global_0_0
+			use (intermediate): engineInstance1 
+
+		trainEngines__global_0_0
+			use (root): engineInstance1 
+
+		trainEngineInstanceData__global_0_0
+			def (intermediate): engineInstance1 
+			use (intermediate): engineInstance1 
+
+		instance__engineInstance1_0_0
+			use (skip): engineInstance1 
+
+		threadName__engineInstance1_0_0
+			def (skip): engineInstance1 
+			use (skip): engineInstance1 
+
+		trainEngineType__engineInstance1_0_0
+			def (skip): engineInstance1 
+			use (skip): engineInstance1 
+
+	engineInstance2:
+		forec_intern_input_train_engine_instance_2__global_0_0
+			use (root): engineInstance2 
+
+		forec_intern_output_train_engine_instance_2__global_0_0
+			def (intermediate): engineInstance2 
+			use (intermediate): engineInstance2 
+
+		LOG_NOTICE__global_0_0
+			use (intermediate): engineInstance2 
+
+		trainEngines__global_0_0
+			use (root): engineInstance2 
+
+		trainEngineInstanceData__global_0_0
+			def (intermediate): engineInstance2 
+			use (intermediate): engineInstance2 
+
+		instance__engineInstance2_0_0
+			use (skip): engineInstance2 
+
+		threadName__engineInstance2_0_0
+			def (skip): engineInstance2 
+			use (skip): engineInstance2 
+
+		trainEngineType__engineInstance2_0_0
+			def (skip): engineInstance2 
+			use (skip): engineInstance2 
+
+	engineInstance3:
+		forec_intern_input_train_engine_instance_3__global_0_0
+			use (root): engineInstance3 
+
+		forec_intern_output_train_engine_instance_3__global_0_0
+			def (intermediate): engineInstance3 
+			use (intermediate): engineInstance3 
+
+		LOG_NOTICE__global_0_0
+			use (intermediate): engineInstance3 
+
+		trainEngines__global_0_0
+			use (root): engineInstance3 
+
+		trainEngineInstanceData__global_0_0
+			def (intermediate): engineInstance3 
+			use (intermediate): engineInstance3 
+
+		instance__engineInstance3_0_0
+			use (skip): engineInstance3 
+
+		threadName__engineInstance3_0_0
+			def (skip): engineInstance3 
+			use (skip): engineInstance3 
+
+		trainEngineType__engineInstance3_0_0
+			def (skip): engineInstance3 
+			use (skip): engineInstance3 
+
+	engineInstance4:
+		forec_intern_input_train_engine_instance_4__global_0_0
+			use (root): engineInstance4 
+
+		forec_intern_output_train_engine_instance_4__global_0_0
+			def (intermediate): engineInstance4 
+			use (intermediate): engineInstance4 
+
+		LOG_NOTICE__global_0_0
+			use (intermediate): engineInstance4 
+
+		trainEngines__global_0_0
+			use (root): engineInstance4 
+
+		trainEngineInstanceData__global_0_0
+			def (intermediate): engineInstance4 
+			use (intermediate): engineInstance4 
+
+		instance__engineInstance4_0_0
+			use (skip): engineInstance4 
+
+		threadName__engineInstance4_0_0
+			def (skip): engineInstance4 
+			use (skip): engineInstance4 
+
+		trainEngineType__engineInstance4_0_0
+			def (skip): engineInstance4 
+			use (skip): engineInstance4 
+
+	letInterface:
+		forec_intern_input_train_engine_instance_0__global_0_0
+			use (root): letInterface 
+
+		forec_intern_input_train_engine_instance_1__global_0_0
+			use (root): letInterface 
+
+		forec_intern_input_train_engine_instance_2__global_0_0
+			use (root): letInterface 
+
+		forec_intern_input_train_engine_instance_3__global_0_0
+			use (root): letInterface 
+
+		forec_intern_input_train_engine_instance_4__global_0_0
+			use (root): letInterface 
+
+		forec_intern_output_train_engine_instance_0__global_0_0
+			use (intermediate): letInterface 
+
+		forec_intern_output_train_engine_instance_1__global_0_0
+			use (intermediate): letInterface 
+
+		forec_intern_output_train_engine_instance_2__global_0_0
+			use (intermediate): letInterface 
+
+		forec_intern_output_train_engine_instance_3__global_0_0
+			use (intermediate): letInterface 
+
+		forec_intern_output_train_engine_instance_4__global_0_0
+			use (intermediate): letInterface 
+
+		dyn_containers_interface__global_0_0
+			use (intermediate): letInterface 
+
+		dyn_containers_mutex__global_0_0
+			use (skip): letInterface 
+
+		threadName__letInterface_0_0
+			def (skip): letInterface 
+
+		forec_intern_input__global_0_0
+			def (intermediate): letInterface 
+			use (intermediate): letInterface 
+
+		forec_intern_input_train_engine_0__global_0_0
+			use (root): letInterface 
+
+		forec_intern_input_train_engine_1__global_0_0
+			use (root): letInterface 
+
+		forec_intern_input_train_engine_2__global_0_0
+			use (root): letInterface 
+
+		forec_intern_input_train_engine_3__global_0_0
+			use (root): letInterface 
+
+		forec_intern_output_train_engine_0__global_0_0
+			use (intermediate): letInterface 
+
+		forec_intern_output_train_engine_1__global_0_0
+			use (intermediate): letInterface 
+
+		forec_intern_output_train_engine_2__global_0_0
+			use (intermediate): letInterface 
+
+		forec_intern_output_train_engine_3__global_0_0
+			use (intermediate): letInterface 
+
+	loadEngines:
+		threadName__loadEngines_0_0
+			def (skip): loadEngines 
+			use (skip): loadEngines 
+
+		load_status__loadEngines_0_0
+			def (skip): loadEngines 
+			use (skip): loadEngines 
+
+		PATH_MAX__global_0_0
+			use (skip): loadEngines 
+
+		NAME_MAX__global_0_0
+			use (skip): loadEngines 
+
+		DYNLIB_LOAD_SUCCESS__global_0_0
+			use (skip): loadEngines 
+
+		trainEngines__global_0_0
+			use (root): loadEngines 
+
+		trainEngineFilepaths__global_0_0
+			use (skip): loadEngines 
+
+		forec_intern_input_train_engine_0__global_0_0
+			use (root): loadEngines 
+
+		forec_intern_input_train_engine_1__global_0_0
+			use (root): loadEngines 
+
+		forec_intern_input_train_engine_2__global_0_0
+			use (root): loadEngines 
+
+		forec_intern_input_train_engine_3__global_0_0
+			use (root): loadEngines 
+
+		forec_intern_output_train_engine_0__global_0_0
+			def (intermediate): loadEngines 
+			use (intermediate): loadEngines 
+
+		forec_intern_output_train_engine_1__global_0_0
+			def (intermediate): loadEngines 
+			use (intermediate): loadEngines 
+
+		forec_intern_output_train_engine_2__global_0_0
+			def (intermediate): loadEngines 
+			use (intermediate): loadEngines 
+
+		forec_intern_output_train_engine_3__global_0_0
+			def (intermediate): loadEngines 
+			use (intermediate): loadEngines 
+
+		load_status__loadEngines_2_3
+			use (skip): loadEngines 
+
+		container__loadEngines_1_2
+			def (skip): loadEngines 
+			use (skip): loadEngines 
+
+		load_status__loadEngines_2_0
+			use (skip): loadEngines 
+
+		load_status__loadEngines_2_1
+			use (skip): loadEngines 
+
+		load_status__loadEngines_2_2
+			use (skip): loadEngines 
+
+	main:
+		forec_intern_input_train_engine_instance_0__global_0_0
+			use (skip): main 
+
+		forec_intern_input_train_engine_instance_1__global_0_0
+			use (skip): main 
+
+		forec_intern_input_train_engine_instance_2__global_0_0
+			use (skip): main 
+
+		forec_intern_input_train_engine_instance_3__global_0_0
+			use (skip): main 
+
+		forec_intern_input_train_engine_instance_4__global_0_0
+			use (skip): main 
+
+		forec_intern_output_train_engine_instance_0__global_0_0
+			def (root): main 
+			use (root): main 
+
+		forec_intern_output_train_engine_instance_1__global_0_0
+			def (root): main 
+			use (root): main 
+
+		forec_intern_output_train_engine_instance_2__global_0_0
+			def (root): main 
+			use (root): main 
+
+		forec_intern_output_train_engine_instance_3__global_0_0
+			def (root): main 
+			use (root): main 
+
+		forec_intern_output_train_engine_instance_4__global_0_0
+			def (root): main 
+			use (root): main 
+
+		dyn_containers_interface__global_0_0
+			use (root): main 
+
+		dyn_containers_mutex__global_0_0
+			use (skip): main 
+
+		threadName__letInterface_0_0
+			def (skip): main 
+
+		threadName__loadEngines_0_0
+			def (skip): main 
+			use (skip): main 
+
+		load_status__loadEngines_0_0
+			def (skip): main 
+			use (skip): main 
+
+		LOG_NOTICE__global_0_0
+			use (root): main 
+
+		PATH_MAX__global_0_0
+			use (skip): main 
+
+		NAME_MAX__global_0_0
+			use (skip): main 
+
+		DYNLIB_LOAD_SUCCESS__global_0_0
+			use (skip): main 
+
+		trainEngines__global_0_0
+			use (skip): main 
+
+		trainEngineFilepaths__global_0_0
+			use (skip): main 
+
+		trainEngineInstanceData__global_0_0
+			def (root): main 
+			use (root): main 
+
+		forec_intern_input__global_0_0
+			def (root): main 
+			use (root): main 
+
+		forec_intern_input_train_engine_0__global_0_0
+			use (skip): main 
+
+		forec_intern_input_train_engine_1__global_0_0
+			use (skip): main 
+
+		forec_intern_input_train_engine_2__global_0_0
+			use (skip): main 
+
+		forec_intern_input_train_engine_3__global_0_0
+			use (skip): main 
+
+		forec_intern_output_train_engine_0__global_0_0
+			def (root): main 
+			use (root): main 
+
+		forec_intern_output_train_engine_1__global_0_0
+			def (root): main 
+			use (root): main 
+
+		forec_intern_output_train_engine_2__global_0_0
+			def (root): main 
+			use (root): main 
+
+		forec_intern_output_train_engine_3__global_0_0
+			def (root): main 
+			use (root): main 
+
+		load_status__loadEngines_2_3
+			use (skip): main 
+
+		instance__engineInstance0_0_0
+			use (skip): main 
+
+		threadName__engineInstance0_0_0
+			def (skip): main 
+			use (skip): main 
+
+		trainEngineType__engineInstance0_0_0
+			def (skip): main 
+			use (skip): main 
+
+		instance__engineInstance1_0_0
+			use (skip): main 
+
+		threadName__engineInstance1_0_0
+			def (skip): main 
+			use (skip): main 
+
+		trainEngineType__engineInstance1_0_0
+			def (skip): main 
+			use (skip): main 
+
+		container__loadEngines_1_2
+			def (skip): main 
+			use (skip): main 
+
+		load_status__loadEngines_2_0
+			use (skip): main 
+
+		load_status__loadEngines_2_1
+			use (skip): main 
+
+		load_status__loadEngines_2_2
+			use (skip): main 
+
+		instance__engineInstance2_0_0
+			use (skip): main 
+
+		threadName__engineInstance2_0_0
+			def (skip): main 
+			use (skip): main 
+
+		trainEngineType__engineInstance2_0_0
+			def (skip): main 
+			use (skip): main 
+
+		instance__engineInstance3_0_0
+			use (skip): main 
+
+		threadName__engineInstance3_0_0
+			def (skip): main 
+			use (skip): main 
+
+		trainEngineType__engineInstance3_0_0
+			def (skip): main 
+			use (skip): main 
+
+		instance__engineInstance4_0_0
+			use (skip): main 
+
+		threadName__engineInstance4_0_0
+			def (skip): main 
+			use (skip): main 
+
+		trainEngineType__engineInstance4_0_0
+			def (skip): main 
+			use (skip): main 
+
+
+Functions used for combining shared variables:
+----------------------------------------------
+	keepOneCombine
+
+============================
+tools::Threading::toString()
+============================
+Threads declared:
+-----------------
+	* engineInstance0__thread
+	* engineInstance1__thread
+	* engineInstance2__thread
+	* engineInstance3__thread
+	* engineInstance4__thread
+	* interlockerInstance0__thread
+	* interlockerInstance1__thread
+	* interlockerInstance2__thread
+	* interlockerInstance3__thread
+	* letInterface__thread
+	* loadEngines__thread
+	* loadInterlockers__thread
+	* main__thread
+
+Threads unused:
+---------------
+
+par(...) statements:
+--------------------
+	Thread scope: main
+		par0:
+		* letInterface__thread
+		* loadEngines__thread
+		* loadInterlockers__thread
+		* engineInstance0__thread
+		* engineInstance1__thread
+		* engineInstance2__thread
+		* engineInstance3__thread
+		* engineInstance4__thread
+		* interlockerInstance0__thread
+		* interlockerInstance1__thread
+		* interlockerInstance2__thread
+		* interlockerInstance3__thread
+
+========================
+tools::Abort::toString()
+========================
+Abort statements:
+-----------------
+	Thread scope: main__thread
+		par0:
+		* abortStrongNonImmediate0 strongNonImmediate
+
+
+============================
+tools::Condition::toString()
+============================
+
+========================
+tarot::Tarot::toString()
+========================
+Full tarot:
+-----------
+	core0: main__thread
+	.	core0: abortStrongNonImmediate0
+	.	:	core0: par0
+	.	:	|	core0: letInterface__thread
+	.	:	|	.	core0: while_0
+	.	:	|	.	.	pause0
+	.	:	|	core1: loadEngines__thread
+	.	:	|	.	core1: while_1
+	.	:	|	.	.	pause1
+	.	:	|	core2: loadInterlockers__thread
+	.	:	|	core1: engineInstance0__thread
+	.	:	|	.	core1: while_4
+	.	:	|	.	.	core1: while_2
+	.	:	|	.	.	.	pause2
+	.	:	|	.	.	core1: while_3
+	.	:	|	.	.	.	pause3
+	.	:	|	.	.	pause4
+	.	:	|	core2: engineInstance1__thread
+	.	:	|	.	core2: while_7
+	.	:	|	.	.	core2: while_5
+	.	:	|	.	.	.	pause5
+	.	:	|	.	.	core2: while_6
+	.	:	|	.	.	.	pause6
+	.	:	|	.	.	pause7
+	.	:	|	core1: engineInstance2__thread
+	.	:	|	.	core1: while_10
+	.	:	|	.	.	core1: while_8
+	.	:	|	.	.	.	pause8
+	.	:	|	.	.	core1: while_9
+	.	:	|	.	.	.	pause9
+	.	:	|	.	.	pause10
+	.	:	|	core2: engineInstance3__thread
+	.	:	|	.	core2: while_13
+	.	:	|	.	.	core2: while_11
+	.	:	|	.	.	.	pause11
+	.	:	|	.	.	core2: while_12
+	.	:	|	.	.	.	pause12
+	.	:	|	.	.	pause13
+	.	:	|	core1: engineInstance4__thread
+	.	:	|	.	core1: while_16
+	.	:	|	.	.	core1: while_14
+	.	:	|	.	.	.	pause14
+	.	:	|	.	.	core1: while_15
+	.	:	|	.	.	.	pause15
+	.	:	|	.	.	pause16
+	.	:	|	core2: interlockerInstance0__thread
+	.	:	|	core1: interlockerInstance1__thread
+	.	:	|	core2: interlockerInstance2__thread
+	.	:	|	core1: interlockerInstance3__thread
+
+
+Tarot by coreId:
+----------------
+	core0:
+	-------
+		core0: main__thread
+		.	core0: abortStrongNonImmediate0
+		.	:	core0: par0
+		.	:	|	core0: letInterface__thread
+		.	:	|	.	core0: while_0
+		.	:	|	.	.	pause0
+
+	core1:
+	-------
+		core0: main__thread
+		.	core0: abortStrongNonImmediate0
+		.	:	core0: par0
+		.	:	|	core1: loadEngines__thread
+		.	:	|	.	core1: while_1
+		.	:	|	.	.	pause1
+		.	:	|	core1: engineInstance0__thread
+		.	:	|	.	core1: while_4
+		.	:	|	.	.	core1: while_2
+		.	:	|	.	.	.	pause2
+		.	:	|	.	.	core1: while_3
+		.	:	|	.	.	.	pause3
+		.	:	|	.	.	pause4
+		.	:	|	core1: engineInstance2__thread
+		.	:	|	.	core1: while_10
+		.	:	|	.	.	core1: while_8
+		.	:	|	.	.	.	pause8
+		.	:	|	.	.	core1: while_9
+		.	:	|	.	.	.	pause9
+		.	:	|	.	.	pause10
+		.	:	|	core1: engineInstance4__thread
+		.	:	|	.	core1: while_16
+		.	:	|	.	.	core1: while_14
+		.	:	|	.	.	.	pause14
+		.	:	|	.	.	core1: while_15
+		.	:	|	.	.	.	pause15
+		.	:	|	.	.	pause16
+		.	:	|	core1: interlockerInstance1__thread
+		.	:	|	core1: interlockerInstance3__thread
+
+	core2:
+	-------
+		core0: main__thread
+		.	core0: abortStrongNonImmediate0
+		.	:	core0: par0
+		.	:	|	core2: loadInterlockers__thread
+		.	:	|	core2: engineInstance1__thread
+		.	:	|	.	core2: while_7
+		.	:	|	.	.	core2: while_5
+		.	:	|	.	.	.	pause5
+		.	:	|	.	.	core2: while_6
+		.	:	|	.	.	.	pause6
+		.	:	|	.	.	pause7
+		.	:	|	core2: engineInstance3__thread
+		.	:	|	.	core2: while_13
+		.	:	|	.	.	core2: while_11
+		.	:	|	.	.	.	pause11
+		.	:	|	.	.	core2: while_12
+		.	:	|	.	.	.	pause12
+		.	:	|	.	.	pause13
+		.	:	|	core2: interlockerInstance0__thread
+		.	:	|	core2: interlockerInstance2__thread
+
+
+par(...) statements with core allocation:
+-----------------------------------------
+	Thread main__thread:
+		all:
+		* core0
+		* core1
+		* core2
+
+		par0:
+		* core0
+		* core1
+		* core2
+
+
+par(...) statements with active cores:
+--------------------------------------
+	Thread main__thread:
+		all:
+		* core0
+		* core1
+		* core2
+
+		par0:
+		* core0
+		* core1
+		* core2
+
+
+Reaction starts:
+----------------
+	core0:
+		main: Master
+
+	core1:
+		main: Slave
+
+	core2:
+		main: Slave
+
+
+Reaction ends:
+--------------
+	core0:
+		par0:
+			coreIds:
+			* 0
+			* 1
+			* 2
+
+			isMaster:
+			* true
+
+			threadScope:
+			* main
+
+	core1:
+		par0:
+			threadScope:
+			* main
+
+	core2:
+		par0:
+			threadScope:
+			* main
+
+
+Par(...) handlers:
+------------------
+	par0:
+	* engineInstance0__thread
+	* engineInstance1__thread
+	* engineInstance2__thread
+	* engineInstance3__thread
+	* engineInstance4__thread
+	* interlockerInstance0__thread
+	* interlockerInstance1__thread
+	* interlockerInstance2__thread
+	* interlockerInstance3__thread
+	* letInterface__thread
+	* loadEngines__thread
+	* loadInterlockers__thread
+	* mainReactionStartMaster0
+	* mainReactionStartSlave1
+	* mainReactionStartSlave2
+	* mainReactionEndMaster0
+	* mainReactionEndSlave1
+	* mainReactionEndSlave2
+	* abortStrongNonImmediate0Check0
+	* abortStrongNonImmediate0Check1
+	* abortStrongNonImmediate0Check2
+
+
+Abort checks:
+-------------
+	core0:
+		main:
+			strong:
+			* abortStrongNonImmediate0(forec_intern_input__global_0_0.value.terminate && init__abortStrongNonImmediate0 == 1)
+
+	core1:
+		main:
+			strong:
+			* abortStrongNonImmediate0(forec_intern_input__global_0_0.value.terminate && init__abortStrongNonImmediate0 == 1)
+
+	core2:
+		main:
+			strong:
+			* abortStrongNonImmediate0(forec_intern_input__global_0_0.value.terminate && init__abortStrongNonImmediate0 == 1)
+
+
+Linked lists:
+-------------
+	core0:
+		Thread main__thread linked lists:
+			par0:
+			* (parStart) mainReactionStartMaster0
+			* (abortStrong) abortStrongNonImmediate0Check0
+			* (thread) letInterface__thread
+			* (parEnd) mainReactionEndMaster0
+
+	core1:
+		Thread main__thread linked lists:
+			par0:
+			* (parStart) mainReactionStartSlave1
+			* (abortStrong) abortStrongNonImmediate0Check1
+			* (thread) loadEngines__thread
+			* (thread) engineInstance0__thread
+			* (thread) engineInstance2__thread
+			* (thread) engineInstance4__thread
+			* (thread) interlockerInstance1__thread
+			* (thread) interlockerInstance3__thread
+			* (parEnd) mainReactionEndSlave1
+
+	core2:
+		Thread main__thread linked lists:
+			par0:
+			* (parStart) mainReactionStartSlave2
+			* (abortStrong) abortStrongNonImmediate0Check2
+			* (thread) loadInterlockers__thread
+			* (thread) engineInstance1__thread
+			* (thread) engineInstance3__thread
+			* (thread) interlockerInstance0__thread
+			* (thread) interlockerInstance2__thread
+			* (parEnd) mainReactionEndSlave2
+
+
+par(...) handlers in thread scopes:
+-----------------------------------
+	par0	main__thread
+
+Last par(...)s in each abort:
+-------------------------------
+	core0:
+		Thread scope: main
+		* abortStrongNonImmediate0->par0
+
+	core1:
+		Thread scope: main
+		* abortStrongNonImmediate0->par0
+
+	core2:
+		Thread scope: main
+		* abortStrongNonImmediate0->par0
+
+
+Scoped aborts:
+--------------
+	abortStrongNonImmediate0:
+		coreIds:
+		* 0
+		* 1
+		* 2
+
+		parIds:
+		* par0
+
+
+Aborts around par(...):
+-----------------------
+	par0:
+	* abortStrongNonImmediate0 (par0)
+
+
+============================
+tools::Multicore::toString()
+============================
+Multicore architecture:
+-----------------------
+	x86
+
+Multicore allocations:
+----------------------
+	Core	Thread
+	----	------
+	1		engineInstance0__thread
+	2		engineInstance1__thread
+	1		engineInstance2__thread
+	2		engineInstance3__thread
+	1		engineInstance4__thread
+	2		interlockerInstance0__thread
+	1		interlockerInstance1__thread
+	2		interlockerInstance2__thread
+	1		interlockerInstance3__thread
+	0		letInterface__thread
+	1		loadEngines__thread
+	2		loadInterlockers__thread
+	0		main__thread
+
+
+========================
+tools::Mutex::toString()
+========================
+Mutex information:
+------------------
+

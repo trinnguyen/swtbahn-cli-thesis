@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="server"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="server">
+				<Option output="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 server"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="server/fast">
+				<Option output="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/server" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 server/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/handler_admin.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/handler_admin.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/handler_controller.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/handler_controller.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/handler_driver.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/handler_driver.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/handler_monitor.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/handler_monitor.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_algorithm.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_algorithm.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/param_verification.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/param_verification.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/server.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/server.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/train_engine_default.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/train_engine_default.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/train_engine_linear.c">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/train_engine_linear.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/train_engine_tick_data.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/tnn/wdata/swtbahn/swtbahn-cli/server/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

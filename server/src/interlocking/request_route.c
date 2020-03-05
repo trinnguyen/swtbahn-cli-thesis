@@ -2007,13 +2007,13 @@ static inline void region__EA_Entry17(__EA_Entry17Context *context) {
 
 // Logic function of the simple state S5_0_2_0 in region region__EA_Entry17
 static inline void region__EA_Entry17_stateS5_0_2_0(__EA_Entry17Context *context) {
-    if (context->iface->_request_route_local_conflict_train_id != "") {
+    if (!string_equals(context->iface->_request_route_local_conflict_train_id, "")) {
         /* Immediate
      *   Transition 0:
      *   S5_0_2_0
      *    to
      *   __EA_Init
-     *   Trigger: context->iface->_request_route_local_conflict_train_id != ""
+     *   Trigger: !string_equals(context->iface->_request_route_local_conflict_train_id, "")
      */
         context->delayedEnabled = 0;
         context->activeState = __EA_INIT3;
@@ -2964,13 +2964,13 @@ static inline void region__EA_Entry2_state_Tc(__EA_Entry2Context *context) {
 
 // Logic function of the simple state S3_0 in region region__EA_Entry2
 static inline void region__EA_Entry2_stateS3_0(__EA_Entry2Context *context) {
-    if (context->iface->_request_route_local_src_state != "red") {
+    if (!string_equals(context->iface->_request_route_local_src_state, "red")) {
         /* Immediate
      *   Transition 0:
      *   S3_0
      *    to
      *   __EA_Init
-     *   Trigger: context->iface->_request_route_local_src_state != "red"
+     *   Trigger: !string_equals(context->iface->_request_route_local_src_state, "red")
      */
         context->delayedEnabled = 0;
         context->activeState = __EA_INIT8;
@@ -3590,13 +3590,13 @@ static inline void region__EA_Entry6(__EA_Entry6Context *context) {
 
 // Logic function of the simple state S3_3_3_0_2_0 in region region__EA_Entry6
 static inline void region__EA_Entry6_stateS3_3_3_0_2_0(__EA_Entry6Context *context) {
-    if (context->iface->_request_route_local_flank_signal != "red") {
+    if (!string_equals(context->iface->_request_route_local_flank_signal, "red")) {
         /* Immediate
      *   Transition 0:
      *   S3_3_3_0_2_0
      *    to
      *   __EA_Init
-     *   Trigger: context->iface->_request_route_local_flank_signal != "red"
+     *   Trigger: !string_equals(context->iface->_request_route_local_flank_signal, "red")
      */
         context->delayedEnabled = 0;
         context->activeState = __EA_INIT5;
@@ -5677,9 +5677,9 @@ static inline void regionregion41_stateS3_0_11(Region41Context *context) {
      *   S3_0_11
      *    to
      *   S3_0_21
-     *   Effects: _request_route_local_point_position = config_get_point_position(id, _request_route_local_point_id)
+     *   Effects: _request_route_local_point_position = config_get_scalar_string_value("route_point", _request_route_local_point_id, "position")
      */
-    context->iface->_request_route_local_point_position = config_get_point_position(context->iface->id, context->iface->_request_route_local_point_id);
+    context->iface->_request_route_local_point_position = config_get_scalar_string_value("route_point", context->iface->_request_route_local_point_id, "position");
     context->delayedEnabled = 0;
     context->activeState = S3_0_21;
 }

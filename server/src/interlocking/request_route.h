@@ -18,11 +18,11 @@ typedef enum {
 
 // The interface of the program is used to communicate with the surrounding environment.
 typedef struct {
-    char* src_signal_id;                                  // Input
-    char* dst_signal_id;                                  // Input
-    char* train_id;                                       // Input
-    char* out;                                            // Output
-    char* route_ids[1000];
+    char* src_signal_id;                                 // Input
+    char* dst_signal_id;                                 // Input
+    char* train_id;                                      // Input
+    char* out;                                           // Output
+    char* route_ids[100];
     int count_routes;
     char* id;
     char is_grantable;
@@ -71,7 +71,7 @@ typedef struct {
     char _request_route_local__Tterm13;
     char _request_route_local__Tterm14;
     char* _request_route_local__train_id_;
-    char* _request_route_local_conflict_routes[1000];
+    char* _request_route_local_conflict_routes[100];
     int _request_route_local_count_conflict_routes;
     int _request_route_local_i4;
     char _request_route_local_result2;
@@ -1395,7 +1395,7 @@ static inline void region__EA_Entry17_stateS5_0_2_0(__EA_Entry17Context *context
  *   S5_0_2_0
  *    to
  *   __EA_Init
- *   Trigger: context->iface->_request_route_local_conflict_train_id != ""
+ *   Trigger: !string_equals(context->iface->_request_route_local_conflict_train_id, "")
  */
 
 /* Immediate
@@ -1841,7 +1841,7 @@ static inline void region__EA_Entry2_stateS3_0(__EA_Entry2Context *context);
  *   S3_0
  *    to
  *   __EA_Init
- *   Trigger: context->iface->_request_route_local_src_state != "red"
+ *   Trigger: !string_equals(context->iface->_request_route_local_src_state, "red")
  */
 
 /* Immediate
@@ -1991,7 +1991,7 @@ static inline void region__EA_Entry6_stateS3_3_3_0_2_0(__EA_Entry6Context *conte
  *   S3_3_3_0_2_0
  *    to
  *   __EA_Init
- *   Trigger: context->iface->_request_route_local_flank_signal != "red"
+ *   Trigger: !string_equals(context->iface->_request_route_local_flank_signal, "red")
  */
 
 /* Immediate
@@ -2912,7 +2912,7 @@ static inline void regionregion41_stateS3_0_11(Region41Context *context);
  *   S3_0_11
  *    to
  *   S3_0_21
- *   Effects: _request_route_local_point_position = config_get_point_position(id, _request_route_local_point_id)
+ *   Effects: _request_route_local_point_position = config_get_scalar_string_value("route_point", _request_route_local_point_id, "position")
  */
 
 // Logic function of the simple state S3_0_21 in region regionregion41

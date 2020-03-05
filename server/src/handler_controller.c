@@ -232,11 +232,11 @@ int grant_route_with_algorithm(const char *train_id, const char *source_id, cons
 
     // result
     char *route_id = tick_data.iface.out;
-    int route_id_int = route_id != NULL && strcmp(route_id, "") ? (int)strtol(route_id, NULL, 10) : -1;
+    int route_id_int = route_id != NULL && strcmp(route_id, "") != 0 ? (int)strtol(route_id, NULL, 10) : -1;
     if (route_id_int >= 0) {
-        syslog_server(LOG_ERR, "Grant route with algorithm: Route could not be granted");
-    } else {
         syslog_server(LOG_NOTICE, "Grant route with algorithm: Route %d has been granted", route_id_int);
+    } else {
+        syslog_server(LOG_ERR, "Grant route with algorithm: Route could not be granted");
     }
 
     return route_id_int;
