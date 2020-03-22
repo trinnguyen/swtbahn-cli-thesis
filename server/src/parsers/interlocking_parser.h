@@ -31,7 +31,7 @@
 #include <glib.h>
 
 
-GArray *parse_interlocking_table(const char *config_dir);
+GHashTable *parse_interlocking_table(const char *config_dir);
 
 
 #endif // INTERLOCKING_PARSER_H

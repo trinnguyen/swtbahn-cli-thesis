@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include <yaml.h>
 
-GArray *parse(yaml_parser_t *parser);
+GHashTable *parse(yaml_parser_t *parser);
 
 bool is_str_equal(const char *str1, const char *str2) {
     return strcmp(str1, str2) == 0;
@@ -109,6 +109,10 @@ e_sequence_level decrease_sequence_level (e_sequence_level level) {
     }
 }
 
+void free_route_key(void *pointer) {
+    free(pointer);
+}
+
 void free_route(void *item) {
     t_interlocking_route *route = (t_interlocking_route *) item;
     free(route->id);
@@ -140,11 +144,11 @@ void free_interlocking_point(void *item) {
     free(point->id);
 }
 
-GArray *parse(yaml_parser_t *parser) {
+GHashTable *parse(yaml_parser_t *parser) {
     e_mapping_level cur_mapping = MAPPING_TABLE;
     e_sequence_level cur_sequence = SEQUENCE_NONE;
 
-    GArray *routes = NULL;
+    GHashTable *routes = NULL;
     t_interlocking_route *route = NULL;
     t_interlocking_point *point = NULL;
 
@@ -187,8 +191,9 @@ GArray *parse(yaml_parser_t *parser) {
                 if (cur_mapping == MAPPING_TABLE) {
                     if (is_str_equal(last_scalar, "interlocking-table")) {
                         cur_sequence = SEQUENCE_ROUTES;
-                        routes = g_array_sized_new(FALSE, FALSE, sizeof(t_interlocking_route), 64);
-                        g_array_set_clear_func(routes, free_route);
+                        if (routes == NULL) {
+                            routes = g_hash_table_new_full(g_str_hash, g_str_equal, free_route_key, free_route);
+                        }
                     }
                     break;
                 }
@@ -202,7 +207,7 @@ GArray *parse(yaml_parser_t *parser) {
                     }
 
                     if (is_str_equal(last_scalar, "points")) {
-                        route->points = g_array_sized_new(FALSE, TRUE, sizeof(char *), 8);
+                        route->points = g_array_sized_new(FALSE, TRUE, sizeof(t_interlocking_point), 8);
                         g_array_set_clear_func(route->points, free_interlocking_point);
                         cur_sequence = SEQUENCE_POINTS;
                         break;
@@ -215,7 +220,7 @@ GArray *parse(yaml_parser_t *parser) {
                     }
 
                     if (is_str_equal(last_scalar, "conflicts")) {
-                        route->conflicts = g_array_sized_new(FALSE, FALSE, sizeof(size_t), 8);
+                        route->conflicts = g_array_sized_new(FALSE, TRUE, sizeof(char *), 8);
                         cur_sequence = SEQUENCE_CONFLICTS;
                     }
                 }
@@ -229,8 +234,16 @@ GArray *parse(yaml_parser_t *parser) {
                 // routes -> create route
                 if (cur_sequence == SEQUENCE_ROUTES) {
                     cur_mapping = MAPPING_ROUTE;
-                    g_array_append_val(routes, (t_interlocking_route){});
-                    route = &g_array_index(routes, t_interlocking_route, routes->len - 1);
+                    route = malloc(sizeof(t_interlocking_route));
+                    route->id = NULL;
+                    route->source = NULL;
+                    route->destination = NULL;
+                    route->length = 0;
+                    route->path = NULL;
+                    route->points = NULL;
+                    route->signals = NULL;
+                    route->conflicts = NULL;
+                    route->train = NULL;
                     break;
                 }
 
@@ -258,6 +271,11 @@ GArray *parse(yaml_parser_t *parser) {
                 }
                 break;
             case YAML_MAPPING_END_EVENT:
+                // insert route
+                if (cur_mapping == MAPPING_ROUTE && route != NULL && route->id != NULL) {
+                    g_hash_table_insert(routes, strdup(route->id), route);
+                }
+
                 // move up one level
                 cur_mapping = decrease_mapping_level(cur_mapping);
                 break;
@@ -352,7 +370,7 @@ GArray *parse(yaml_parser_t *parser) {
     return routes;
 }
 
-GArray *parse_interlocking_table(const char *config_dir) {
+GHashTable *parse_interlocking_table(const char *config_dir) {
     if (config_dir == NULL) {
         syslog_server(LOG_INFO, "No interlocking table loaded because of missing config dir");
         return false;
@@ -366,7 +384,7 @@ GArray *parse_interlocking_table(const char *config_dir) {
     }
 
     // parse
-    GArray *routes = parse(&parser);
+    GHashTable *routes = parse(&parser);
 
     // clean
     yaml_parser_delete(&parser);

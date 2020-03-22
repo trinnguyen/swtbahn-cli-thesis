@@ -65,10 +65,6 @@ typedef struct {
     char *train;
 } t_interlocking_route;
 
-extern GArray *route_arr;
-
-extern GHashTable *route_string_to_ids_hashtable;
-
 
 /**
  * Resolves the libbidib state array indices for track segments, 

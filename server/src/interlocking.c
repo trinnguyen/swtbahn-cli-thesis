@@ -35,7 +35,7 @@
 #include "parsers/interlocking_parser.h"
 
 
-GArray *route_arr = NULL;
+GHashTable *route_hash_table = NULL;
 GHashTable *route_string_to_ids_hashtable = NULL;
 
 void free_interlocking_hashtable_key(void *pointer) {
@@ -50,8 +50,12 @@ void free_interlocking_hashtable_value(void *pointer) {
 
 void create_interlocking_hashtable(void) {
 	route_string_to_ids_hashtable = g_hash_table_new_full(g_str_hash, g_str_equal, free_interlocking_hashtable_key, free_interlocking_hashtable_value);
-	for (int route_index = 0; route_index < route_arr->len; ++route_index) {
-		t_interlocking_route *route = get_route(route_index);
+
+    GHashTableIter iter;
+    gpointer key, value;
+    g_hash_table_iter_init (&iter, route_hash_table);
+    while (g_hash_table_iter_next (&iter, &key, &value)) {
+        t_interlocking_route *route = (t_interlocking_route *) value;
 
 		// Build key, example: signal3signal6
 		size_t len = strlen(route->source) + strlen(route->destination) + 1;
@@ -80,16 +84,16 @@ void free_interlocking_table(void) {
     }
 
     // free array
-	if (route_arr != NULL) {
-		g_array_free(route_arr, true);
-        route_arr = NULL;
+	if (route_hash_table != NULL) {
+        g_hash_table_destroy(route_hash_table);
+        route_hash_table = NULL;
 	}
 }
 
 bool interlocking_table_initialise(const char *config_dir) {
 	// Parse the interlocking table from the YAML file
-	route_arr = parse_interlocking_table(config_dir);
-	if (route_arr != NULL) {
+	route_hash_table = parse_interlocking_table(config_dir);
+	if (route_hash_table != NULL) {
         create_interlocking_hashtable();
         return true;
 	}
@@ -110,9 +114,11 @@ GArray *interlocking_table_get_route_ids(const char *source_id, const char *dest
 }
 
 t_interlocking_route *get_route(int route_id) {
-	if (route_id < 0 || route_id >= route_arr->len) {
-		return NULL;
-	}
+    char str[8];
+    sprintf(str, "%d", route_id);
+    if (g_hash_table_contains(route_hash_table, str)) {
+        return g_hash_table_lookup(route_hash_table, str);
+    }
 
-	return &g_array_index(route_arr, t_interlocking_route, route_id);
+    return NULL;
 }
