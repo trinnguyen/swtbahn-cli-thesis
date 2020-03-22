@@ -29,11 +29,7 @@
 #define INTERLOCKING_H
 
 #include <glib.h>
-
-typedef enum {
-	CLOCKWISE,
-	ANTICLOCKWISE
-} e_interlocking_table;
+#include <stdbool.h>
 
 typedef enum {
 	NORMAL,
@@ -42,19 +38,8 @@ typedef enum {
 
 typedef struct {
 	char *id;
-	int bidib_state_index;	// t_bidib_track_state.segments[bidib_state_index].data
-} t_interlocking_path_segment;
-
-typedef struct {
-	char *id;
-	int bidib_state_index;	// t_bidib_track_state.points_board[bidib_state_index].data
 	e_interlocking_point_position position;
 } t_interlocking_point;
-
-typedef struct {
-	char *id;
-	int bidib_state_index;	// t_bidib_track_state.signals_board[bidib_state_index].data
-} t_interlocking_signal;
 
 /**
  * Route information
@@ -70,24 +55,17 @@ typedef struct {
  */
 typedef struct {
 	char *id;
-	t_interlocking_signal source;
-	t_interlocking_signal destination;
-	size_t direction;
+    char *source;
+	char *destination;
 	float length;
-	GArray *path;		// g_array_index(route->path, t_interlocking_path_segment, segment_index)
+	GArray *path;		// g_array_index(route->path, char *, segment_index)
 	GArray *points;		// g_array_index(route->points, t_interlocking_point, point_index)
-	GArray *signals;	// g_array_index(route->signals, t_interlocking_signal, signal_index)
+	GArray *signals;	// g_array_index(route->signals, char *, signal_index)
 	GArray *conflicts;	// g_array_index(route->conflicts, char *, conflict_index)
-	GString *train_id;
+    char *train;
 } t_interlocking_route;
 
-//extern t_interlocking_route interlocking_table[TOTAL_ROUTES];
-extern GArray *interlocking_table;
-
-typedef struct {
-	char *string;
-	int id;
-} t_route_string_to_id;
+extern GArray *route_arr;
 
 extern GHashTable *route_string_to_ids_hashtable;
 
@@ -97,14 +75,9 @@ extern GHashTable *route_string_to_ids_hashtable;
  * points, and signals. Creates hashtable for constant lookup of
  * route strings to IDs.
  *
- * @return 0 if successful, otherwise 1
+ * @return true if successful, otherwise false
  */
-int interlocking_table_initialise(const char *config_dir);
-
-/**
- * Frees the hashtable that maps route strings to IDs.
- */
-void free_interlocking_hashtable(void);
+bool interlocking_table_initialise(const char *config_dir);
 
 /**
  * Free the array that stores interlocking table
@@ -116,14 +89,6 @@ void free_interlocking_table(void);
  * @return array if it exists, otherwise NULL
  */
 GArray *interlocking_table_get_route_ids(const char *source_id, const char *destination_id);
-
-/**
- * Returns the route ID for a given source and destination signal. 
- * The route ID is also the required array index for the interlocking table.
- *
- * @return the route ID if it exists, otherwise -1
- */
-int interlocking_table_get_route_id(const char *source_id, const char *destination_id);
 
 /**
  * Return the route (pointer to a struct) for a given route_id

@@ -26,8 +26,8 @@
  */
 
 #include "interlocking_parser.h"
-#include "interlocking.h"
-#import "server.h"
+#include "../interlocking.h"
+#import "../server.h"
 
 #include <stdio.h>
 #include <yaml.h>
@@ -111,8 +111,12 @@ e_sequence_level decrease_sequence_level (e_sequence_level level) {
 
 void free_route(void *item) {
     t_interlocking_route *route = (t_interlocking_route *) item;
-    free(route->source.id);
-    free(route->destination.id);
+    free(route->id);
+    free(route->source);
+    free(route->destination);
+    if (route->train != NULL) {
+        free(route->train);
+    }
 
     if (route->path != NULL) {
         g_array_free(route->path, true);
@@ -131,19 +135,9 @@ void free_route(void *item) {
     }
 }
 
-void free_route_path(void *item) {
-    t_interlocking_path_segment *path = (t_interlocking_path_segment *) item;
-    free(path->id);
-}
-
-void free_route_point(void *item) {
-    t_interlocking_point *point = (t_interlocking_point *)item;
+void free_interlocking_point(void *item) {
+    t_interlocking_point *point = (t_interlocking_point *) item;
     free(point->id);
-}
-
-void free_route_signal(void *item) {
-    t_interlocking_signal *signal = (t_interlocking_signal *)item;
-    free(signal->id);
 }
 
 GArray *parse(yaml_parser_t *parser) {
@@ -152,9 +146,7 @@ GArray *parse(yaml_parser_t *parser) {
 
     GArray *routes = NULL;
     t_interlocking_route *route = NULL;
-    t_interlocking_path_segment *segment = NULL;
     t_interlocking_point *point = NULL;
-    t_interlocking_signal *signal = NULL;
 
     yaml_event_t  event;
     bool error = false;
@@ -204,22 +196,20 @@ GArray *parse(yaml_parser_t *parser) {
                 // array member of route
                 if (cur_mapping == MAPPING_ROUTE) {
                     if (is_str_equal(last_scalar, "path")) {
-                        route->path = g_array_sized_new(FALSE, TRUE, sizeof(t_interlocking_path_segment), 8);
-                        g_array_set_clear_func(route->path, free_route_path);
+                        route->path = g_array_sized_new(FALSE, TRUE, sizeof(char *), 8);
                         cur_sequence = SEQUENCE_PATH;
                         break;
                     }
 
                     if (is_str_equal(last_scalar, "points")) {
-                        route->points = g_array_sized_new(FALSE, TRUE, sizeof(t_interlocking_point), 8);
-                        g_array_set_clear_func(route->points, free_route_point);
+                        route->points = g_array_sized_new(FALSE, TRUE, sizeof(char *), 8);
+                        g_array_set_clear_func(route->points, free_interlocking_point);
                         cur_sequence = SEQUENCE_POINTS;
                         break;
                     }
 
                     if (is_str_equal(last_scalar, "signals")) {
-                        route->signals = g_array_sized_new(FALSE, TRUE, sizeof(t_interlocking_signal), 8);
-                        g_array_set_clear_func(route->signals, free_route_signal);
+                        route->signals = g_array_sized_new(FALSE, TRUE, sizeof(char *), 8);
                         cur_sequence = SEQUENCE_SIGNALS;
                         break;
                     }
@@ -247,28 +237,18 @@ GArray *parse(yaml_parser_t *parser) {
                 // path -> create segment
                 if (cur_sequence == SEQUENCE_PATH) {
                     cur_mapping = MAPPING_SEGMENT;
-                    g_array_append_val(route->path, (t_interlocking_path_segment){
-                            .bidib_state_index = -1
-                    });
-                    segment = &g_array_index(route->path, t_interlocking_path_segment, route->path->len - 1);
                     break;
                 }
 
                 if (cur_sequence == SEQUENCE_POINTS) {
                     cur_mapping = MAPPING_POINT;
-                    g_array_append_val(route->points, (t_interlocking_point){
-                            .bidib_state_index = -1
-                    });
+                    g_array_append_val(route->points, (t_interlocking_point){});
                     point = &g_array_index(route->points, t_interlocking_point, route->points->len - 1);
                     break;
                 }
 
                 if (cur_sequence == SEQUENCE_SIGNALS) {
                     cur_mapping = MAPPING_SIGNAL;
-                    g_array_append_val(route->signals, (t_interlocking_signal){
-                            .bidib_state_index = -1
-                    });
-                    signal = &g_array_index(route->signals, t_interlocking_signal , route->signals->len - 1);
                     break;
                 }
 
@@ -301,14 +281,12 @@ GArray *parse(yaml_parser_t *parser) {
                     }
 
                     if (is_str_equal(last_scalar, "source")) {
-                        route->source.id = cur_scalar;
-                        route->source.bidib_state_index = -1;
+                        route->source = cur_scalar;
                         break;
                     }
 
                     if (is_str_equal(last_scalar, "destination")) {
-                        route->destination.id = cur_scalar;
-                        route->destination.bidib_state_index = -1;
+                        route->destination = cur_scalar;
                         break;
                     }
 
@@ -317,19 +295,13 @@ GArray *parse(yaml_parser_t *parser) {
                         break;
                     }
 
-                    if (is_str_equal(last_scalar, "direction")) {
-                        route->direction = is_str_equal(cur_scalar, "clockwise")
-                                           ? CLOCKWISE
-                                           : ANTICLOCKWISE;
-                    }
-
                     break;
                 }
 
                 // segment
                 if (cur_mapping == MAPPING_SEGMENT) {
                     if (is_str_equal(last_scalar, "id")) {
-                        segment->id = cur_scalar;
+                        g_array_append_val(route->path, cur_scalar);
                     }
                     break;
                 }
@@ -353,7 +325,7 @@ GArray *parse(yaml_parser_t *parser) {
                 // signal
                 if (cur_mapping == MAPPING_SIGNAL) {
                     if (is_str_equal(last_scalar, "id")) {
-                        signal->id = cur_scalar;
+                        g_array_append_val(route->signals, cur_scalar);
                     }
 
                     break;

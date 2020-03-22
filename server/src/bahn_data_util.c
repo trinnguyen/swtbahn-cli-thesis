@@ -5,8 +5,8 @@
 #include <bidib.h>
 #include <string.h>
 
-#include "interlocking.h"
 #include "server.h"
+#include "interlocking.h"
 #include "parsers/config_data_parser.h"
 #include "parsers/config_data_intern.h"
 #include "bahn_data_util.h"
@@ -27,15 +27,21 @@ typedef enum {
 } e_config_type;
 
 bool initialise_config(const char *config_dir) {
-    if (parse_config_data(config_dir, &config_data)) {
-        return true;
+
+    if (!interlocking_table_initialise(config_dir)) {
+        return false;
     }
 
-    return false;
+    if (!parse_config_data(config_dir, &config_data)) {
+        return false;
+    }
+
+    return true;
 }
 
 void free_config() {
     free_config_data(config_data);
+    free_interlocking_table();
 }
 
 bool string_equals(const char *str1, const char *str2) {
@@ -161,17 +167,17 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                 }
 
                 if (string_equals(prop_name, "source")) {
-                    result = ((t_interlocking_route *) obj)->source.id;
+                    result = ((t_interlocking_route *) obj)->source;
                     break;
                 }
 
                 if (string_equals(prop_name, "destination")) {
-                    result = ((t_interlocking_route *) obj)->destination.id;
+                    result = ((t_interlocking_route *) obj)->destination;
                     break;
                 }
 
-                if (string_equals(prop_name, "train_id")) {
-                    GString *train_id = ((t_interlocking_route *) obj)->train_id;
+                if (string_equals(prop_name, "train")) {
+                    GString *train_id = ((t_interlocking_route *) obj)->train;
                     if (train_id != NULL) {
                         result = train_id->str;
                     }
@@ -382,7 +388,7 @@ int get_route_array_string_value(t_interlocking_route *route, const char *prop_n
     if (string_equals(prop_name, "path")) {
         if (route->path != NULL) {
             for (int i = 0; i < route->path->len; ++i) {
-                data[i] = (&g_array_index(route->path, t_interlocking_path_segment, i))->id;
+                data[i] = g_array_index(route->path, char *, i);
             }
             return route->path->len;
         }
@@ -400,7 +406,7 @@ int get_route_array_string_value(t_interlocking_route *route, const char *prop_n
     if (string_equals(prop_name, "signals")) {
         if (route->signals != NULL) {
             for (int i = 0; i < route->signals->len; ++i) {
-                data[i] = (&g_array_index(route->signals, t_interlocking_signal, i))->id;
+                data[i] = g_array_index(route->signals, char *, i);
             }
             return route->signals->len;
         }
@@ -464,7 +470,7 @@ bool config_set_scalar_string_value(const char *type, const char *id, const char
         if (string_equals(prop_name, "train")) {
             // Set train
             t_interlocking_route *route = (t_interlocking_route *) obj;
-            route->train_id = g_string_new(value);
+            route->train = strdup(value);
             result = true;
         }
     }

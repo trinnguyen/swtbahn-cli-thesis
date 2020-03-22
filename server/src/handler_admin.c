@@ -33,9 +33,8 @@
 
 #include "server.h"
 #include "handler_driver.h"
-#include "interlocking.h"
 #include "dyn_containers_interface.h"
-#include "interlocking/bahn_data_util.h"
+#include "bahn_data_util.h"
 
 
 static pthread_mutex_t start_stop_mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -54,14 +53,6 @@ void build_message_hex_string(unsigned char *message, char *dest) {
 static void *start_bidib(void *_) {
 	int err_serial = bidib_start_serial(serial_device, config_directory, 0);
 	if (err_serial) {
-		pthread_mutex_lock(&start_stop_mutex);
-		starting = false;
-		pthread_mutex_unlock(&start_stop_mutex);
-		pthread_exit(NULL);
-	}
-	
-	int err_interlocking = interlocking_table_initialise(config_directory);
-	if (err_interlocking) {
 		pthread_mutex_lock(&start_stop_mutex);
 		starting = false;
 		pthread_mutex_unlock(&start_stop_mutex);
@@ -130,8 +121,6 @@ static void *stop_bidib(void *_) {
 	usleep (1000000); // wait for running functions
 	bidib_stop();
 	free_all_grabbed_trains();
-	free_interlocking_hashtable();
-	free_interlocking_table();
 	free_config();
 	pthread_mutex_lock(&start_stop_mutex);
 	stopping = false;
