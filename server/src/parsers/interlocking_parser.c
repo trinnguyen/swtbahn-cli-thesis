@@ -187,7 +187,7 @@ GArray *parse(yaml_parser_t *parser) {
                 if (cur_mapping == MAPPING_TABLE) {
                     if (is_str_equal(last_scalar, "interlocking-table")) {
                         cur_sequence = SEQUENCE_ROUTES;
-                        routes = g_array_sized_new(FALSE, TRUE, sizeof(t_interlocking_route), 64);
+                        routes = g_array_sized_new(FALSE, FALSE, sizeof(t_interlocking_route), 64);
                         g_array_set_clear_func(routes, free_route);
                     }
                     break;

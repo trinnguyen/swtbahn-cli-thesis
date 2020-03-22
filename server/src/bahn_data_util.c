@@ -177,10 +177,7 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                 }
 
                 if (string_equals(prop_name, "train")) {
-                    GString *train_id = ((t_interlocking_route *) obj)->train;
-                    if (train_id != NULL) {
-                        result = train_id->str;
-                    }
+                    result = ((t_interlocking_route *) obj)->train;
                     break;
                 }
 
