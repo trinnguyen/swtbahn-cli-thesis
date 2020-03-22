@@ -3,7 +3,6 @@
 //
 
 #include <stdbool.h>
-#include "../parsers/config_data_intern.h"
 
 #ifndef BAHN_DATA_UTIL_H
 #define BAHN_DATA_UTIL_H

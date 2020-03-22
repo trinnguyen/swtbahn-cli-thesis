@@ -2,12 +2,14 @@
 // Created by Tri Nguyen on 09/02/2020.
 //
 
-#include "bahn_data_util.h"
-#include "string.h"
-#include "../parsers/config_data_parser.h"
-#include "../interlocking.h"
 #include <bidib.h>
-#include "../server.h"
+#include <string.h>
+
+#include "interlocking.h"
+#include "server.h"
+#include "parsers/config_data_parser.h"
+#include "parsers/config_data_intern.h"
+#include "bahn_data_util.h"
 
 t_config_data config_data = {};
 
@@ -40,23 +42,29 @@ bool string_equals(const char *str1, const char *str2) {
     return strcmp(str1, str2) == 0;
 }
 
-GArray *cached_states;
+GArray *cached_allocated_str;
 
 void init_cached_track_state() {
-    cached_states = g_array_sized_new(FALSE, FALSE, sizeof(char *), 16);
+    cached_allocated_str = g_array_sized_new(FALSE, FALSE, sizeof(char *), 16);
 }
 
 void free_cached_track_state() {
-    if (cached_states != NULL) {
-        g_array_free(cached_states, true);
-        cached_states = NULL;
+    if (cached_allocated_str != NULL) {
+        g_array_free(cached_allocated_str, true);
+        cached_allocated_str = NULL;
     }
 }
 
-void add_cache_state(char *state) {
-    if (cached_states != NULL) {
-        g_array_append_val(cached_states, state);
+void add_cache_str(char *state) {
+    if (cached_allocated_str != NULL) {
+        g_array_append_val(cached_allocated_str, state);
     }
+}
+
+char *new_empty_str() {
+    char *result = strdup("");
+    g_array_append_val(cached_allocated_str, result);
+    return result;
 }
 
 e_config_type get_config_type(const char *type) {
@@ -162,7 +170,7 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                     break;
                 }
 
-                if (string_equals(prop_name, "train")) {
+                if (string_equals(prop_name, "train_id")) {
                     GString *train_id = ((t_interlocking_route *) obj)->train_id;
                     if (train_id != NULL) {
                         result = train_id->str;
@@ -170,12 +178,14 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                     break;
                 }
 
+                break;
             case TYPE_SEGMENT:
                 if (string_equals(prop_name, "id")) {
                     result = ((t_config_segment *) obj)->id;
                     break;
                 }
 
+                break;
             case TYPE_SIGNAL:
                 if (string_equals(prop_name, "id")) {
                     result = ((t_config_signal *) obj)->id;
@@ -187,6 +197,7 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                     break;
                 }
 
+                break;
             case TYPE_POINT:
                 if (string_equals(prop_name, "id")) {
                     result = ((t_config_point *) obj)->id;
@@ -213,6 +224,7 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                     break;
                 }
 
+                break;
             case TYPE_TRAIN:
                 if (string_equals(prop_name, "id")) {
                     result = ((t_config_train *) obj)->id;
@@ -224,6 +236,7 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                     break;
                 }
 
+                break;
             case TYPE_BLOCK:
                 if (string_equals(prop_name, "id")) {
                     result = ((t_config_block *) obj)->id;
@@ -240,6 +253,7 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                     break;
                 }
 
+                break;
             case TYPE_CROSSING:
                 if (string_equals(prop_name, "id")) {
                     result = ((t_config_crossing *) obj)->id;
@@ -251,12 +265,13 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                     break;
                 }
 
+                break;
             default:
                 break;
         }
     }
 
-    result = result != NULL ? result : "";
+    result = result != NULL ? result : new_empty_str();
     syslog_server(LOG_DEBUG, "Get scalar string: %s %s.%s => %s", type, id, prop_name, result);
     return result;
 }
@@ -487,9 +502,9 @@ char *track_state_get_value(const char *type, const char *id) {
     }
 
     if (state != NULL) {
-        add_cache_state(state);
+        add_cache_str(state);
     } else {
-        state = "";
+        state = new_empty_str();
     }
 
     syslog_server(LOG_DEBUG, "Get track state: %s %s => %s", type, id, state);
@@ -543,7 +558,7 @@ char *config_get_point_position(const char *route_id, const char *point_id) {
         }
     }
 
-    result = result != NULL ? result : "";
+    result = result != NULL ? result : new_empty_str();
     syslog_server(LOG_DEBUG, "Get route point position: %s.%s => %s", route_id, point_id, result);
     return result;
 }

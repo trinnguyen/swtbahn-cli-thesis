@@ -35,12 +35,15 @@
 #include "server.h"
 #include "param_verification.h"
 #include "interlocking.h"
-
 #include "interlocking_algorithm.h"
-#include "interlocking/request_route.h"
-#include "interlocking/bahn_data_util.h"
+#include "bahn_data_util.h"
+#include "tick_data.h"
+#include "dynlib.h"
 
 pthread_mutex_t interlocker_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+char REQUEST_ROUTE_LIB_PATH[] = "../src/interlocking/request_route";
+dynlib_data library_request_route = {};
 
 bool route_is_unavailable_or_conflicted(const int route_id) {
 	t_interlocking_route *route = get_route(route_id);
@@ -207,31 +210,37 @@ int grant_route(const char *train_id, const char *source_id, const char *destina
 }
 
 int grant_route_with_algorithm(const char *train_id, const char *source_id, const char *destination_id) {
+    pthread_mutex_lock(&interlocker_mutex);
+
     // init cache
     init_cached_track_state();
 
     // request route
-    TickData tick_data;
-    reset(&tick_data);
+    TickDataRequestRoute tick_data = {.src_signal_id = strdup(source_id),
+                                      .dst_signal_id = strdup(destination_id),
+                                      .train_id = strdup(train_id)};
 
-    // Set the inputs
-    tick_data.iface.src_signal_id = source_id;
-    tick_data.iface.dst_signal_id = destination_id;
-    tick_data.iface.train_id = train_id;
-
-    // Execute the algorithm
-    int cticks = 0;
-    while (tick_data.threadStatus != TERMINATED) {
-        tick(&tick_data);
-        cticks++;
+    // execute the interlocking procedure
+    if (!dynlib_is_loaded(&library_request_route)) {
+        dynlib_load(&library_request_route, REQUEST_ROUTE_LIB_PATH);
+        load_symbols(&library_request_route, "request_route_reset", "request_route_tick");
+        syslog_server(LOG_NOTICE, "Loaded dynamic interlocking library: %s", library_request_route.filepath);
     }
-    syslog_server(LOG_DEBUG, "Number of ticks: %d", cticks);
+
+    library_request_route.reset_func(&tick_data);
+    while (tick_data.is_terminated == 0) {
+        library_request_route.tick_func(&tick_data);
+    }
 
     // Free
+
+    free(tick_data.src_signal_id);
+    free(tick_data.dst_signal_id);
+    free(tick_data.train_id);
     free_cached_track_state();
 
     // result
-    char *route_id = tick_data.iface.out;
+    char *route_id = tick_data.out;
     int route_id_int = route_id != NULL && strcmp(route_id, "") != 0 ? (int)strtol(route_id, NULL, 10) : -1;
     if (route_id_int >= 0) {
         syslog_server(LOG_NOTICE, "Grant route with algorithm: Route %d has been granted", route_id_int);
@@ -239,46 +248,8 @@ int grant_route_with_algorithm(const char *train_id, const char *source_id, cons
         syslog_server(LOG_ERR, "Grant route with algorithm: Route could not be granted");
     }
 
+    pthread_mutex_unlock(&interlocker_mutex);
     return route_id_int;
-}
-
-int grant_route_with_algorithm_bak(const char *train_id, const char *source_id, const char *destination_id) {
-	t_interlocking_algorithm_tick_data interlocking_data;
-	interlocking_algorithm_reset(&interlocking_data);
-
-	// Set the inputs
-	interlocking_data.request_available = true;
-	interlocking_data.train_id = train_id;
-	interlocking_data.source_id = source_id;
-	interlocking_data.destination_id = destination_id;
-	
-	// Execute the algorithm
-	pthread_mutex_lock(&interlocker_mutex);
-	interlocking_algorithm_tick(&interlocking_data);
-	pthread_mutex_unlock(&interlocker_mutex);
-
-	interlocking_data.request_available = false;
-
-	switch (interlocking_data.route_id) {
-		case (-1):
-			syslog_server(LOG_ERR, "Grant route with algorithm: Route could not be granted (1. Wait)");
-			return -1;
-		case (-2):
-			syslog_server(LOG_ERR, "Grant route with algorithm: Route could not be granted (2. Find)");
-			return -1;
-		case (-3):
-			syslog_server(LOG_ERR, "Grant route with algorithm: Route could not be granted (3. Grantable)");
-			return -1;
-		case (-4):
-			syslog_server(LOG_ERR, "Grant route with algorithm: Route could not be granted (3. Clearance)");
-			return -1;
-		default:
-			break;
-	} 
-	
-	// Return the ID of the granted route
-	syslog_server(LOG_NOTICE, "Grant route with algorithm: Route %d has been granted", interlocking_data.route_id);
-	return interlocking_data.route_id;
 }
 
 void release_route(const int route_id) {

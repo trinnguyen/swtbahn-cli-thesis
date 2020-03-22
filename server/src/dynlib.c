@@ -68,22 +68,26 @@ dynlib_status dynlib_load(dynlib_data *library, const char filepath[]) {
 	 * value into a variable, and check whether this saved value is not NULL.
 	 */
 	dlerror();
-	
-	*(void **) (&library->reset_func) = dlsym(library->lib_handle, dynlib_symbol_reset);
-	char *error;
-	if ((error = dlerror()) != NULL) {
-		syslog_server(LOG_ERR, "Could not find address of symbol %s.\n%s", dynlib_symbol_reset, error);
-		return DYNLIB_LOAD_RESET_ERR;
-	}
-	
-	dlerror();
-	*(void **) (&library->tick_func) = dlsym(library->lib_handle, dynlib_symbol_tick);
-	if ((error = dlerror()) != NULL) {
-		syslog_server(LOG_ERR, "Could not find address of symbol %s.\n%s", dynlib_symbol_tick, error);
-		return DYNLIB_LOAD_TICK_ERR;
-	}
-	
-	return DYNLIB_LOAD_SUCCESS;
+
+    return load_symbols(library, dynlib_symbol_reset, dynlib_symbol_tick);
+}
+
+dynlib_status load_symbols(dynlib_data *library, const char *reset_name, const char *tick_name) {
+    *(void **) (&library->reset_func) = dlsym(library->lib_handle, reset_name);
+    char *error;
+    if ((error = dlerror()) != NULL) {
+        syslog_server(LOG_ERR, "Could not find address of symbol %s.\n%s", dynlib_symbol_reset, error);
+        return DYNLIB_LOAD_RESET_ERR;
+    }
+
+    dlerror();
+    *(void **) (&library->tick_func) = dlsym(library->lib_handle, tick_name);
+    if ((error = dlerror()) != NULL) {
+        syslog_server(LOG_ERR, "Could not find address of symbol %s.\n%s", dynlib_symbol_tick, error);
+        return DYNLIB_LOAD_TICK_ERR;
+    }
+
+    return DYNLIB_LOAD_SUCCESS;
 }
 
 bool dynlib_is_loaded(dynlib_data *library) {
@@ -102,13 +106,13 @@ void dynlib_close(dynlib_data *library) {
 	}
 }
 
-void dynlib_reset(dynlib_data *library, TickData *tick_data) {
+void dynlib_reset(dynlib_data *library, void *tick_data) {
 	if (dynlib_is_loaded(library)) {
 		(*library->reset_func)(tick_data);
 	}
 }
 
-void dynlib_tick(dynlib_data *library, TickData *tick_data) {
+void dynlib_tick(dynlib_data *library, void *tick_data) {
 	if (dynlib_is_loaded(library)) {
 		(*library->tick_func)(tick_data);
 	}

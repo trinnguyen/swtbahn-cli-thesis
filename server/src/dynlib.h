@@ -36,8 +36,8 @@ typedef struct {
     void *lib_handle;
     
     // Library interface functions
-    void (*reset_func)(TickData *);
-    void (*tick_func)(TickData *);
+    void (*reset_func)(void *);
+    void (*tick_func)(void *);
 } dynlib_data;
 
 
@@ -45,10 +45,11 @@ dynlib_status dynlib_compile_scchart(dynlib_data *library, const char filepath[]
 dynlib_status dynlib_compile_c(dynlib_data *library, const char filepath[]);
 
 dynlib_status dynlib_load(dynlib_data *library, const char filepath[]);
+dynlib_status load_symbols(dynlib_data *library, const char *reset_name, const char *tick_name);
 bool dynlib_is_loaded(dynlib_data *library);
 void dynlib_set_name(dynlib_data *library, const char name[]);
 void dynlib_close(dynlib_data *library);
-void dynlib_reset(dynlib_data *library, TickData *tick_data);
-void dynlib_tick(dynlib_data *library, TickData *TickData);
+void dynlib_reset(dynlib_data *library, void *tick_data);
+void dynlib_tick(dynlib_data *library, void *TickData);
 
 #endif	// DYNLIB_H
