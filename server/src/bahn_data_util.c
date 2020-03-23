@@ -351,7 +351,7 @@ int config_get_array_string_value(const char *type, const char *id, const char *
                 }
 
             case TYPE_BLOCK:
-                if (string_equals(prop_name, "trains")) {
+                if (string_equals(prop_name, "train_types")) {
                     arr = ((t_config_block *) obj)->train_types;
                     break;
                 }
@@ -476,8 +476,23 @@ bool config_set_scalar_string_value(const char *type, const char *id, const char
     return result;
 }
 
-char *track_state_get_value(const char *type, const char *id) {
-    e_config_type config_type = get_config_type(type);
+e_config_type get_track_state_type(const char *id) {
+    if (id == NULL)
+        return TYPE_NOT_SUPPORTED;
+
+    if (g_hash_table_contains(config_data.table_signals, id)) {
+        return TYPE_SIGNAL;
+    }
+
+    if (g_hash_table_contains(config_data.table_points, id)) {
+        return TYPE_POINT;
+    }
+
+    return TYPE_NOT_SUPPORTED;
+}
+
+char *track_state_get_value(const char *id) {
+    e_config_type config_type = get_track_state_type(id);
     void *obj = get_object(config_type, id);
     char *state = NULL;
     if (obj != NULL) {
@@ -510,20 +525,20 @@ char *track_state_get_value(const char *type, const char *id) {
         state = new_empty_str();
     }
 
-    syslog_server(LOG_DEBUG, "Get track state: %s %s => %s", type, id, state);
+    syslog_server(LOG_DEBUG, "Get track state: %s => %s", id, state);
     return state;
 }
 
-bool track_state_set_value(const char *type, const char *id, const char *value) {
+bool track_state_set_value(const char *id, const char *value) {
     bool result = false;
-    switch (get_config_type(type)) {
+    switch (get_track_state_type(id)) {
         case TYPE_POINT:
             result = bidib_switch_point(id, value) == 0;
-            syslog_server(LOG_DEBUG, "Set point state: %s %s to %s => %s", type, id, value, result ? "true" : "false");
+            syslog_server(LOG_DEBUG, "Set point state: %s to %s => %s", id, value, result ? "true" : "false");
             break;
         case TYPE_SIGNAL:
             result = bidib_set_signal(id, value) == 0;
-            syslog_server(LOG_DEBUG, "Set signal state: %s %s to %s => %s", type, id, value, result ? "true" : "false");
+            syslog_server(LOG_DEBUG, "Set signal state: %s to %s => %s", id, value, result ? "true" : "false");
             break;
         default:
             break;
