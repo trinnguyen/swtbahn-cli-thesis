@@ -492,41 +492,39 @@ e_config_type get_track_state_type(const char *id) {
 }
 
 char *track_state_get_value(const char *id) {
+    char *result = NULL;
     e_config_type config_type = get_track_state_type(id);
     void *obj = get_object(config_type, id);
-    char *state = NULL;
     if (obj != NULL) {
-        t_bidib_track_state track_state = bidib_get_state();
-        int index = -1;
+        t_bidib_unified_accessory_state_query state_query = {};
         switch (config_type) {
             case TYPE_POINT:
-                index = bidib_get_point_state_index(id);
-                if (index >= 0 && index < track_state.points_board_count) {
-                    state = strdup(track_state.points_board[index].data.state_id);
-                }
+                state_query = bidib_get_point_state(id);
                 break;
             case TYPE_SIGNAL:
-                index = bidib_get_signal_state_index(id);
-                if (index >= 0 && index < track_state.signals_board_count) {
-                    state = strdup(track_state.signals_board[index].data.state_id);
-                }
+                state_query = bidib_get_signal_state(id);
                 break;
             default:
                 break;
         }
 
+        // read data
+        if (state_query.known) {
+            result = strdup(state_query.board_accessory_state.state_id);
+        }
+
         // free
-        bidib_free_track_state(track_state);
+        bidib_free_unified_accessory_state_query(state_query);
     }
 
-    if (state != NULL) {
-        add_cache_str(state);
+    if (result != NULL) {
+        add_cache_str(result);
     } else {
-        state = new_empty_str();
+        result = new_empty_str();
     }
 
-    syslog_server(LOG_DEBUG, "Get track state: %s => %s", id, state);
-    return state;
+    syslog_server(LOG_DEBUG, "Get track state: %s => %s", id, result);
+    return result;
 }
 
 bool track_state_set_value(const char *id, const char *value) {
@@ -544,17 +542,15 @@ bool track_state_set_value(const char *id, const char *value) {
             break;
     }
 
-
     return result;
 }
 
 bool is_segment_occupied(const char *id) {
-    int index = bidib_get_segment_state_index(id);
     bool result = false;
-    if (index >= 0) {
-        t_bidib_track_state track_state = bidib_get_state();
-        result = track_state.segments[index].data.occupied;
-        bidib_free_track_state(track_state);
+    if (g_hash_table_contains(config_data.table_segments, id)) {
+        t_bidib_segment_state_query state_query = bidib_get_segment_state(id);
+        result = state_query.known && state_query.data.occupied;
+        bidib_free_segment_state_query(state_query);
     }
 
     syslog_server(LOG_DEBUG, "Is segment occupied: %s => %s", id, result ? "true" : "false");
