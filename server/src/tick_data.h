@@ -23,8 +23,13 @@ typedef struct {
     char* train_id;                                                         // Input
     char* out;                                                              // Output
 
-    int is_terminated;
-} TickDataRequestRoute;
+    int terminated;
+} request_route_tick_data;
 
+typedef struct {
+    char* route_id;                                                    // Input
+    char* train_id;                                                    // Input
+    int terminated;
+} drive_route_tick_data;
 
 #endif // TICK_DATA_H

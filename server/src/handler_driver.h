@@ -50,6 +50,10 @@ bool train_grabbed(const char *train);
 
 void free_all_grabbed_trains(void);
 
+int load_interlocking_library();
+
+void close_interlocking_library();
+
 onion_connection_status handler_grab_train(void *_, onion_request *req,
                                            onion_response *res);
 

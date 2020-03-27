@@ -31,17 +31,6 @@
 extern pthread_mutex_t interlocker_mutex;
 
 /**
- * Finds and grants a requested train route.
- * A requested route is defined by a pair of source and destination signals.
- *
- * @param name of the source signal
- * @param name of the destination signal
- * @return ID of the route if it has been granted, otherwise -1
- */
-int grant_route_with_algorithm(const char *train_id, const char *source_id,
-                               const char *destination_id);
-
-/**
  * Release route by unset granted train
  * @param route_id
  */

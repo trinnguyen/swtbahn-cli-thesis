@@ -28,62 +28,12 @@
 #include <onion/onion.h>
 #include <bidib.h>
 #include <pthread.h>
-#include <string.h>
 
 #include "server.h"
 #include "param_verification.h"
 #include "interlocking.h"
-#include "bahn_data_util.h"
-#include "tick_data.h"
-#include "dynlib.h"
 
 pthread_mutex_t interlocker_mutex = PTHREAD_MUTEX_INITIALIZER;
-
-char REQUEST_ROUTE_LIB_PATH[] = "../src/interlocking/request_route";
-dynlib_data library_request_route = {};
-
-int grant_route_with_algorithm(const char *train_id, const char *source_id, const char *destination_id) {
-    pthread_mutex_lock(&interlocker_mutex);
-
-    // init cache
-    init_cached_track_state();
-
-    // request route
-    TickDataRequestRoute tick_data = {.src_signal_id = strdup(source_id),
-                                      .dst_signal_id = strdup(destination_id),
-                                      .train_id = strdup(train_id)};
-
-    // execute the interlocking procedure
-    if (!dynlib_is_loaded(&library_request_route)) {
-        dynlib_load(&library_request_route, REQUEST_ROUTE_LIB_PATH);
-        load_symbols(&library_request_route, "request_route_reset", "request_route_tick");
-        syslog_server(LOG_NOTICE, "Loaded dynamic interlocking library: %s", library_request_route.filepath);
-    }
-
-    library_request_route.reset_func(&tick_data);
-    while (tick_data.is_terminated == 0) {
-        library_request_route.tick_func(&tick_data);
-    }
-
-    // Free
-
-    free(tick_data.src_signal_id);
-    free(tick_data.dst_signal_id);
-    free(tick_data.train_id);
-    free_cached_track_state();
-
-    // result
-    char *route_id = tick_data.out;
-    int route_id_int = route_id != NULL && strcmp(route_id, "") != 0 ? (int)strtol(route_id, NULL, 10) : -1;
-    if (route_id_int >= 0) {
-        syslog_server(LOG_NOTICE, "Grant route with algorithm: Route %d has been granted", route_id_int);
-    } else {
-        syslog_server(LOG_ERR, "Grant route with algorithm: Route could not be granted");
-    }
-
-    pthread_mutex_unlock(&interlocker_mutex);
-    return route_id_int;
-}
 
 void release_route(int route_id) {
 	pthread_mutex_lock(&interlocker_mutex);
