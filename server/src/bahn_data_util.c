@@ -532,22 +532,46 @@ char *track_state_get_value(const char *id) {
     return result;
 }
 
-bool track_state_set_value(const char *id, const char *value) {
-    bool result = false;
-    switch (get_track_state_type(id)) {
+static bool is_track_state_aspect_valid(e_config_type config_type, const char *id, const char *value) {
+    char *signal_type = NULL;
+    switch (config_type) {
         case TYPE_POINT:
-            result = bidib_switch_point(id, value) == 0;
-            syslog_server(LOG_DEBUG, "Set point state: %s to %s => %s", id, value, result ? "true" : "false");
+            if (string_equals(value, "normal") || string_equals(value, "reverse")) {
+                return true;
+            }
             break;
         case TYPE_SIGNAL:
-            result = bidib_set_signal(id, value) == 0;
-            syslog_server(LOG_DEBUG, "Set signal state: %s to %s => %s", id, value, result ? "true" : "false");
-            break;
+            // ensure valid aspect by checking the type of the signal
+            signal_type = config_get_scalar_string_value("signal", id, "type");
+            // TODO check the aspects from the signal types in extra configuration file
+            return true;
         default:
             break;
     }
 
-    return result;
+    return false;
+}
+
+bool track_state_set_value(const char *id, const char *value) {
+    e_config_type config_type = get_track_state_type(id);
+    if (!is_track_state_aspect_valid(config_type, id, value)) {
+        syslog_server(LOG_DEBUG, "Invalid aspect: %s", value);
+        return false;
+    }
+
+    bool result = false;
+    switch (config_type) {
+        case TYPE_POINT:
+            result = bidib_switch_point(id, value) == 0;
+            syslog_server(LOG_DEBUG, "Set point state: %s to %s => %s", id, value, result ? "true" : "false");
+            return result;
+        case TYPE_SIGNAL:
+            result = bidib_set_signal(id, value) == 0;
+            syslog_server(LOG_DEBUG, "Set signal state: %s to %s => %s", id, value, result ? "true" : "false");
+            return result;
+        default:
+            return false;
+    }
 }
 
 bool is_segment_occupied(const char *id) {
