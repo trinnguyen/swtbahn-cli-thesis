@@ -29,6 +29,9 @@ typedef struct {
 typedef struct {
     char* route_id;                                                    // Input
     char* train_id;                                                    // Input
+    char* segment_ids[1024];                                           // Input
+    int count_segments;                                                // Input
+
     int terminated;
 } drive_route_tick_data;
 

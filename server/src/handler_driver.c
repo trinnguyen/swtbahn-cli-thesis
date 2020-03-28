@@ -148,6 +148,17 @@ static char *grant_route_with_algorithm(const char *train_id, const char *source
     return route_id;
 }
 
+static void free_array(char **arr, int len) {
+    if (len >= 0 && arr != NULL) {
+        for (int i = 0; i < len; ++i) {
+            if (arr[i] != NULL) {
+                free(arr[i]);
+                arr[i] = NULL;
+            }
+        }
+    }
+}
+
 static bool drive_route(const int grab_id, const int route_id) {
 	const char *train_id = grabbed_trains[grab_id].name->str;
 	t_interlocking_route *route = get_route(route_id);
@@ -191,16 +202,49 @@ static bool drive_route(const int grab_id, const int route_id) {
 	// Wait until the destination has been reached
 	const int path_count = route->path->len;
 	const char *destination = g_array_index(route->path, char *, path_count - 1);
-	while (!train_position_is_at(train_id, destination)) {
-		usleep(TRAIN_DRIVE_TIME_STEP);
+	while (true) {
+	    bool is_at_destination = false;
+
+	    // get segments
+        t_bidib_train_position_query train_position_query = bidib_get_train_position(train_id);
+        int num_segments = train_position_query.length;
+        char *segments[num_segments];
+        for (size_t i = 0; i < num_segments; i++) {
+            if (strcmp(destination, train_position_query.segments[i]) == 0) {
+                is_at_destination = true;
+                break;
+            }
+
+            segments[i] = train_position_query.segments[i];
+        }
+
+        bidib_free_train_position_query(train_position_query);
+
+        // check if reach final segment
+        if (is_at_destination) {
+            free_array(segments, num_segments);
+            break;
+        }
 
 		// invoke interlocking library
 		if (lib_interlocking.drive_reset_func != NULL && lib_interlocking.drive_tick_func != NULL) {
+		    // update current segments
+            drive_data.count_segments = num_segments;
+            for (int i = 0; i < num_segments; ++i) {
+                drive_data.segment_ids[i] = segments[i];
+            }
+
+		    // call SCCharts reset and tick function
             lib_interlocking.drive_reset_func(&drive_data);
             while (drive_data.terminated == 0) {
                 lib_interlocking.drive_tick_func(&drive_data);
             }
 		}
+
+		// free
+        free_array(segments, num_segments);
+
+        usleep(TRAIN_DRIVE_TIME_STEP);
 	}
 
 	// free tick data
