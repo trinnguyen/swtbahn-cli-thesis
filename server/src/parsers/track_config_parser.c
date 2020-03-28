@@ -142,6 +142,7 @@ void track_yaml_mapping_start(char *scalar) {
             cur_signal->id = NULL;
             cur_signal->initial = NULL;
             cur_signal->aspects = NULL;
+            cur_signal->type = NULL;
             break;
         case SIGNAL_ASPECTS:
             track_mapping = SIGNAL_ASPECT;
@@ -224,6 +225,11 @@ void track_yaml_scalar(char *last_scalar, char *cur_scalar) {
 
             if (str_equal(last_scalar, "initial")) {
                 cur_signal->initial = cur_scalar;
+                return;
+            }
+
+            if (str_equal(last_scalar, "type")) {
+                cur_signal->type = cur_scalar;
                 return;
             }
 

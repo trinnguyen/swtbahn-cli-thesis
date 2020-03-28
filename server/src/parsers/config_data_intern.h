@@ -25,6 +25,7 @@ typedef struct {
     char *id;
     char *initial;
     GArray *aspects;
+    char *type;
 } t_config_signal;
 
 typedef struct {

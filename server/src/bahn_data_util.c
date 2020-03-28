@@ -200,6 +200,11 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                     break;
                 }
 
+                if (string_equals(prop_name, "type")) {
+                    result = ((t_config_signal *) obj)->type;
+                    break;
+                }
+
                 break;
             case TYPE_POINT:
                 if (string_equals(prop_name, "id")) {
