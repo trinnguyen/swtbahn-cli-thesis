@@ -8,7 +8,8 @@
 typedef enum {
     EXTRAS_ROOT,
     BLOCK,
-    CROSSING
+    CROSSING,
+    SIGNAL_TYPE
 } e_extras_mapping_level;
 
 typedef enum {
@@ -17,13 +18,17 @@ typedef enum {
     BLOCK_SIGNALS,
     BLOCK_OVERLAPS,
     BLOCK_TRAIN_TYPES,
-    CROSSINGS
+    CROSSINGS,
+    SIGNAL_TYPES,
+    SIGNAL_TYPE_ASPECTS
 } e_extras_sequence_level;
 
 GHashTable *tb_blocks;
 GHashTable *tb_crossing;
+GHashTable *tb_signal_types;
 t_config_block *cur_block;
 t_config_crossing *cur_crossing;
+t_config_signal_type *cur_signal_type;
 
 e_extras_mapping_level extras_mapping = EXTRAS_ROOT;
 e_extras_sequence_level extras_sequence = EXTRAS_SEQ_NONE;
@@ -70,6 +75,12 @@ void free_crossing(void *pointer) {
     free(crossing);
 }
 
+void free_signal_type(void *pointer) {
+    t_config_signal_type *signal_type = (t_config_signal_type *) pointer;
+    log_debug("free signal type: %s", signal_type->id);
+    free(signal_type);
+}
+
 void extras_yaml_sequence_start(char *scalar) {
     log_debug("extras_yaml_sequence_start: %s", scalar);
     switch (extras_mapping) {
@@ -86,6 +97,13 @@ void extras_yaml_sequence_start(char *scalar) {
                 tb_crossing = g_hash_table_new_full(g_str_hash, g_str_equal, free_extras_id_key, free_crossing);
                 return;
             }
+
+            if (str_equal(scalar, "signaltypes")) {
+                extras_sequence = SIGNAL_TYPES;
+                tb_signal_types = g_hash_table_new_full(g_str_hash, g_str_equal, free_extras_id_key, free_signal_type);
+                return;
+            }
+            break;
         case BLOCK:
             if (str_equal(scalar, "overlaps")) {
                 extras_sequence = BLOCK_OVERLAPS;
@@ -104,6 +122,14 @@ void extras_yaml_sequence_start(char *scalar) {
                 cur_block->train_types = g_array_sized_new(false, false, sizeof(char *), 8);
                 return;
             }
+            break;
+        case SIGNAL_TYPE:
+            if (str_equal(scalar, "aspects")) {
+                extras_sequence = SIGNAL_TYPE_ASPECTS;
+                cur_signal_type->aspects = g_array_sized_new(false, false, sizeof(char *), 3);
+                return;
+            }
+            break;
         default:
             break;
     }
@@ -115,12 +141,16 @@ void extras_yaml_sequence_end(char *scalar) {
     switch (extras_sequence) {
         case BLOCKS:
         case CROSSINGS:
+        case SIGNAL_TYPES:
             extras_sequence = EXTRAS_SEQ_NONE;
             break;
         case BLOCK_OVERLAPS:
         case BLOCK_SIGNALS:
         case BLOCK_TRAIN_TYPES:
             extras_sequence = BLOCKS;
+            break;
+        case SIGNAL_TYPE_ASPECTS:
+            extras_sequence = SIGNAL_TYPES;
             break;
         default:
             break;
@@ -143,6 +173,14 @@ void extras_yaml_mapping_start(char *scalar) {
         case CROSSINGS:
             extras_mapping = CROSSING;
             cur_crossing = malloc(sizeof(t_config_crossing));
+            cur_crossing->id = NULL;
+            cur_crossing->main_segment = NULL;
+            break;
+        case SIGNAL_TYPES:
+            extras_mapping = SIGNAL_TYPE;
+            cur_signal_type = malloc(sizeof(t_config_signal_type));
+            cur_signal_type->id = NULL;
+            cur_signal_type->aspects = NULL;
             break;
         default:
             break;
@@ -162,6 +200,10 @@ void extras_yaml_mapping_end(char *scalar) {
             log_debug("insert crossing: %s", cur_crossing->id);
             g_hash_table_insert(tb_crossing, strdup(cur_crossing->id), cur_crossing);
             break;
+        case SIGNAL_TYPE:
+            log_debug("insert signal type: %s", cur_signal_type->id);
+            g_hash_table_insert(tb_signal_types, strdup(cur_signal_type->id), cur_signal_type);
+            break;
         default:
             break;
     }
@@ -170,6 +212,7 @@ void extras_yaml_mapping_end(char *scalar) {
     switch (extras_mapping) {
         case BLOCK:
         case CROSSING:
+        case SIGNAL_TYPE:
             extras_mapping = EXTRAS_ROOT;
             break;
         default:
@@ -190,6 +233,12 @@ void extras_yaml_scalar(char *last_scalar, char *cur_scalar) {
 
     if (extras_sequence == BLOCK_TRAIN_TYPES) {
         g_array_append_val(cur_block->train_types, cur_scalar);
+        return;
+    }
+
+    if (extras_sequence == SIGNAL_TYPE_ASPECTS) {
+        log_debug("insert aspect to signal type: %s, %s", cur_signal_type->id, cur_scalar);
+        g_array_append_val(cur_signal_type->aspects, cur_scalar);
         return;
     }
 
@@ -214,7 +263,7 @@ void extras_yaml_scalar(char *last_scalar, char *cur_scalar) {
                 cur_block->direction = cur_scalar;
                 return;
             }
-            return;
+            break;
         case CROSSING:
             if (str_equal(last_scalar, "id")) {
                 cur_crossing->id = cur_scalar;
@@ -225,7 +274,13 @@ void extras_yaml_scalar(char *last_scalar, char *cur_scalar) {
                 cur_crossing->main_segment = cur_scalar;
                 return;
             }
-            return;
+            break;
+        case SIGNAL_TYPE:
+            if (str_equal(last_scalar, "id")) {
+                cur_signal_type->id = cur_scalar;
+                return;
+            }
+            break;
         default:
             break;
     }
@@ -235,4 +290,5 @@ void parse_extras_yaml(yaml_parser_t *parser, t_config_data *data) {
     parse_yaml_content(parser, extras_yaml_sequence_start, extras_yaml_sequence_end, extras_yaml_mapping_start, extras_yaml_mapping_end, extras_yaml_scalar);
     data->table_blocks = tb_blocks;
     data->table_crossings = tb_crossing;
+    data->table_signal_types = tb_signal_types;
 }

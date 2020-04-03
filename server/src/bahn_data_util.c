@@ -23,6 +23,7 @@ typedef enum {
     TYPE_TRAIN,
     TYPE_BLOCK,
     TYPE_CROSSING,
+    TYPE_SIGNAL_TYPE,
     TYPE_NOT_SUPPORTED
 } e_config_type;
 
@@ -102,6 +103,10 @@ e_config_type get_config_type(const char *type) {
         return TYPE_CROSSING;
     }
 
+    if (string_equals(type, "signaltype")) {
+        return TYPE_SIGNAL_TYPE;
+    }
+
     return TYPE_NOT_SUPPORTED;
 }
 
@@ -127,6 +132,9 @@ void *get_object(e_config_type config_type, const char *id) {
             break;
         case TYPE_CROSSING:
             tb = config_data.table_crossings;
+            break;
+        case TYPE_SIGNAL_TYPE:
+            tb = config_data.table_signal_types;
             break;
         default:
             break;
@@ -274,6 +282,13 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                 }
 
                 break;
+            case TYPE_SIGNAL_TYPE:
+                if (string_equals(prop_name, "id")) {
+                    result = ((t_config_signal_type *) obj)->id;
+                    break;
+                }
+
+                break;
             default:
                 break;
         }
@@ -368,6 +383,12 @@ int config_get_array_string_value(const char *type, const char *id, const char *
 
                 if (string_equals(prop_name, "overlaps")) {
                     arr = ((t_config_block *) obj)->overlaps;
+                    break;
+                }
+
+            case TYPE_SIGNAL_TYPE:
+                if (string_equals(prop_name, "aspects")) {
+                    arr = ((t_config_signal_type *) obj)->aspects;
                     break;
                 }
             default:
@@ -533,7 +554,10 @@ char *track_state_get_value(const char *id) {
 }
 
 static bool is_track_state_aspect_valid(e_config_type config_type, const char *id, const char *value) {
-    char *signal_type = NULL;
+    if (value == NULL)
+        return false;
+
+    char *signal_type_id = NULL;
     switch (config_type) {
         case TYPE_POINT:
             if (string_equals(value, "normal") || string_equals(value, "reverse")) {
@@ -542,9 +566,25 @@ static bool is_track_state_aspect_valid(e_config_type config_type, const char *i
             break;
         case TYPE_SIGNAL:
             // ensure valid aspect by checking the type of the signal
-            signal_type = config_get_scalar_string_value("signal", id, "type");
-            // TODO check the aspects from the signal types in extra configuration file
-            return true;
+            signal_type_id = config_get_scalar_string_value("signal", id, "type");
+            if (signal_type_id == NULL || string_equals(signal_type_id, "")) {
+                return false;
+            }
+
+            // get signal type
+            if (g_hash_table_contains(config_data.table_signal_types, signal_type_id)) {
+                t_config_signal_type *signal_type = g_hash_table_lookup(config_data.table_signal_types, signal_type_id);
+                if (signal_type->aspects != NULL) {
+                    for (int i = 0; i < signal_type->aspects->len; ++i) {
+                        char *aspect = g_array_index(signal_type->aspects, char *, i);
+                        if (string_equals(value, aspect)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
         default:
             break;
     }

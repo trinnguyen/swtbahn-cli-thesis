@@ -14,6 +14,7 @@ typedef struct {
     GHashTable *table_trains;
     GHashTable *table_blocks; // store: blocks and platforms
     GHashTable *table_crossings;
+    GHashTable *table_signal_types;
 } t_config_data;
 
 typedef struct {
@@ -59,6 +60,11 @@ typedef struct {
     char *id;
     char *main_segment;
 } t_config_crossing;
+
+typedef struct {
+    char *id;
+    GArray *aspects;
+} t_config_signal_type;
 
 
 #endif //CONFIG_DATA_INTERN_H
