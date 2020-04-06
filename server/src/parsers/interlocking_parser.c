@@ -67,6 +67,7 @@ typedef enum {
     SEQUENCE_NONE,
     SEQUENCE_ROUTES,
     SEQUENCE_PATH,
+    SEQUENCE_SECTIONS,
     SEQUENCE_POINTS,
     SEQUENCE_SIGNALS,
     SEQUENCE_CONFLICTS
@@ -76,6 +77,7 @@ typedef enum {
     MAPPING_TABLE,
     MAPPING_ROUTE,
     MAPPING_SEGMENT,
+    MAPPING_BLOCK,
     MAPPING_POINT,
     MAPPING_SIGNAL,
     MAPPING_CONFLICT
@@ -86,6 +88,7 @@ e_mapping_level decrease_mapping_level (e_mapping_level level) {
         case MAPPING_ROUTE:
             return MAPPING_TABLE;
         case MAPPING_SEGMENT:
+        case MAPPING_BLOCK:
         case MAPPING_POINT:
         case MAPPING_SIGNAL:
         case MAPPING_CONFLICT:
@@ -100,6 +103,7 @@ e_sequence_level decrease_sequence_level (e_sequence_level level) {
         case SEQUENCE_ROUTES:
             return SEQUENCE_NONE;
         case SEQUENCE_PATH:
+        case SEQUENCE_SECTIONS:
         case SEQUENCE_POINTS:
         case SEQUENCE_SIGNALS:
         case SEQUENCE_CONFLICTS:
@@ -124,6 +128,10 @@ void free_route(void *item) {
 
     if (route->path != NULL) {
         g_array_free(route->path, true);
+    }
+
+    if (route->sections != NULL) {
+        g_array_free(route->sections, true);
     }
 
     if (route->points != NULL) {
@@ -206,6 +214,12 @@ GHashTable *parse(yaml_parser_t *parser) {
                         break;
                     }
 
+                    if (is_str_equal(last_scalar, "sections")) {
+                        route->sections = g_array_sized_new(FALSE, TRUE, sizeof(char *), 8);
+                        cur_sequence = SEQUENCE_SECTIONS;
+                        break;
+                    }
+
                     if (is_str_equal(last_scalar, "points")) {
                         route->points = g_array_sized_new(FALSE, TRUE, sizeof(t_interlocking_point), 8);
                         g_array_set_clear_func(route->points, free_interlocking_point);
@@ -240,6 +254,7 @@ GHashTable *parse(yaml_parser_t *parser) {
                     route->destination = NULL;
                     route->length = 0;
                     route->path = NULL;
+                    route->sections = NULL;
                     route->points = NULL;
                     route->signals = NULL;
                     route->conflicts = NULL;
@@ -250,6 +265,11 @@ GHashTable *parse(yaml_parser_t *parser) {
                 // path -> create segment
                 if (cur_sequence == SEQUENCE_PATH) {
                     cur_mapping = MAPPING_SEGMENT;
+                    break;
+                }
+
+                if (cur_sequence == SEQUENCE_SECTIONS) {
+                    cur_mapping = MAPPING_BLOCK;
                     break;
                 }
 
@@ -320,6 +340,14 @@ GHashTable *parse(yaml_parser_t *parser) {
                 if (cur_mapping == MAPPING_SEGMENT) {
                     if (is_str_equal(last_scalar, "id")) {
                         g_array_append_val(route->path, cur_scalar);
+                    }
+                    break;
+                }
+
+                // block
+                if (cur_mapping == MAPPING_BLOCK) {
+                    if (is_str_equal(last_scalar, "id")) {
+                        g_array_append_val(route->sections, cur_scalar);
                     }
                     break;
                 }

@@ -523,17 +523,17 @@ Shared_trainEngineInstanceData__global_0_0 trainEngineInstanceData__global_0_0_c
 // interlockerInstance2
 // interlockerInstance3
 // letInterface
+Shared_forec_intern_input__global_0_0 forec_intern_input__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
+Shared_forec_intern_output_train_engine_0__global_0_0 forec_intern_output_train_engine_0__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
+Shared_forec_intern_output_train_engine_1__global_0_0 forec_intern_output_train_engine_1__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
+Shared_forec_intern_output_train_engine_2__global_0_0 forec_intern_output_train_engine_2__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
+Shared_forec_intern_output_train_engine_3__global_0_0 forec_intern_output_train_engine_3__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
 Shared_forec_intern_output_train_engine_instance_0__global_0_0 forec_intern_output_train_engine_instance_0__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
 Shared_forec_intern_output_train_engine_instance_1__global_0_0 forec_intern_output_train_engine_instance_1__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
 Shared_forec_intern_output_train_engine_instance_2__global_0_0 forec_intern_output_train_engine_instance_2__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
 Shared_forec_intern_output_train_engine_instance_3__global_0_0 forec_intern_output_train_engine_instance_3__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
 Shared_forec_intern_output_train_engine_instance_4__global_0_0 forec_intern_output_train_engine_instance_4__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
 Shared_dyn_containers_interface__global_0_0 dyn_containers_interface__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
-Shared_forec_intern_input__global_0_0 forec_intern_input__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
-Shared_forec_intern_output_train_engine_0__global_0_0 forec_intern_output_train_engine_0__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
-Shared_forec_intern_output_train_engine_1__global_0_0 forec_intern_output_train_engine_1__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
-Shared_forec_intern_output_train_engine_2__global_0_0 forec_intern_output_train_engine_2__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
-Shared_forec_intern_output_train_engine_3__global_0_0 forec_intern_output_train_engine_3__global_0_0_copy_letInterface = {.status = FOREC_SHARED_UNMODIFIED};
 // loadEngines
 Shared_forec_intern_output_train_engine_0__global_0_0 forec_intern_output_train_engine_0__global_0_0_copy_loadEngines = {.status = FOREC_SHARED_UNMODIFIED};
 Shared_forec_intern_output_train_engine_1__global_0_0 forec_intern_output_train_engine_1__global_0_0_copy_loadEngines = {.status = FOREC_SHARED_UNMODIFIED};
@@ -831,6 +831,36 @@ mainReactionEndMaster0: {
 		int index;
 		int numberOfModifiedCopies;
 
+		// forec_intern_input__global_0_0
+		if (forec_intern_input__global_0_0_copy_letInterface.status == FOREC_SHARED_MODIFIED) {
+			forec_intern_input__global_0_0_copy_letInterface.status = FOREC_SHARED_UNMODIFIED;
+			forec_intern_input__global_0_0.value = forec_intern_input__global_0_0_copy_letInterface.value;
+		}
+
+		// forec_intern_output_train_engine_0__global_0_0
+		if (forec_intern_output_train_engine_0__global_0_0_copy_loadEngines.status == FOREC_SHARED_MODIFIED) {
+			forec_intern_output_train_engine_0__global_0_0_copy_loadEngines.status = FOREC_SHARED_UNMODIFIED;
+			forec_intern_output_train_engine_0__global_0_0.value = forec_intern_output_train_engine_0__global_0_0_copy_loadEngines.value;
+		}
+
+		// forec_intern_output_train_engine_1__global_0_0
+		if (forec_intern_output_train_engine_1__global_0_0_copy_loadEngines.status == FOREC_SHARED_MODIFIED) {
+			forec_intern_output_train_engine_1__global_0_0_copy_loadEngines.status = FOREC_SHARED_UNMODIFIED;
+			forec_intern_output_train_engine_1__global_0_0.value = forec_intern_output_train_engine_1__global_0_0_copy_loadEngines.value;
+		}
+
+		// forec_intern_output_train_engine_2__global_0_0
+		if (forec_intern_output_train_engine_2__global_0_0_copy_loadEngines.status == FOREC_SHARED_MODIFIED) {
+			forec_intern_output_train_engine_2__global_0_0_copy_loadEngines.status = FOREC_SHARED_UNMODIFIED;
+			forec_intern_output_train_engine_2__global_0_0.value = forec_intern_output_train_engine_2__global_0_0_copy_loadEngines.value;
+		}
+
+		// forec_intern_output_train_engine_3__global_0_0
+		if (forec_intern_output_train_engine_3__global_0_0_copy_loadEngines.status == FOREC_SHARED_MODIFIED) {
+			forec_intern_output_train_engine_3__global_0_0_copy_loadEngines.status = FOREC_SHARED_UNMODIFIED;
+			forec_intern_output_train_engine_3__global_0_0.value = forec_intern_output_train_engine_3__global_0_0_copy_loadEngines.value;
+		}
+
 		// forec_intern_output_train_engine_instance_0__global_0_0
 		if (forec_intern_output_train_engine_instance_0__global_0_0_copy_engineInstance0.status == FOREC_SHARED_MODIFIED) {
 			forec_intern_output_train_engine_instance_0__global_0_0_copy_engineInstance0.status = FOREC_SHARED_UNMODIFIED;
@@ -897,36 +927,6 @@ mainReactionEndMaster0: {
 		// Combine with the remaining modified copies.
 		for (index = 1; index < numberOfModifiedCopies; ++index) {
 			trainEngineInstanceData__global_0_0.value = keepOneCombine(&trainEngineInstanceData__global_0_0.value, &modified_trainEngineInstanceData__global_0_0[index]->value);
-		}
-
-		// forec_intern_input__global_0_0
-		if (forec_intern_input__global_0_0_copy_letInterface.status == FOREC_SHARED_MODIFIED) {
-			forec_intern_input__global_0_0_copy_letInterface.status = FOREC_SHARED_UNMODIFIED;
-			forec_intern_input__global_0_0.value = forec_intern_input__global_0_0_copy_letInterface.value;
-		}
-
-		// forec_intern_output_train_engine_0__global_0_0
-		if (forec_intern_output_train_engine_0__global_0_0_copy_loadEngines.status == FOREC_SHARED_MODIFIED) {
-			forec_intern_output_train_engine_0__global_0_0_copy_loadEngines.status = FOREC_SHARED_UNMODIFIED;
-			forec_intern_output_train_engine_0__global_0_0.value = forec_intern_output_train_engine_0__global_0_0_copy_loadEngines.value;
-		}
-
-		// forec_intern_output_train_engine_1__global_0_0
-		if (forec_intern_output_train_engine_1__global_0_0_copy_loadEngines.status == FOREC_SHARED_MODIFIED) {
-			forec_intern_output_train_engine_1__global_0_0_copy_loadEngines.status = FOREC_SHARED_UNMODIFIED;
-			forec_intern_output_train_engine_1__global_0_0.value = forec_intern_output_train_engine_1__global_0_0_copy_loadEngines.value;
-		}
-
-		// forec_intern_output_train_engine_2__global_0_0
-		if (forec_intern_output_train_engine_2__global_0_0_copy_loadEngines.status == FOREC_SHARED_MODIFIED) {
-			forec_intern_output_train_engine_2__global_0_0_copy_loadEngines.status = FOREC_SHARED_UNMODIFIED;
-			forec_intern_output_train_engine_2__global_0_0.value = forec_intern_output_train_engine_2__global_0_0_copy_loadEngines.value;
-		}
-
-		// forec_intern_output_train_engine_3__global_0_0
-		if (forec_intern_output_train_engine_3__global_0_0_copy_loadEngines.status == FOREC_SHARED_MODIFIED) {
-			forec_intern_output_train_engine_3__global_0_0_copy_loadEngines.status = FOREC_SHARED_UNMODIFIED;
-			forec_intern_output_train_engine_3__global_0_0.value = forec_intern_output_train_engine_3__global_0_0_copy_loadEngines.value;
 		}
 	} else {
 		// Nothing.
@@ -2037,22 +2037,32 @@ abortStrongNonImmediate0Check2: {
 	*-------------------------------------------------------------*/
 
 	// Thread local declarations -----------------------------------
+	Shared_forec_intern_input__global_0_0 forec_intern_input__global_0_0_copy_letInterface_local;
+	Shared_forec_intern_output_train_engine_0__global_0_0 forec_intern_output_train_engine_0__global_0_0_copy_letInterface_local;
+	Shared_forec_intern_output_train_engine_1__global_0_0 forec_intern_output_train_engine_1__global_0_0_copy_letInterface_local;
+	Shared_forec_intern_output_train_engine_2__global_0_0 forec_intern_output_train_engine_2__global_0_0_copy_letInterface_local;
+	Shared_forec_intern_output_train_engine_3__global_0_0 forec_intern_output_train_engine_3__global_0_0_copy_letInterface_local;
 	Shared_forec_intern_output_train_engine_instance_0__global_0_0 forec_intern_output_train_engine_instance_0__global_0_0_copy_letInterface_local;
 	Shared_forec_intern_output_train_engine_instance_1__global_0_0 forec_intern_output_train_engine_instance_1__global_0_0_copy_letInterface_local;
 	Shared_forec_intern_output_train_engine_instance_2__global_0_0 forec_intern_output_train_engine_instance_2__global_0_0_copy_letInterface_local;
 	Shared_forec_intern_output_train_engine_instance_3__global_0_0 forec_intern_output_train_engine_instance_3__global_0_0_copy_letInterface_local;
 	Shared_forec_intern_output_train_engine_instance_4__global_0_0 forec_intern_output_train_engine_instance_4__global_0_0_copy_letInterface_local;
 	Shared_dyn_containers_interface__global_0_0 dyn_containers_interface__global_0_0_copy_letInterface_local;
-	Shared_forec_intern_input__global_0_0 forec_intern_input__global_0_0_copy_letInterface_local;
-	Shared_forec_intern_output_train_engine_0__global_0_0 forec_intern_output_train_engine_0__global_0_0_copy_letInterface_local;
-	Shared_forec_intern_output_train_engine_1__global_0_0 forec_intern_output_train_engine_1__global_0_0_copy_letInterface_local;
-	Shared_forec_intern_output_train_engine_2__global_0_0 forec_intern_output_train_engine_2__global_0_0_copy_letInterface_local;
-	Shared_forec_intern_output_train_engine_3__global_0_0 forec_intern_output_train_engine_3__global_0_0_copy_letInterface_local;
 	char *threadName__letInterface_0_0;
 
 	// Thread body -------------------------------------------------
 	letInterface__thread: {
 		// Initialise the local copies of shared variables.
+		forec_intern_input__global_0_0_copy_letInterface_local.value = forec_intern_input__global_0_0.value;
+		forec_intern_input__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
+		forec_intern_output_train_engine_0__global_0_0_copy_letInterface_local.value = forec_intern_output_train_engine_0__global_0_0.value;
+		forec_intern_output_train_engine_0__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
+		forec_intern_output_train_engine_1__global_0_0_copy_letInterface_local.value = forec_intern_output_train_engine_1__global_0_0.value;
+		forec_intern_output_train_engine_1__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
+		forec_intern_output_train_engine_2__global_0_0_copy_letInterface_local.value = forec_intern_output_train_engine_2__global_0_0.value;
+		forec_intern_output_train_engine_2__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
+		forec_intern_output_train_engine_3__global_0_0_copy_letInterface_local.value = forec_intern_output_train_engine_3__global_0_0.value;
+		forec_intern_output_train_engine_3__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
 		forec_intern_output_train_engine_instance_0__global_0_0_copy_letInterface_local.value = forec_intern_output_train_engine_instance_0__global_0_0.value;
 		forec_intern_output_train_engine_instance_0__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
 		forec_intern_output_train_engine_instance_1__global_0_0_copy_letInterface_local.value = forec_intern_output_train_engine_instance_1__global_0_0.value;
@@ -2065,16 +2075,6 @@ abortStrongNonImmediate0Check2: {
 		forec_intern_output_train_engine_instance_4__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
 		dyn_containers_interface__global_0_0_copy_letInterface_local.value = dyn_containers_interface__global_0_0.value;
 		dyn_containers_interface__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
-		forec_intern_input__global_0_0_copy_letInterface_local.value = forec_intern_input__global_0_0.value;
-		forec_intern_input__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
-		forec_intern_output_train_engine_0__global_0_0_copy_letInterface_local.value = forec_intern_output_train_engine_0__global_0_0.value;
-		forec_intern_output_train_engine_0__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
-		forec_intern_output_train_engine_1__global_0_0_copy_letInterface_local.value = forec_intern_output_train_engine_1__global_0_0.value;
-		forec_intern_output_train_engine_1__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
-		forec_intern_output_train_engine_2__global_0_0_copy_letInterface_local.value = forec_intern_output_train_engine_2__global_0_0.value;
-		forec_intern_output_train_engine_2__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
-		forec_intern_output_train_engine_3__global_0_0_copy_letInterface_local.value = forec_intern_output_train_engine_3__global_0_0.value;
-		forec_intern_output_train_engine_3__global_0_0_copy_letInterface_local.status = FOREC_SHARED_UNMODIFIED;
 		//--------------------------------------------------------------
 
 		threadName__letInterface_0_0 = "letInterface";
@@ -2119,17 +2119,17 @@ abortStrongNonImmediate0Check2: {
 			pause0:;
 			// forec:statement:pause:pause0:end
 			// Update the values of the used shared variables from their global copy.
+			forec_intern_input__global_0_0_copy_letInterface_local = forec_intern_input__global_0_0;
+			forec_intern_output_train_engine_0__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_0__global_0_0;
+			forec_intern_output_train_engine_1__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_1__global_0_0;
+			forec_intern_output_train_engine_2__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_2__global_0_0;
+			forec_intern_output_train_engine_3__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_3__global_0_0;
 			forec_intern_output_train_engine_instance_0__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_instance_0__global_0_0;
 			forec_intern_output_train_engine_instance_1__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_instance_1__global_0_0;
 			forec_intern_output_train_engine_instance_2__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_instance_2__global_0_0;
 			forec_intern_output_train_engine_instance_3__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_instance_3__global_0_0;
 			forec_intern_output_train_engine_instance_4__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_instance_4__global_0_0;
 			dyn_containers_interface__global_0_0_copy_letInterface_local = dyn_containers_interface__global_0_0;
-			forec_intern_input__global_0_0_copy_letInterface_local = forec_intern_input__global_0_0;
-			forec_intern_output_train_engine_0__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_0__global_0_0;
-			forec_intern_output_train_engine_1__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_1__global_0_0;
-			forec_intern_output_train_engine_2__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_2__global_0_0;
-			forec_intern_output_train_engine_3__global_0_0_copy_letInterface_local = forec_intern_output_train_engine_3__global_0_0;
 
 		}
 

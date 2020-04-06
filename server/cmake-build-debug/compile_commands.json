@@ -1,6 +1,11 @@
 [
 {
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include -isystem /Users/tnn/wdata/swtbahn/libbidib/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/swtbahn-server.dir/src/bahn_data_util.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/bahn_data_util.c",
+  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/bahn_data_util.c"
+},
+{
+  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
   "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include -isystem /Users/tnn/wdata/swtbahn/libbidib/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/swtbahn-server.dir/src/dyn_containers_interface.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/dyn_containers_interface.c",
   "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/dyn_containers_interface.c"
 },
@@ -36,26 +41,6 @@
 },
 {
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include -isystem /Users/tnn/wdata/swtbahn/libbidib/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/swtbahn-server.dir/src/interlocking/bahn_data_util.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/bahn_data_util.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/bahn_data_util.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include -isystem /Users/tnn/wdata/swtbahn/libbidib/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/swtbahn-server.dir/src/interlocking/request_route.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/request_route.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/request_route.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include -isystem /Users/tnn/wdata/swtbahn/libbidib/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/swtbahn-server.dir/src/interlocking_algorithm.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_algorithm.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_algorithm.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include -isystem /Users/tnn/wdata/swtbahn/libbidib/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/swtbahn-server.dir/src/interlocking_parser.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_parser.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_parser.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
   "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include -isystem /Users/tnn/wdata/swtbahn/libbidib/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/swtbahn-server.dir/src/param_verification.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/param_verification.c",
   "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/param_verification.c"
 },
@@ -68,6 +53,11 @@
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
   "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include -isystem /Users/tnn/wdata/swtbahn/libbidib/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/swtbahn-server.dir/src/parsers/extras_config_parser.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/extras_config_parser.c",
   "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/extras_config_parser.c"
+},
+{
+  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include -isystem /Users/tnn/wdata/swtbahn/libbidib/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/swtbahn-server.dir/src/parsers/interlocking_parser.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/interlocking_parser.c",
+  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/interlocking_parser.c"
 },
 {
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
@@ -88,6 +78,11 @@
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
   "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include -isystem /Users/tnn/wdata/swtbahn/libbidib/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/swtbahn-server.dir/src/server.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/server.c",
   "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/server.c"
+},
+{
+  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/dyn_containers_static.dir/src/bahn_data_util.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/bahn_data_util.c",
+  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/bahn_data_util.c"
 },
 {
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
@@ -126,26 +121,6 @@
 },
 {
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/dyn_containers_static.dir/src/interlocking/bahn_data_util.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/bahn_data_util.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/bahn_data_util.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/dyn_containers_static.dir/src/interlocking/request_route.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/request_route.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/request_route.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/dyn_containers_static.dir/src/interlocking_algorithm.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_algorithm.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_algorithm.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/dyn_containers_static.dir/src/interlocking_parser.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_parser.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_parser.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
   "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/dyn_containers_static.dir/src/param_verification.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/param_verification.c",
   "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/param_verification.c"
 },
@@ -158,6 +133,11 @@
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
   "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/dyn_containers_static.dir/src/parsers/extras_config_parser.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/extras_config_parser.c",
   "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/extras_config_parser.c"
+},
+{
+  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/dyn_containers_static.dir/src/parsers/interlocking_parser.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/interlocking_parser.c",
+  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/interlocking_parser.c"
 },
 {
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
@@ -183,6 +163,11 @@
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
   "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc  -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk   -std=gnu11 -o CMakeFiles/dyn_containers_static.dir/dyn_containers.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/dyn_containers.c",
   "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug/dyn_containers.c"
+},
+{
+  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -Ddyn_containers_EXPORTS -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -fPIC   -std=gnu11 -o CMakeFiles/dyn_containers.dir/src/bahn_data_util.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/bahn_data_util.c",
+  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/bahn_data_util.c"
 },
 {
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
@@ -221,26 +206,6 @@
 },
 {
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -Ddyn_containers_EXPORTS -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -fPIC   -std=gnu11 -o CMakeFiles/dyn_containers.dir/src/interlocking/bahn_data_util.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/bahn_data_util.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/bahn_data_util.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -Ddyn_containers_EXPORTS -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -fPIC   -std=gnu11 -o CMakeFiles/dyn_containers.dir/src/interlocking/request_route.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/request_route.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking/request_route.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -Ddyn_containers_EXPORTS -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -fPIC   -std=gnu11 -o CMakeFiles/dyn_containers.dir/src/interlocking_algorithm.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_algorithm.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_algorithm.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -Ddyn_containers_EXPORTS -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -fPIC   -std=gnu11 -o CMakeFiles/dyn_containers.dir/src/interlocking_parser.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_parser.c",
-  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/interlocking_parser.c"
-},
-{
-  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
   "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -Ddyn_containers_EXPORTS -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -fPIC   -std=gnu11 -o CMakeFiles/dyn_containers.dir/src/param_verification.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/param_verification.c",
   "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/param_verification.c"
 },
@@ -253,6 +218,11 @@
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
   "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -Ddyn_containers_EXPORTS -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -fPIC   -std=gnu11 -o CMakeFiles/dyn_containers.dir/src/parsers/extras_config_parser.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/extras_config_parser.c",
   "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/extras_config_parser.c"
+},
+{
+  "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -Ddyn_containers_EXPORTS -I/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src -isystem /Users/tnn/wdata/swtbahn/libbidib/include -isystem /Users/tnn/wdata/swtbahn/onion/src -isystem /Users/tnn/opt/homebrew/Cellar/nettle/3.4.1/include -isystem /Users/tnn/opt/homebrew/Cellar/libyaml/0.2.2/include -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/include/glib-2.0 -isystem /Users/tnn/opt/homebrew/Cellar/glib/2.62.5/lib/glib-2.0/include -isystem /Users/tnn/opt/homebrew/opt/gettext/include -isystem /Users/tnn/opt/homebrew/Cellar/libtasn1/4.14/include -isystem /Users/tnn/opt/homebrew/Cellar/p11-kit/0.23.18.1/include/p11-kit-1 -isystem /Users/tnn/opt/homebrew/Cellar/gnutls/3.6.10/include -isystem /usr/local/include  -Wall -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -fPIC   -std=gnu11 -o CMakeFiles/dyn_containers.dir/src/parsers/interlocking_parser.c.o   -c /Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/interlocking_parser.c",
+  "file": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/src/parsers/interlocking_parser.c"
 },
 {
   "directory": "/Users/tnn/wdata/swtbahn/swtbahn-cli/server/cmake-build-debug",

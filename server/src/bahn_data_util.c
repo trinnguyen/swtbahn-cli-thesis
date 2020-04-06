@@ -417,6 +417,15 @@ int get_route_array_string_value(t_interlocking_route *route, const char *prop_n
         }
     }
 
+    if (string_equals(prop_name, "sections")) {
+        if (route->sections != NULL) {
+            for (int i = 0; i < route->sections->len; ++i) {
+                data[i] = g_array_index(route->sections, char *, i);
+            }
+            return route->sections->len;
+        }
+    }
+
     if (string_equals(prop_name, "points")) {
         if (route->points != NULL) {
             for (int i = 0; i < route->points->len; ++i) {

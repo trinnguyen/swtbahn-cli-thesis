@@ -59,6 +59,7 @@ typedef struct {
 	char *destination;
 	float length;
 	GArray *path;		// g_array_index(route->path, char *, segment_index)
+    GArray *sections;		// g_array_index(route->sections, char *, segment_index)
 	GArray *points;		// g_array_index(route->points, t_interlocking_point, point_index)
 	GArray *signals;	// g_array_index(route->signals, char *, signal_index)
 	GArray *conflicts;	// g_array_index(route->conflicts, char *, conflict_index)

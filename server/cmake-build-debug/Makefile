@@ -205,6 +205,39 @@ dyn_containers.c.s:
 	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/dyn_containers.c.s
 .PHONY : dyn_containers.c.s
 
+src/bahn_data_util.o: src/bahn_data_util.c.o
+
+.PHONY : src/bahn_data_util.o
+
+# target to build an object file
+src/bahn_data_util.c.o:
+	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/bahn_data_util.c.o
+	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/bahn_data_util.c.o
+	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/bahn_data_util.c.o
+.PHONY : src/bahn_data_util.c.o
+
+src/bahn_data_util.i: src/bahn_data_util.c.i
+
+.PHONY : src/bahn_data_util.i
+
+# target to preprocess a source file
+src/bahn_data_util.c.i:
+	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/bahn_data_util.c.i
+	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/bahn_data_util.c.i
+	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/bahn_data_util.c.i
+.PHONY : src/bahn_data_util.c.i
+
+src/bahn_data_util.s: src/bahn_data_util.c.s
+
+.PHONY : src/bahn_data_util.s
+
+# target to generate assembly for a file
+src/bahn_data_util.c.s:
+	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/bahn_data_util.c.s
+	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/bahn_data_util.c.s
+	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/bahn_data_util.c.s
+.PHONY : src/bahn_data_util.c.s
+
 src/dyn_containers_interface.o: src/dyn_containers_interface.c.o
 
 .PHONY : src/dyn_containers_interface.o
@@ -436,138 +469,6 @@ src/interlocking.c.s:
 	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking.c.s
 .PHONY : src/interlocking.c.s
 
-src/interlocking/bahn_data_util.o: src/interlocking/bahn_data_util.c.o
-
-.PHONY : src/interlocking/bahn_data_util.o
-
-# target to build an object file
-src/interlocking/bahn_data_util.c.o:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking/bahn_data_util.c.o
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking/bahn_data_util.c.o
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking/bahn_data_util.c.o
-.PHONY : src/interlocking/bahn_data_util.c.o
-
-src/interlocking/bahn_data_util.i: src/interlocking/bahn_data_util.c.i
-
-.PHONY : src/interlocking/bahn_data_util.i
-
-# target to preprocess a source file
-src/interlocking/bahn_data_util.c.i:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking/bahn_data_util.c.i
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking/bahn_data_util.c.i
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking/bahn_data_util.c.i
-.PHONY : src/interlocking/bahn_data_util.c.i
-
-src/interlocking/bahn_data_util.s: src/interlocking/bahn_data_util.c.s
-
-.PHONY : src/interlocking/bahn_data_util.s
-
-# target to generate assembly for a file
-src/interlocking/bahn_data_util.c.s:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking/bahn_data_util.c.s
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking/bahn_data_util.c.s
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking/bahn_data_util.c.s
-.PHONY : src/interlocking/bahn_data_util.c.s
-
-src/interlocking/request_route.o: src/interlocking/request_route.c.o
-
-.PHONY : src/interlocking/request_route.o
-
-# target to build an object file
-src/interlocking/request_route.c.o:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking/request_route.c.o
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking/request_route.c.o
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking/request_route.c.o
-.PHONY : src/interlocking/request_route.c.o
-
-src/interlocking/request_route.i: src/interlocking/request_route.c.i
-
-.PHONY : src/interlocking/request_route.i
-
-# target to preprocess a source file
-src/interlocking/request_route.c.i:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking/request_route.c.i
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking/request_route.c.i
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking/request_route.c.i
-.PHONY : src/interlocking/request_route.c.i
-
-src/interlocking/request_route.s: src/interlocking/request_route.c.s
-
-.PHONY : src/interlocking/request_route.s
-
-# target to generate assembly for a file
-src/interlocking/request_route.c.s:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking/request_route.c.s
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking/request_route.c.s
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking/request_route.c.s
-.PHONY : src/interlocking/request_route.c.s
-
-src/interlocking_algorithm.o: src/interlocking_algorithm.c.o
-
-.PHONY : src/interlocking_algorithm.o
-
-# target to build an object file
-src/interlocking_algorithm.c.o:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking_algorithm.c.o
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking_algorithm.c.o
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking_algorithm.c.o
-.PHONY : src/interlocking_algorithm.c.o
-
-src/interlocking_algorithm.i: src/interlocking_algorithm.c.i
-
-.PHONY : src/interlocking_algorithm.i
-
-# target to preprocess a source file
-src/interlocking_algorithm.c.i:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking_algorithm.c.i
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking_algorithm.c.i
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking_algorithm.c.i
-.PHONY : src/interlocking_algorithm.c.i
-
-src/interlocking_algorithm.s: src/interlocking_algorithm.c.s
-
-.PHONY : src/interlocking_algorithm.s
-
-# target to generate assembly for a file
-src/interlocking_algorithm.c.s:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking_algorithm.c.s
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking_algorithm.c.s
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking_algorithm.c.s
-.PHONY : src/interlocking_algorithm.c.s
-
-src/interlocking_parser.o: src/interlocking_parser.c.o
-
-.PHONY : src/interlocking_parser.o
-
-# target to build an object file
-src/interlocking_parser.c.o:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking_parser.c.o
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking_parser.c.o
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking_parser.c.o
-.PHONY : src/interlocking_parser.c.o
-
-src/interlocking_parser.i: src/interlocking_parser.c.i
-
-.PHONY : src/interlocking_parser.i
-
-# target to preprocess a source file
-src/interlocking_parser.c.i:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking_parser.c.i
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking_parser.c.i
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking_parser.c.i
-.PHONY : src/interlocking_parser.c.i
-
-src/interlocking_parser.s: src/interlocking_parser.c.s
-
-.PHONY : src/interlocking_parser.s
-
-# target to generate assembly for a file
-src/interlocking_parser.c.s:
-	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/interlocking_parser.c.s
-	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/interlocking_parser.c.s
-	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/interlocking_parser.c.s
-.PHONY : src/interlocking_parser.c.s
-
 src/param_verification.o: src/param_verification.c.o
 
 .PHONY : src/param_verification.o
@@ -666,6 +567,39 @@ src/parsers/extras_config_parser.c.s:
 	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/parsers/extras_config_parser.c.s
 	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/parsers/extras_config_parser.c.s
 .PHONY : src/parsers/extras_config_parser.c.s
+
+src/parsers/interlocking_parser.o: src/parsers/interlocking_parser.c.o
+
+.PHONY : src/parsers/interlocking_parser.o
+
+# target to build an object file
+src/parsers/interlocking_parser.c.o:
+	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/parsers/interlocking_parser.c.o
+	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/parsers/interlocking_parser.c.o
+	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/parsers/interlocking_parser.c.o
+.PHONY : src/parsers/interlocking_parser.c.o
+
+src/parsers/interlocking_parser.i: src/parsers/interlocking_parser.c.i
+
+.PHONY : src/parsers/interlocking_parser.i
+
+# target to preprocess a source file
+src/parsers/interlocking_parser.c.i:
+	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/parsers/interlocking_parser.c.i
+	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/parsers/interlocking_parser.c.i
+	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/parsers/interlocking_parser.c.i
+.PHONY : src/parsers/interlocking_parser.c.i
+
+src/parsers/interlocking_parser.s: src/parsers/interlocking_parser.c.s
+
+.PHONY : src/parsers/interlocking_parser.s
+
+# target to generate assembly for a file
+src/parsers/interlocking_parser.c.s:
+	$(MAKE) -f CMakeFiles/swtbahn-server.dir/build.make CMakeFiles/swtbahn-server.dir/src/parsers/interlocking_parser.c.s
+	$(MAKE) -f CMakeFiles/dyn_containers_static.dir/build.make CMakeFiles/dyn_containers_static.dir/src/parsers/interlocking_parser.c.s
+	$(MAKE) -f CMakeFiles/dyn_containers.dir/build.make CMakeFiles/dyn_containers.dir/src/parsers/interlocking_parser.c.s
+.PHONY : src/parsers/interlocking_parser.c.s
 
 src/parsers/parser_util.o: src/parsers/parser_util.c.o
 
@@ -815,6 +749,9 @@ help:
 	@echo "... dyn_containers.o"
 	@echo "... dyn_containers.i"
 	@echo "... dyn_containers.s"
+	@echo "... src/bahn_data_util.o"
+	@echo "... src/bahn_data_util.i"
+	@echo "... src/bahn_data_util.s"
 	@echo "... src/dyn_containers_interface.o"
 	@echo "... src/dyn_containers_interface.i"
 	@echo "... src/dyn_containers_interface.s"
@@ -836,18 +773,6 @@ help:
 	@echo "... src/interlocking.o"
 	@echo "... src/interlocking.i"
 	@echo "... src/interlocking.s"
-	@echo "... src/interlocking/bahn_data_util.o"
-	@echo "... src/interlocking/bahn_data_util.i"
-	@echo "... src/interlocking/bahn_data_util.s"
-	@echo "... src/interlocking/request_route.o"
-	@echo "... src/interlocking/request_route.i"
-	@echo "... src/interlocking/request_route.s"
-	@echo "... src/interlocking_algorithm.o"
-	@echo "... src/interlocking_algorithm.i"
-	@echo "... src/interlocking_algorithm.s"
-	@echo "... src/interlocking_parser.o"
-	@echo "... src/interlocking_parser.i"
-	@echo "... src/interlocking_parser.s"
 	@echo "... src/param_verification.o"
 	@echo "... src/param_verification.i"
 	@echo "... src/param_verification.s"
@@ -857,6 +782,9 @@ help:
 	@echo "... src/parsers/extras_config_parser.o"
 	@echo "... src/parsers/extras_config_parser.i"
 	@echo "... src/parsers/extras_config_parser.s"
+	@echo "... src/parsers/interlocking_parser.o"
+	@echo "... src/parsers/interlocking_parser.i"
+	@echo "... src/parsers/interlocking_parser.s"
 	@echo "... src/parsers/parser_util.o"
 	@echo "... src/parsers/parser_util.i"
 	@echo "... src/parsers/parser_util.s"

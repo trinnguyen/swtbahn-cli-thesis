@@ -89,17 +89,17 @@
 	<shared>
 		<threadScope id="main">
 			<par id="0">
+				<variable id="forec_intern_input__global_0_0" defines="1"/>
+				<variable id="forec_intern_output_train_engine_0__global_0_0" defines="1"/>
+				<variable id="forec_intern_output_train_engine_1__global_0_0" defines="1"/>
+				<variable id="forec_intern_output_train_engine_2__global_0_0" defines="1"/>
+				<variable id="forec_intern_output_train_engine_3__global_0_0" defines="1"/>
 				<variable id="forec_intern_output_train_engine_instance_0__global_0_0" defines="1"/>
 				<variable id="forec_intern_output_train_engine_instance_1__global_0_0" defines="1"/>
 				<variable id="forec_intern_output_train_engine_instance_2__global_0_0" defines="1"/>
 				<variable id="forec_intern_output_train_engine_instance_3__global_0_0" defines="1"/>
 				<variable id="forec_intern_output_train_engine_instance_4__global_0_0" defines="1"/>
 				<variable id="trainEngineInstanceData__global_0_0" defines="5" combine="keepOneCombine"/>
-				<variable id="forec_intern_input__global_0_0" defines="1"/>
-				<variable id="forec_intern_output_train_engine_0__global_0_0" defines="1"/>
-				<variable id="forec_intern_output_train_engine_1__global_0_0" defines="1"/>
-				<variable id="forec_intern_output_train_engine_2__global_0_0" defines="1"/>
-				<variable id="forec_intern_output_train_engine_3__global_0_0" defines="1"/>
 			</par>
 		</threadScope>
 	</shared>

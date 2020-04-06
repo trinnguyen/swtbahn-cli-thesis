@@ -228,6 +228,8 @@ static bool drive_route(const int grab_id, const int route_id) {
 
 		// invoke interlocking library
 		if (lib_interlocking.drive_reset_func != NULL && lib_interlocking.drive_tick_func != NULL) {
+		    //TODO sort the segments as the order in the interlocking table
+
 		    // update current segments
             drive_data.count_segments = num_segments;
             for (int i = 0; i < num_segments; ++i) {
