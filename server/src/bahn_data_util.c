@@ -259,7 +259,7 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
                     break;
                 }
 
-                if (string_equals(prop_name, "main")) {
+                if (string_equals(prop_name, "segment")) {
                     result = ((t_config_block *) obj)->main_segment;
                     break;
                 }
@@ -376,7 +376,7 @@ int config_get_array_string_value(const char *type, const char *id, const char *
                     break;
                 }
 
-                if (string_equals(prop_name, "signals")) {
+                if (string_equals(prop_name, "block_signals")) {
                     arr = ((t_config_block *) obj)->signals;
                     break;
                 }
@@ -435,7 +435,7 @@ int get_route_array_string_value(t_interlocking_route *route, const char *prop_n
         }
     }
 
-    if (string_equals(prop_name, "signals")) {
+    if (string_equals(prop_name, "route_signals")) {
         if (route->signals != NULL) {
             for (int i = 0; i < route->signals->len; ++i) {
                 data[i] = g_array_index(route->signals, char *, i);
@@ -529,6 +529,11 @@ e_config_type get_track_state_type(const char *id) {
 char *track_state_get_value(const char *id) {
     char *result = NULL;
     e_config_type config_type = get_track_state_type(id);
+    if (config_type == TYPE_POINT)
+        return "normal";
+
+    return "red";
+
     void *obj = get_object(config_type, id);
     if (obj != NULL) {
         t_bidib_unified_accessory_state_query state_query = {};
@@ -608,6 +613,7 @@ bool track_state_set_value(const char *id, const char *value) {
         return false;
     }
 
+    return true;
     bool result = false;
     switch (config_type) {
         case TYPE_POINT:
@@ -624,6 +630,8 @@ bool track_state_set_value(const char *id, const char *value) {
 }
 
 bool is_segment_occupied(const char *id) {
+    syslog_server(LOG_DEBUG, "Is segment occupied: %s => false", id);
+    return false;
     bool result = false;
     if (g_hash_table_contains(config_data.table_segments, id)) {
         t_bidib_segment_state_query state_query = bidib_get_segment_state(id);
