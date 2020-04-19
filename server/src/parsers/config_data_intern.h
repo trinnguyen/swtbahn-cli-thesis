@@ -49,7 +49,7 @@ typedef struct {
 typedef struct {
     char *id;
     float length;
-    float limit_speed;
+    size_t limit_speed;
     GArray *train_types;
     GArray *signals;
     char *main_segment;

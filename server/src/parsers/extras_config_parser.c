@@ -255,7 +255,7 @@ void extras_yaml_scalar(char *last_scalar, char *cur_scalar) {
             }
 
             if (str_equal(last_scalar, "limit")) {
-                cur_block->limit_speed = strtof(cur_scalar, NULL);
+                cur_block->limit_speed = strtol(cur_scalar, NULL, 10);
                 break;
             }
 

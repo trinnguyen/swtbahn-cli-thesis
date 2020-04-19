@@ -10,6 +10,7 @@
 #include "parsers/config_data_parser.h"
 #include "parsers/config_data_intern.h"
 #include "bahn_data_util.h"
+#include "handler_driver.h"
 
 t_config_data config_data = {};
 
@@ -300,8 +301,17 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
 }
 
 int config_get_scalar_int_value(const char *type, const char *id, const char *prop_name) {
-    // No object type has int property
-    return 0;
+    e_config_type config_type = get_config_type(type);
+    void *obj = get_object(config_type, id);
+    int result = 0;
+    if (obj != NULL && config_type == TYPE_BLOCK) {
+        if (string_equals(prop_name, "limit")) {
+            result = ((t_config_block *) obj)->limit_speed;
+        }
+    }
+
+    syslog_server(LOG_DEBUG, "Get scalar int: %s %s.%s => %.2f", type, id, prop_name, result);
+    return result;
 }
 
 float config_get_scalar_float_value(const char *type, const char *id, const char *prop_name) {
@@ -320,12 +330,6 @@ float config_get_scalar_float_value(const char *type, const char *id, const char
                     result = ((t_config_block *) obj)->length;
                     break;
                 }
-
-                if (string_equals(prop_name, "limit")) {
-                    result = ((t_config_block *) obj)->limit_speed;
-                }
-
-                break;
 
             case TYPE_SEGMENT:
                 if (string_equals(prop_name, "length")) {
@@ -536,11 +540,6 @@ e_config_type get_track_state_type(const char *id) {
 char *track_state_get_value(const char *id) {
     char *result = NULL;
     e_config_type config_type = get_track_state_type(id);
-    if (config_type == TYPE_POINT)
-        return "normal";
-
-    return "red";
-
     void *obj = get_object(config_type, id);
     if (obj != NULL) {
         t_bidib_unified_accessory_state_query state_query = {};
@@ -616,11 +615,10 @@ static bool is_track_state_aspect_valid(e_config_type config_type, const char *i
 bool track_state_set_value(const char *id, const char *value) {
     e_config_type config_type = get_track_state_type(id);
     if (!is_track_state_aspect_valid(config_type, id, value)) {
-        syslog_server(LOG_DEBUG, "Invalid aspect: %s", value);
+        syslog_server(LOG_ERR, "Invalid track state aspect: %s to %s", id, value);
         return false;
     }
 
-    return true;
     bool result = false;
     switch (config_type) {
         case TYPE_POINT:
@@ -637,8 +635,6 @@ bool track_state_set_value(const char *id, const char *value) {
 }
 
 bool is_segment_occupied(const char *id) {
-    syslog_server(LOG_DEBUG, "Is segment occupied: %s => false", id);
-    return false;
     bool result = false;
     if (g_hash_table_contains(config_data.table_segments, id)) {
         t_bidib_segment_state_query state_query = bidib_get_segment_state(id);
@@ -647,6 +643,40 @@ bool is_segment_occupied(const char *id) {
     }
 
     syslog_server(LOG_DEBUG, "Is segment occupied: %s => %s", id, result ? "true" : "false");
+    return result;
+}
+
+int train_state_get_speed(const char *train_id) {
+    int result = 0;
+    if (g_hash_table_contains(config_data.table_trains, train_id)) {
+        t_bidib_train_speed_kmh_query kmh_query = bidib_get_train_speed_kmh(train_id);
+        if (kmh_query.known_and_avail) {
+            result = kmh_query.speed_kmh;
+        }
+    } else {
+        syslog_server(LOG_ERR, "Invalid train id: %s", train_id);
+    }
+
+    syslog_server(LOG_DEBUG, "Get train speed in km/h: %s => %d", train_id, result);
+    return result;
+}
+
+bool train_state_set_speed(const char *train_id, int speed) {
+    bool result = false;
+    if (g_hash_table_contains(config_data.table_trains, train_id)) {
+        result = true;
+        for (size_t i = 0; i < MAX_TRAINS; i++) {
+            int err = bidib_set_train_speed(train_id, speed, grabbed_trains[0].track_output);
+            if (err == 1) {
+                result = false;
+                break;
+            }
+        }
+    } else {
+        syslog_server(LOG_ERR, "Invalid train id: %s", train_id);
+    }
+
+    syslog_server(LOG_DEBUG, "Set train speed in km/h: %s to %d => %s", train_id, speed, result ? "true" : "false");
     return result;
 }
 
