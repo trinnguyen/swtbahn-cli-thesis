@@ -254,6 +254,11 @@ void extras_yaml_scalar(char *last_scalar, char *cur_scalar) {
                 break;
             }
 
+            if (str_equal(last_scalar, "limit")) {
+                cur_block->limit_speed = strtof(cur_scalar, NULL);
+                break;
+            }
+
             if (str_equal(last_scalar, "main")) {
                 cur_block->main_segment = cur_scalar;
                 return;

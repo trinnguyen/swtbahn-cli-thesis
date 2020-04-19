@@ -318,8 +318,15 @@ float config_get_scalar_float_value(const char *type, const char *id, const char
             case TYPE_BLOCK:
                 if (string_equals(prop_name, "length")) {
                     result = ((t_config_block *) obj)->length;
+                    break;
                 }
+
+                if (string_equals(prop_name, "limit")) {
+                    result = ((t_config_block *) obj)->limit_speed;
+                }
+
                 break;
+
             case TYPE_SEGMENT:
                 if (string_equals(prop_name, "length")) {
                     result = ((t_config_segment *) obj)->length;
