@@ -25,6 +25,7 @@ typedef enum {
     TYPE_BLOCK,
     TYPE_CROSSING,
     TYPE_SIGNAL_TYPE,
+    TYPE_COMPOSITE_SIGNAL,
     TYPE_NOT_SUPPORTED
 } e_config_type;
 
@@ -136,6 +137,9 @@ void *get_object(e_config_type config_type, const char *id) {
             break;
         case TYPE_SIGNAL_TYPE:
             tb = config_data.table_signal_types;
+            break;
+        case TYPE_COMPOSITE_SIGNAL:
+            tb = config_data.table_composite_signals;
             break;
         default:
             break;
@@ -286,6 +290,34 @@ char *config_get_scalar_string_value(const char *type, const char *id, const cha
             case TYPE_SIGNAL_TYPE:
                 if (string_equals(prop_name, "id")) {
                     result = ((t_config_signal_type *) obj)->id;
+                    break;
+                }
+
+                break;
+
+            case TYPE_COMPOSITE_SIGNAL:
+                if (string_equals(prop_name, "id")) {
+                    result = ((t_config_composite_signal *) obj)->id;
+                    break;
+                }
+
+                if (string_equals(prop_name, "entry")) {
+                    result = ((t_config_composite_signal *) obj)->entry;
+                    break;
+                }
+
+                if (string_equals(prop_name, "exit")) {
+                    result = ((t_config_composite_signal *) obj)->exit;
+                    break;
+                }
+
+                if (string_equals(prop_name, "block")) {
+                    result = ((t_config_composite_signal *) obj)->block;
+                    break;
+                }
+
+                if (string_equals(prop_name, "distant")) {
+                    result = ((t_config_composite_signal *) obj)->distant;
                     break;
                 }
 

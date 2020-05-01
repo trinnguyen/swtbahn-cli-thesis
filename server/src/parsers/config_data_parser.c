@@ -78,4 +78,9 @@ void free_config_data(t_config_data config_data) {
         g_hash_table_destroy(config_data.table_crossings);
         config_data.table_crossings = NULL;
     }
+
+    if (config_data.table_composite_signals != NULL) {
+        g_hash_table_destroy(config_data.table_composite_signals);
+        config_data.table_composite_signals = NULL;
+    }
 }

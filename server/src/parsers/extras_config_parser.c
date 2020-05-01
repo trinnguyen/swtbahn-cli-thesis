@@ -9,7 +9,8 @@ typedef enum {
     EXTRAS_ROOT,
     BLOCK,
     CROSSING,
-    SIGNAL_TYPE
+    SIGNAL_TYPE,
+    COMPOSITE_SIGNAL
 } e_extras_mapping_level;
 
 typedef enum {
@@ -20,15 +21,19 @@ typedef enum {
     BLOCK_TRAIN_TYPES,
     CROSSINGS,
     SIGNAL_TYPES,
+    COMPOSITE_SIGNALS,
     SIGNAL_TYPE_ASPECTS
 } e_extras_sequence_level;
 
 GHashTable *tb_blocks;
 GHashTable *tb_crossing;
 GHashTable *tb_signal_types;
+GHashTable *tb_composite_signals;
+
 t_config_block *cur_block;
 t_config_crossing *cur_crossing;
 t_config_signal_type *cur_signal_type;
+t_config_composite_signal *cur_composite_signal;
 
 e_extras_mapping_level extras_mapping = EXTRAS_ROOT;
 e_extras_sequence_level extras_sequence = EXTRAS_SEQ_NONE;
@@ -44,25 +49,16 @@ void free_block(void *pointer) {
 
     if (block->overlaps != NULL) {
         log_debug("free block overlaps");
-        for (int i = 0; i < block->overlaps->len; ++i) {
-            log_debug("\t\t%s", g_array_index(block->overlaps, char *, i));
-        }
         g_array_free(block->overlaps, true);
     }
 
     if (block->signals != NULL) {
         log_debug("free block signals");
-        for (int i = 0; i < block->signals->len; ++i) {
-            log_debug("\t\t%s", g_array_index(block->signals, char *, i));
-        }
         g_array_free(block->signals, true);
     }
 
     if (block->train_types != NULL) {
         log_debug("free block train types");
-        for (int i = 0; i < block->train_types->len; ++i) {
-            log_debug("\t\t%s", g_array_index(block->train_types, char *, i));
-        }
         g_array_free(block->train_types, true);
     }
 
@@ -78,7 +74,17 @@ void free_crossing(void *pointer) {
 void free_signal_type(void *pointer) {
     t_config_signal_type *signal_type = (t_config_signal_type *) pointer;
     log_debug("free signal type: %s", signal_type->id);
+    if (signal_type->aspects != NULL) {
+        log_debug("free signal type aspects");
+        g_array_free(signal_type->aspects, true);
+    }
     free(signal_type);
+}
+
+void free_composite_signal(void *pointer) {
+    t_config_composite_signal *composite_signal = (t_config_composite_signal *) pointer;
+    log_debug("free composite signal: %s", composite_signal->id);
+    free(composite_signal);
 }
 
 void extras_yaml_sequence_start(char *scalar) {
@@ -101,6 +107,12 @@ void extras_yaml_sequence_start(char *scalar) {
             if (str_equal(scalar, "signaltypes")) {
                 extras_sequence = SIGNAL_TYPES;
                 tb_signal_types = g_hash_table_new_full(g_str_hash, g_str_equal, free_extras_id_key, free_signal_type);
+                return;
+            }
+
+            if (str_equal(scalar, "compositions")) {
+                extras_sequence = COMPOSITE_SIGNALS;
+                tb_composite_signals = g_hash_table_new_full(g_str_hash, g_str_equal, free_extras_id_key, free_composite_signal);
                 return;
             }
             break;
@@ -142,6 +154,7 @@ void extras_yaml_sequence_end(char *scalar) {
         case BLOCKS:
         case CROSSINGS:
         case SIGNAL_TYPES:
+        case COMPOSITE_SIGNALS:
             extras_sequence = EXTRAS_SEQ_NONE;
             break;
         case BLOCK_OVERLAPS:
@@ -182,6 +195,14 @@ void extras_yaml_mapping_start(char *scalar) {
             cur_signal_type->id = NULL;
             cur_signal_type->aspects = NULL;
             break;
+        case COMPOSITE_SIGNALS:
+            extras_mapping = COMPOSITE_SIGNAL;
+            cur_composite_signal = malloc(sizeof(t_config_composite_signal));
+            cur_composite_signal->id = NULL;
+            cur_composite_signal->entry = NULL;
+            cur_composite_signal->exit = NULL;
+            cur_composite_signal->block = NULL;
+            cur_composite_signal->distant = NULL;
         default:
             break;
     }
@@ -204,6 +225,10 @@ void extras_yaml_mapping_end(char *scalar) {
             log_debug("insert signal type: %s", cur_signal_type->id);
             g_hash_table_insert(tb_signal_types, strdup(cur_signal_type->id), cur_signal_type);
             break;
+        case COMPOSITE_SIGNAL:
+            log_debug("insert composite signal: %s", cur_composite_signal->id);
+            g_hash_table_insert(tb_composite_signals, strdup(cur_composite_signal->id), cur_composite_signal);
+            break;
         default:
             break;
     }
@@ -213,6 +238,7 @@ void extras_yaml_mapping_end(char *scalar) {
         case BLOCK:
         case CROSSING:
         case SIGNAL_TYPE:
+        case COMPOSITE_SIGNAL:
             extras_mapping = EXTRAS_ROOT;
             break;
         default:
@@ -286,6 +312,32 @@ void extras_yaml_scalar(char *last_scalar, char *cur_scalar) {
                 return;
             }
             break;
+        case COMPOSITE_SIGNAL:
+            if (str_equal(last_scalar, "id")) {
+                cur_composite_signal->id = cur_scalar;
+                return;
+            }
+
+            if (str_equal(last_scalar, "entry")) {
+                cur_composite_signal->entry = cur_scalar;
+                return;
+            }
+
+            if (str_equal(last_scalar, "exit")) {
+                cur_composite_signal->exit = cur_scalar;
+                return;
+            }
+
+            if (str_equal(last_scalar, "block")) {
+                cur_composite_signal->block = cur_scalar;
+                return;
+            }
+
+            if (str_equal(last_scalar, "distant")) {
+                cur_composite_signal->block = cur_scalar;
+                return;
+            }
+            break;
         default:
             break;
     }
@@ -296,4 +348,5 @@ void parse_extras_yaml(yaml_parser_t *parser, t_config_data *data) {
     data->table_blocks = tb_blocks;
     data->table_crossings = tb_crossing;
     data->table_signal_types = tb_signal_types;
+    data->table_composite_signals = tb_composite_signals;
 }
