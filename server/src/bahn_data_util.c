@@ -605,40 +605,66 @@ char *track_state_get_value(const char *id) {
     return result;
 }
 
-static bool is_track_state_aspect_valid(e_config_type config_type, const char *id, const char *value) {
-    if (value == NULL)
+bool set_signal_raw_aspect(t_config_signal *signal, const char *value) {
+    if (signal->aspects != NULL) {
+        for (int i = 0; i < signal->aspects->len; ++i) {
+            char *aspect = g_array_index(signal->aspects, char *, i);
+            if (string_equals(aspect, value)) {
+                return bidib_set_signal(signal->id, value) == 0;
+            }
+        }
+    }
+
+    return false;
+}
+
+bool set_signal_state(const char *id, const char *value) {
+    t_config_signal *signal = get_object(TYPE_SIGNAL, id);
+    if (signal == NULL)
         return false;
 
-    char *signal_type_id = NULL;
-    switch (config_type) {
-        case TYPE_POINT:
-            if (string_equals(value, "normal") || string_equals(value, "reverse")) {
-                return true;
-            }
-            break;
-        case TYPE_SIGNAL:
-            // ensure valid aspect by checking the type of the signal
-            signal_type_id = config_get_scalar_string_value("signal", id, "type");
-            if (signal_type_id == NULL || string_equals(signal_type_id, "")) {
-                return false;
-            }
+    if (string_equals(value, "stop")) {
 
-            // get signal type
-            if (g_hash_table_contains(config_data.table_signal_types, signal_type_id)) {
-                t_config_signal_type *signal_type = g_hash_table_lookup(config_data.table_signal_types, signal_type_id);
-                if (signal_type->aspects != NULL) {
-                    for (int i = 0; i < signal_type->aspects->len; ++i) {
-                        char *aspect = g_array_index(signal_type->aspects, char *, i);
-                        if (string_equals(value, aspect)) {
-                            return true;
-                        }
-                    }
-                }
-            }
+        if (string_equals(signal->type, "entry")
+            || string_equals(signal->type, "exit")
+            || string_equals(signal->type, "block")
+            || string_equals(signal->type, "stoplight")) {
 
-            return false;
-        default:
-            break;
+            return set_signal_raw_aspect(signal, "red");
+        }
+
+        if (string_equals(signal->type, "distant")) {
+            return set_signal_raw_aspect(signal, "yellow");
+        }
+
+        return false;
+    }
+
+    if (string_equals(value, "clear")) {
+        if (string_equals(signal->type, "entry")
+            || string_equals(signal->type, "exit")
+            || string_equals(signal->type, "block")
+            || string_equals(signal->type, "distant")) {
+
+            return set_signal_raw_aspect(signal, "green");
+        }
+
+        if (string_equals(signal->type, "stoplight")) {
+            return set_signal_raw_aspect(signal, "white");
+        }
+
+        return false;
+    }
+
+    if (string_equals(value, "caution")) {
+        if (string_equals(signal->type, "entry")
+            || string_equals(signal->type, "exit")
+            || string_equals(signal->type, "distant")) {
+
+            return set_signal_raw_aspect(signal, "yellow") && set_signal_raw_aspect(signal, "green");
+        }
+
+        return false;
     }
 
     return false;
@@ -646,19 +672,18 @@ static bool is_track_state_aspect_valid(e_config_type config_type, const char *i
 
 bool track_state_set_value(const char *id, const char *value) {
     e_config_type config_type = get_track_state_type(id);
-    if (!is_track_state_aspect_valid(config_type, id, value)) {
-        syslog_server(LOG_ERR, "Invalid track state aspect: %s to %s", id, value);
-        return false;
-    }
-
     bool result = false;
     switch (config_type) {
         case TYPE_POINT:
-            result = bidib_switch_point(id, value) == 0;
-            syslog_server(LOG_DEBUG, "Set point state: %s to %s => %s", id, value, result ? "true" : "false");
+            if (string_equals(value, "normal") || string_equals(value, "reverse")) {
+                result = bidib_switch_point(id, value) == 0;
+                syslog_server(LOG_DEBUG, "Set point state: %s to %s => %s", id, value, result ? "true" : "false");
+            } else {
+                syslog_server(LOG_DEBUG, "Invalid point state: %s", value);
+            }
             return result;
         case TYPE_SIGNAL:
-            result = bidib_set_signal(id, value) == 0;
+            result = set_signal_state(id, value);
             syslog_server(LOG_DEBUG, "Set signal state: %s to %s => %s", id, value, result ? "true" : "false");
             return result;
         default:
