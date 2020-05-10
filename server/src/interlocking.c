@@ -2,7 +2,7 @@
  *
  * Copyright (C) 2020 University of Bamberg, Software Technologies Research Group
  * <https://www.uni-bamberg.de/>, <http://www.swt-bamberg.de/>
- * 
+ *
  * This file is part of the SWTbahn command line interface (swtbahn-cli), which is
  * a client-server application to interactively control a BiDiB model railway.
  *
@@ -22,6 +22,7 @@
  * present swtbahn-cli (in alphabetic order by surname):
  *
  * - Eugene Yip <https://github.com/eyip002>
+ * - Tri Nguyen <https://github.com/trinnguyen>
  *
  */
  
