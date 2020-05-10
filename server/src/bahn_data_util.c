@@ -492,7 +492,7 @@ int get_route_array_string_value(t_interlocking_route *route, const char *prop_n
         }
     }
 
-    if (string_equals(prop_name, "points")) {
+    if (string_equals(prop_name, "point_positions")) {
         if (route->points != NULL) {
             for (int i = 0; i < route->points->len; ++i) {
                 data[i] = (&g_array_index(route->points, t_interlocking_point, i))->id;
