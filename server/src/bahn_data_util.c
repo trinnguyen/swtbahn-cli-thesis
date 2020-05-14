@@ -592,42 +592,6 @@ e_config_type get_track_state_type(const char *id) {
     return TYPE_NOT_SUPPORTED;
 }
 
-char *track_state_get_value(const char *id) {
-    char *result = NULL;
-    e_config_type config_type = get_track_state_type(id);
-    void *obj = get_object(config_type, id);
-    if (obj != NULL) {
-        t_bidib_unified_accessory_state_query state_query = {};
-        switch (config_type) {
-            case TYPE_POINT:
-                state_query = bidib_get_point_state(id);
-                break;
-            case TYPE_SIGNAL:
-                state_query = bidib_get_signal_state(id);
-                break;
-            default:
-                break;
-        }
-
-        // read data
-        if (state_query.known) {
-            result = strdup(state_query.board_accessory_state.state_id);
-        }
-
-        // free
-        bidib_free_unified_accessory_state_query(state_query);
-    }
-
-    if (result != NULL) {
-        add_cache_str(result);
-    } else {
-        result = new_empty_str();
-    }
-
-    syslog_server(LOG_DEBUG, "Get track state: %s => %s", id, result);
-    return result;
-}
-
 bool set_signal_raw_aspect(t_config_signal *signal, const char *value) {
     if (signal->aspects != NULL) {
         for (int i = 0; i < signal->aspects->len; ++i) {
@@ -641,6 +605,75 @@ bool set_signal_raw_aspect(t_config_signal *signal, const char *value) {
     return false;
 }
 
+/**
+ * Get raw signal aspect from bidib state
+ * Convert back to signalling action based on signal type
+ * caution action is not completely supported yet because it requires multiple aspects enabled
+ * @param id signal name
+ * @param value stop, clear or caution
+ * @return true of success, otherwise false
+ */
+char *get_signal_state(const char *id) {
+    t_config_signal *signal = get_object(TYPE_SIGNAL, id);
+    if (signal == NULL)
+        return "";
+
+    const char *type = signal->type;
+
+    // load raw state
+    char *raw_state = NULL;
+    t_bidib_unified_accessory_state_query state_query = bidib_get_signal_state(id);
+    if (state_query.known) {
+        raw_state = strdup(state_query.board_accessory_state.state_id);
+    }
+    bidib_free_unified_accessory_state_query(state_query);
+
+    // load signalling aspect based on signal type
+    char *result = NULL;
+    if (string_equals(raw_state, "red")) {
+        if (string_equals(type, "entry")
+            || string_equals(type, "exit")
+            || string_equals(type, "block")
+            || string_equals(type, "stoplight")) {
+
+            result = "stop";
+        }
+    } else if (string_equals(raw_state, "green")){
+        if (string_equals(type, "entry")
+            || string_equals(type, "exit")
+            || string_equals(type, "block")
+            || string_equals(type, "distant")) {
+
+            result = "clear";
+        }
+    } else if (string_equals(raw_state, "yellow")){
+        if (string_equals(type, "distant")) {
+            result = "stop";
+        } else if (string_equals(type, "entry")
+                   || string_equals(type, "exit")) {
+            result = "caution";
+        }
+    } else if (string_equals(raw_state, "white")){
+        if (string_equals(type, "stoplight")) {
+            result = "clear";
+        }
+    }
+
+    // free
+    if (raw_state != NULL) {
+        free(raw_state);
+    }
+
+    return result;
+}
+
+/**
+ * Convert the signalling action to raw aspect based on signal types
+ * Update bidib state
+ * @param id signal name
+ * @param value stop, clear or caution
+ * @return true of success, otherwise false
+ */
 bool set_signal_state(const char *id, const char *value) {
     t_config_signal *signal = get_object(TYPE_SIGNAL, id);
     if (signal == NULL)
@@ -691,6 +724,32 @@ bool set_signal_state(const char *id, const char *value) {
     }
 
     return false;
+}
+
+char *track_state_get_value(const char *id) {
+    char *result = NULL;
+    e_config_type config_type = get_track_state_type(id);
+    void *obj = get_object(config_type, id);
+    if (obj != NULL) {
+        if (config_type == TYPE_POINT) {
+            t_bidib_unified_accessory_state_query state_query = bidib_get_point_state(id);
+            if (state_query.known) {
+                result = strdup(state_query.board_accessory_state.state_id);
+            }
+            bidib_free_unified_accessory_state_query(state_query);
+        } else if (config_type == TYPE_SIGNAL){
+            result = get_signal_state(id);
+        }
+    }
+
+    if (result != NULL) {
+        add_cache_str(result);
+    } else {
+        result = new_empty_str();
+    }
+
+    syslog_server(LOG_DEBUG, "Get track state: %s => %s", id, result);
+    return result;
 }
 
 bool track_state_set_value(const char *id, const char *value) {
