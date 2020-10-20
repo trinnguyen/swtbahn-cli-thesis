@@ -58,8 +58,8 @@
     </select>
     <label>Engine:</label>
     <select id=grabEngine>
-        <option>libtrain_engine_default</option>
-        <option>libtrain_engine_linear</option>
+        <option>libtrain_engine_default (unremovable)</option>
+        <option>libtrain_engine_linear (unremovable)</option>
     </select>
     <button id=grabTrainButton>Grab</button>
     <button id=releaseTrainButton>Release</button>
@@ -80,11 +80,30 @@
     <label>to</label>
     <input type="text" id=signalIdTo value="signal" />
     <button id=requestRouteButton>Request</button>
-    <button id=driveRouteButton>Drive</button>
+    <button id=driveRouteButton>Drive Route</button>
     <span id=routeResponse></span>
     <br />
     <br />
-
+    
+    
+    <h1>Custom Engines</h1>
+    <label>SCCharts File (*.sctx):</label>
+    <input type="file" id=selectEngineFile accept=".sctx" />
+    <button id=uploadEngineButton>Upload</button>
+    <span id=uploadResponse></span>
+    <br />
+    
+    <label>Available Engines:</label>
+    <select id=availableEngines>
+        <option>libtrain_engine_default (unremovable)</option>
+        <option>libtrain_engine_linear (unremovable)</option>
+    </select>
+    <button id=refreshEnginesButton>Refresh</button>
+    <button id=removeEngineButton>Remove</button>
+    <span id=refreshRemoveResponse></span>
+    <br />
+    <br />
+    
 
     <h1>Controller</h1>
 
